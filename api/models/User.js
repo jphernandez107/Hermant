@@ -9,6 +9,28 @@ module.exports = {
 
   attributes: {
 
+      name : {
+          type : "string",
+          required : true
+      },
+
+      lastname:{
+        type: "string",
+        required: true
+      },
+
+      dni:{
+          type: "string",
+          required:true,
+          unique:true
+      },
+      
+      password : {
+          type : "string",
+          required : true
+      },
+
+
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
@@ -26,4 +48,3 @@ module.exports = {
   },
 
 };
-
