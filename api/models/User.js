@@ -20,15 +20,19 @@ module.exports = {
       },
 
       dni:{
-          type: "string",
+          type: "number",
           required:true,
           unique:true
       },
-      
+
       password : {
           type : "string",
           required : true
       },
+
+      permissions : {
+        type : "string"
+      }
 
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
