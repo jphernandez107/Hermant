@@ -8,20 +8,35 @@
 module.exports = {
   login: async function (req,res) {
 
-      var user = await User.findOne( {
-        dni: req.param("dni"),
-        password: req.param("password"),
-      });
+    var user = await User.findOne( {
+      dni: req.param("dni"),
+      password: req.param("password"),
+    });
 
-      if(user === undefined){
+      if(!user){
           //Usuario o contrasena no valida
+          res.redirect('/');
       }else{
           //Usuario valido
+          res.send("Bienvenido " + user.name + " " + user.lastname);
       }
 
+  },
 
-      res.send("ANDÓ" + req.param("name"));
+  signup: async function(req,res){
 
-  }
+    var dni = req.param('dni');
+    var name = req.param('name');
+    var lastname = req.param('lastname');
+    var password = req.param('password');
+    var permissions = req.param('permissions');
+
+    await User.create({dni:dni, name:name, lastname:lastname, password:password, permissions:permissions});
+
+    res.redirect('/');
+    //res.send(req.param('dni') + " " + req.param('name') + " " + req.param('lastname') + " " + req.param('password') + " " +
+      //        req.param('password2') + " " + req.param('permissions'));
+
+  },
 
 };
