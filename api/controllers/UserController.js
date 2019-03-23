@@ -31,12 +31,17 @@ module.exports = {
     var password = req.param('password');
     var permissions = req.param('permissions');
 
-    await User.create({dni:dni, name:name, lastname:lastname, password:password, permissions:permissions});
+    var user = await User.findOne({dni:dni});
+    if(!user){
+      await User.create({dni:dni, name:name, lastname:lastname, password:password, permissions:permissions});
+    }else {
+      res.send(500);
+    }
 
     res.redirect('/');
-    //res.send(req.param('dni') + " " + req.param('name') + " " + req.param('lastname') + " " + req.param('password') + " " +
-      //        req.param('password2') + " " + req.param('permissions'));
 
   },
+
+  //TODO: Make an action for reset password. Set password of an user to "1234".
 
 };
