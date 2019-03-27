@@ -42,37 +42,183 @@
     <link rel="stylesheet" href="/styles/Bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/styles/Bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/homepage_style.css">
-    <link rel="stylesheet" href="/styles/Homepage/chartist-plugin-tooltip.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/material-design-iconic-font/css/materialdesignicons.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/themify-icons/ie7/ie7.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons-core.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons-variables.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons-wind.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons-wind.min.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/css/weather-icons.min.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-beaufort.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-day.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-direction.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-misc.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-moon.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-neutral.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-night.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-time.css">
-    <link rel="stylesheet" href="/styles/Homepage/icons/weather-icons/less/css/variables-wind-names.css">
-    <link rel="stylesheet" href="/styles/Homepage/style.css">
-    <link rel="stylesheet" href="/styles/Homepage/style.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/layout/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="/styles/layout/icons/material-design-iconic-font/css/materialdesignicons.css">
+    <link rel="stylesheet" href="/styles/layout/icons/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/styles/layout/icons/themify-icons/ie7/ie7.css">
+    <link rel="stylesheet" href="/styles/layout/icons/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/styles/layout/style.css">
+    <link rel="stylesheet" href="/styles/layout/style.min.css">
     <link rel="stylesheet" href="/styles/signin_style.css">
     <!--STYLES END-->
   </head>
 
   <body>
+
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header" data-logobg="skin5">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close"></i>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-brand">
+                        <a href="index.html" class="logo">
+                            <!-- Logo icon -->
+                            <b class="logo-icon">
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="../../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                <img src="favicon.ico" alt="homepage" class="light-logo" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <!--img src="../../assets/images/logo-text.png" alt="homepage" class="dark-logo" /-->
+                                <!-- Light Logo text -->
+                                <!--img src="../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /-->
+                                <b>HERMANT®</b>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item search-box">
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi mdi-magnify font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>Buscar</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="ti-close"></i>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="#"><i class="mdi mdi-account m-r-5 m-l-5"></i> Perfil</a>
+                                <a class="dropdown-item" href="#"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="#"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                                <i class="mdi mdi-calendar-clock"></i>
+                                <span class="hide-menu">Calendario</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                                <i class="mdi mdi-bulldozer"></i>
+                                <span class="hide-menu">Equipos</span>
+                            </a>
+                        </li>
+                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                                <i class="mdi mdi-worker"></i>
+                                <span class="hide-menu">Obras</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                                <i class="mdi mdi-settings"></i>
+                                <span class="hide-menu">Repuestos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/signup" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu">Usuarios</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+
+
     <%- body %>
 
-
+    <footer class="footer text-center">
+        All Rights Reserved by Nice admin. Designed and Developed by
+        Juan & Mati
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
 
     <!--
         Client-side Templates
@@ -96,7 +242,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
 
@@ -145,150 +291,32 @@
     <script src="/js/Bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/js/Bootstrap/bootstrap.js"></script>
     <script src="/js/Bootstrap/bootstrap.min.js"></script>
-    <script src="/js/Homepage/chartist-plugin-tooltip.min.js"></script>
-    <script src="/js/Homepage/core.js"></script>
-    <script src="/js/Homepage/custom.js"></script>
-    <script src="/js/Homepage/custom.min.js"></script>
-    <script src="/js/Homepage/ender.js"></script>
-    <script src="/js/Homepage/esm/popper-utils.min.js"></script>
-    <script src="/js/Homepage/esm/popper.min.js"></script>
-    <script src="/js/Homepage/jquery.min.js"></script>
-    <script src="/js/Homepage/jquery.slim.min.js"></script>
-    <script src="/js/Homepage/locale/af.js"></script>
-    <script src="/js/Homepage/locale/ar-dz.js"></script>
-    <script src="/js/Homepage/locale/ar-kw.js"></script>
-    <script src="/js/Homepage/locale/ar-ly.js"></script>
-    <script src="/js/Homepage/locale/ar-ma.js"></script>
-    <script src="/js/Homepage/locale/ar-sa.js"></script>
-    <script src="/js/Homepage/locale/ar-tn.js"></script>
-    <script src="/js/Homepage/locale/ar.js"></script>
-    <script src="/js/Homepage/locale/az.js"></script>
-    <script src="/js/Homepage/locale/be.js"></script>
-    <script src="/js/Homepage/locale/bg.js"></script>
-    <script src="/js/Homepage/locale/bm.js"></script>
-    <script src="/js/Homepage/locale/bn.js"></script>
-    <script src="/js/Homepage/locale/bo.js"></script>
-    <script src="/js/Homepage/locale/br.js"></script>
-    <script src="/js/Homepage/locale/bs.js"></script>
-    <script src="/js/Homepage/locale/ca.js"></script>
-    <script src="/js/Homepage/locale/cs.js"></script>
-    <script src="/js/Homepage/locale/cv.js"></script>
-    <script src="/js/Homepage/locale/cy.js"></script>
-    <script src="/js/Homepage/locale/da.js"></script>
-    <script src="/js/Homepage/locale/de-at.js"></script>
-    <script src="/js/Homepage/locale/de-ch.js"></script>
-    <script src="/js/Homepage/locale/de.js"></script>
-    <script src="/js/Homepage/locale/dv.js"></script>
-    <script src="/js/Homepage/locale/el.js"></script>
-    <script src="/js/Homepage/locale/en-au.js"></script>
-    <script src="/js/Homepage/locale/en-ca.js"></script>
-    <script src="/js/Homepage/locale/en-gb.js"></script>
-    <script src="/js/Homepage/locale/en-ie.js"></script>
-    <script src="/js/Homepage/locale/en-il.js"></script>
-    <script src="/js/Homepage/locale/en-nz.js"></script>
-    <script src="/js/Homepage/locale/eo.js"></script>
-    <script src="/js/Homepage/locale/es-do.js"></script>
-    <script src="/js/Homepage/locale/es-us.js"></script>
-    <script src="/js/Homepage/locale/es.js"></script>
-    <script src="/js/Homepage/locale/et.js"></script>
-    <script src="/js/Homepage/locale/eu.js"></script>
-    <script src="/js/Homepage/locale/fa.js"></script>
-    <script src="/js/Homepage/locale/fi.js"></script>
-    <script src="/js/Homepage/locale/fo.js"></script>
-    <script src="/js/Homepage/locale/fr-ca.js"></script>
-    <script src="/js/Homepage/locale/fr-ch.js"></script>
-    <script src="/js/Homepage/locale/fr.js"></script>
-    <script src="/js/Homepage/locale/fy.js"></script>
-    <script src="/js/Homepage/locale/gd.js"></script>
-    <script src="/js/Homepage/locale/gl.js"></script>
-    <script src="/js/Homepage/locale/gom-latn.js"></script>
-    <script src="/js/Homepage/locale/gu.js"></script>
-    <script src="/js/Homepage/locale/he.js"></script>
-    <script src="/js/Homepage/locale/hi.js"></script>
-    <script src="/js/Homepage/locale/hr.js"></script>
-    <script src="/js/Homepage/locale/hu.js"></script>
-    <script src="/js/Homepage/locale/hy-am.js"></script>
-    <script src="/js/Homepage/locale/id.js"></script>
-    <script src="/js/Homepage/locale/is.js"></script>
-    <script src="/js/Homepage/locale/it.js"></script>
-    <script src="/js/Homepage/locale/ja.js"></script>
-    <script src="/js/Homepage/locale/jv.js"></script>
-    <script src="/js/Homepage/locale/ka.js"></script>
-    <script src="/js/Homepage/locale/kk.js"></script>
-    <script src="/js/Homepage/locale/km.js"></script>
-    <script src="/js/Homepage/locale/kn.js"></script>
-    <script src="/js/Homepage/locale/ko.js"></script>
-    <script src="/js/Homepage/locale/ky.js"></script>
-    <script src="/js/Homepage/locale/lb.js"></script>
-    <script src="/js/Homepage/locale/lo.js"></script>
-    <script src="/js/Homepage/locale/lt.js"></script>
-    <script src="/js/Homepage/locale/lv.js"></script>
-    <script src="/js/Homepage/locale/me.js"></script>
-    <script src="/js/Homepage/locale/mi.js"></script>
-    <script src="/js/Homepage/locale/mk.js"></script>
-    <script src="/js/Homepage/locale/ml.js"></script>
-    <script src="/js/Homepage/locale/mn.js"></script>
-    <script src="/js/Homepage/locale/mr.js"></script>
-    <script src="/js/Homepage/locale/ms-my.js"></script>
-    <script src="/js/Homepage/locale/ms.js"></script>
-    <script src="/js/Homepage/locale/mt.js"></script>
-    <script src="/js/Homepage/locale/my.js"></script>
-    <script src="/js/Homepage/locale/nb.js"></script>
-    <script src="/js/Homepage/locale/ne.js"></script>
-    <script src="/js/Homepage/locale/nl-be.js"></script>
-    <script src="/js/Homepage/locale/nl.js"></script>
-    <script src="/js/Homepage/locale/nn.js"></script>
-    <script src="/js/Homepage/locale/pa-in.js"></script>
-    <script src="/js/Homepage/locale/pl.js"></script>
-    <script src="/js/Homepage/locale/pt-br.js"></script>
-    <script src="/js/Homepage/locale/pt.js"></script>
-    <script src="/js/Homepage/locale/ro.js"></script>
-    <script src="/js/Homepage/locale/ru.js"></script>
-    <script src="/js/Homepage/locale/sd.js"></script>
-    <script src="/js/Homepage/locale/se.js"></script>
-    <script src="/js/Homepage/locale/si.js"></script>
-    <script src="/js/Homepage/locale/sk.js"></script>
-    <script src="/js/Homepage/locale/sl.js"></script>
-    <script src="/js/Homepage/locale/sq.js"></script>
-    <script src="/js/Homepage/locale/sr-cyrl.js"></script>
-    <script src="/js/Homepage/locale/sr.js"></script>
-    <script src="/js/Homepage/locale/ss.js"></script>
-    <script src="/js/Homepage/locale/sv.js"></script>
-    <script src="/js/Homepage/locale/sw.js"></script>
-    <script src="/js/Homepage/locale/ta.js"></script>
-    <script src="/js/Homepage/locale/te.js"></script>
-    <script src="/js/Homepage/locale/tet.js"></script>
-    <script src="/js/Homepage/locale/tg.js"></script>
-    <script src="/js/Homepage/locale/th.js"></script>
-    <script src="/js/Homepage/locale/tl-ph.js"></script>
-    <script src="/js/Homepage/locale/tlh.js"></script>
-    <script src="/js/Homepage/locale/tr.js"></script>
-    <script src="/js/Homepage/locale/tzl.js"></script>
-    <script src="/js/Homepage/locale/tzm-latn.js"></script>
-    <script src="/js/Homepage/locale/tzm.js"></script>
-    <script src="/js/Homepage/locale/ug-cn.js"></script>
-    <script src="/js/Homepage/locale/uk.js"></script>
-    <script src="/js/Homepage/locale/ur.js"></script>
-    <script src="/js/Homepage/locale/uz-latn.js"></script>
-    <script src="/js/Homepage/locale/uz.js"></script>
-    <script src="/js/Homepage/locale/vi.js"></script>
-    <script src="/js/Homepage/locale/x-pseudo.js"></script>
-    <script src="/js/Homepage/locale/yo.js"></script>
-    <script src="/js/Homepage/locale/zh-cn.js"></script>
-    <script src="/js/Homepage/locale/zh-hk.js"></script>
-    <script src="/js/Homepage/locale/zh-tw.js"></script>
-    <script src="/js/Homepage/min/locales.min.js"></script>
-    <script src="/js/Homepage/min/moment-with-locales.min.js"></script>
-    <script src="/js/Homepage/min/moment.min.js"></script>
-    <script src="/js/Homepage/moment.js"></script>
-    <script src="/js/Homepage/package.js"></script>
-    <script src="/js/Homepage/pages/dashboards/dashboard1.js"></script>
-    <script src="/js/Homepage/popper-utils.min.js"></script>
-    <script src="/js/Homepage/popper.min.js"></script>
-    <script src="/js/Homepage/sidebarmenu.js"></script>
-    <script src="/js/Homepage/umd/popper-utils.min.js"></script>
-    <script src="/js/Homepage/umd/popper.min.js"></script>
-    <script src="/js/Homepage/waves.js"></script>
+    <script src="/js/layout/chartist-plugin-tooltip.min.js"></script>
+    <script src="/js/layout/chartist.min.js"></script>
+    <script src="/js/layout/custom.js"></script>
+    <script src="/js/layout/custom.min.js"></script>
+    <script src="/js/layout/dashboard1.js"></script>
+    <script src="/js/layout/jquery.min.js"></script>
+    <script src="/js/layout/jquery.slim.min.js"></script>
+    <script src="/js/layout/package.js"></script>
+    <script src="/js/layout/popper.min.js"></script>
+    <script src="/js/layout/sidebarmenu.js"></script>
+    <script src="/js/layout/sparkline.js"></script>
+    <script src="/js/layout/waves.js"></script>
     <!--SCRIPTS END-->
+
+
+    <!--Scripts para el homepage.-->
+    <script src="/js/layout/jquery.min.js"></script>
+    <script src="/js/layout/popper.min.js"></script>
+    <script src="/js/Bootstrap/bootstrap.min.js"></script>
+    <script src="/js/layout/sparkline.js"></script>
+    <script src="/js/layout/sidebarmenu.js"></script>
+    <script src="/js/layout/custom.min.js"></script>
+    <script src="/js/layout/chartist.min.js"></script>
+    <script src="/js/layout/chartist-plugin-tooltip.min.js"></script>
+    <script src="/js/layout/dashboard1.js"></script>
+
+
   </body>
 </html>
