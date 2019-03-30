@@ -24,6 +24,9 @@ module.exports.routes = {
   },
   '/': {
     view: 'pages/signin',
+    locals: {
+      layout: 'layouts/signin_layout'
+    }
   },
   '/signup': {
     view: 'pages/signup',
