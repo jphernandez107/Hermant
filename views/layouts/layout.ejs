@@ -44,13 +44,15 @@
     <link rel="stylesheet" href="/styles/homepage_style.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/layout/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="/styles/layout/chartist.css">
+    <link rel="stylesheet" href="/styles/layout/chartist.min.css">
     <link rel="stylesheet" href="/styles/layout/icons/material-design-iconic-font/css/materialdesignicons.css">
     <link rel="stylesheet" href="/styles/layout/icons/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/styles/layout/icons/themify-icons/ie7/ie7.css">
     <link rel="stylesheet" href="/styles/layout/icons/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/styles/layout/style.css">
     <link rel="stylesheet" href="/styles/layout/style.min.css">
-    <link rel="stylesheet" href="/styles/signin_style.css">
+    <link rel="stylesheet" href="/styles/progressbar_equip.css">
     <!--STYLES END-->
   </head>
 
@@ -76,9 +78,9 @@
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
-                                <img src="favicon.ico" alt="homepage" class="dark-logo" />
+                                <img src="/favicon.ico" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="favicon.ico" alt="homepage" class="light-logo" />
+                                <img src="/favicon.ico" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
@@ -170,7 +172,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/equipment/list" aria-expanded="false">
                                 <i class="mdi mdi-bulldozer"></i>
                                 <span class="hide-menu">Equipos</span>
                             </a>
@@ -205,7 +207,15 @@
 
 
 
-    <%- body %>
+        <div class="page-wrapper">    <!-- Agrego este div al principio-->
+          <div class="container-fluid">   <!-- Agrego este div segundo-->
+            <%- body %>
+          </div>  <!-- Cierro el container-fluid-->
+          <footer class="footer text-center">
+              All Rights Reserved by Juan & Mati. Designed and Developed by
+              Juan & Mati
+          </footer>
+        </div>  <!-- Cierro el page-wrapper-->
 
 
     <!-- ============================================================== -->
@@ -287,7 +297,9 @@
     <script src="/js/Bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/js/Bootstrap/bootstrap.js"></script>
     <script src="/js/Bootstrap/bootstrap.min.js"></script>
+    <script src="/js/layout/chartist-plugin-tooltip.js"></script>
     <script src="/js/layout/chartist-plugin-tooltip.min.js"></script>
+    <script src="/js/layout/chartist.js"></script>
     <script src="/js/layout/chartist.min.js"></script>
     <script src="/js/layout/custom.js"></script>
     <script src="/js/layout/custom.min.js"></script>
@@ -299,6 +311,7 @@
     <script src="/js/layout/sidebarmenu.js"></script>
     <script src="/js/layout/sparkline.js"></script>
     <script src="/js/layout/waves.js"></script>
+    <script src="/js/progressbar_equip.js"></script>
     <!--SCRIPTS END-->
 
 
