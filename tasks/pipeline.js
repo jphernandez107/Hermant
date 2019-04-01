@@ -40,7 +40,8 @@ var cssFilesToInject = [
   // in no particular order.  To customize the ordering, add additional
   // items here, _above_ this one.
   'styles/**/*.css',
-  '!styles/local/*.css'
+  '!styles/local/*.css',
+  '!styles/local/**/*.css'
 ];
 
 
@@ -64,9 +65,9 @@ var jsFilesToInject = [
 
   // Load `sails.io` before everything else.
   'dependencies/sails.io.js',
-  'js/Homepage/jquery.min.js',
-  'js/Homepage/jquery.slim.min.js',
-  'js/Homepage/chartist.min.js',
+  //'js/Homepage/jquery.min.js',
+  //'js/Homepage/jquery.slim.min.js',
+  //'js/Homepage/chartist.min.js',
 
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
@@ -76,7 +77,7 @@ var jsFilesToInject = [
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
   // here, _above_ this one.
-  'js/**/*.js'
+  //'js/**/*.js'
 ];
 
 
