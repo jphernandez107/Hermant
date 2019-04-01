@@ -20,10 +20,13 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/homepage': {
-    view: 'pages/homepage',
+    view: 'pages/index',
   },
   '/': {
     view: 'pages/signin',
+    locals: {
+      layout: 'layouts/signin_layout'
+    }
   },
   '/signup': {
     view: 'pages/signup',
@@ -35,8 +38,24 @@ module.exports.routes = {
   '/login': {
       controller: 'user',
       action : 'login'
- },
+  },
 
+  '/equipment/list':{
+    controller: 'equipment',
+    action: 'list_view',
+  },
+  '/equipment/new':{
+    controller: 'equipment',
+    action: 'new_equipment',
+  },
+  '/equipment/new/create':{
+    controller: 'equipment',
+    action: 'create',
+  },
+  '/equipment/update/:id/:d/:b':{
+    controller: 'equipment',
+    action: 'update',
+  },
 
   /***************************************************************************
   *                                                                          *
