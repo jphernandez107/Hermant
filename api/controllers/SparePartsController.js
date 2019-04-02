@@ -17,7 +17,7 @@ new_part: async function(req,res){
   return res.view('pages/parts/new_part');
 },
 /*
-  Creamos un nuevo equipo en la base de datos del sistema.
+  Creamos un nuevo repuesto en la base de datos del sistema.
 */
 create: async function(req,res){
     var type = String(req.param('tipo'));
@@ -25,12 +25,12 @@ create: async function(req,res){
     var model = String(req.param('modelo'));
     var internalCode = String(req.param('codigo interno'));
     var externalCode = String(req.param('codigo externo'));
-    var stock = String(req.param('cantidad'));
+    var stock = Num(req.param('cantidad'));
     var application = String(req.param('aplicacion'));
 
 
 
-  var parts = await parts.create({type, brand, model, internalCode, externalCode, stock, application});
+  var part = await SpareParts.create({type, brand, model, internalCode, externalCode, stock, application});
 
   return res.redirect('/parts');
 },
