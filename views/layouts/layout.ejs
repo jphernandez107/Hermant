@@ -140,7 +140,7 @@
                               <a class="nav-link waves-effect waves-dark pro-pic" href="/signout"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"> Cerrar Sesión <%=req.session.User.name%></a>
                           </li-->
                           <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"></a>
+                              <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"> <%=req.session.User.name%></a>
                               <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                   <a class="dropdown-item" href="/resetpass/user"><i class="mdi mdi-account-key m-r-5 m-l-5"></i> Cambiar Contraseña</a>
                                   <a class="dropdown-item" href="/signout"><i class="mdi mdi-exit-to-app m-r-5 m-l-5"></i> Cerrar Sesión</a>
