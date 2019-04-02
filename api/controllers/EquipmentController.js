@@ -62,13 +62,14 @@ module.exports = {
   */
   list_view: async function(req,res){
 
+    var session = req.session;
     var equipments = await Equipment.find({});
 
     if(!equipments){
       // No se encontraron equipos registrados.
       return res.redirect('/');
     }else{
-      return res.view('pages/equipment/equipment_list', {equipments:equipments});
+      return res.view('pages/equipment/equipment_list', {equipments, session});
     }
   },
 

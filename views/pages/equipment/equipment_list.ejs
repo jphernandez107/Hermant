@@ -40,7 +40,7 @@
                             <th class="border-top-0" style="width: 7%; text-align: center;">I/R</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">HORÓMETRO</th>
                             <th class="border-top-0" style="width: 25%; text-align: center;">PRÓXIMO MANTENIMIENTO</th>
-                            <th class="border-top-0" colspan="2" style="width: 14%; text-align: center;">DETALLES</th>
+                            <th class="border-top-0" style="width: 14%; text-align: center;">DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +56,17 @@
                             <td class="txt-oflo align-middle">
 
                             </td>
-                            <td style="width: 50%; text-align: center;">
-                              <button class="btn btn-success"><i class="mdi mdi-file-find"></i></button>
-                            </td>
-                            <td style="width: 50%; text-align: center;">
-                              <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
+                            <td style="text-align: center;">
+                              <div class="btn-group" role="group">
+                                <form method="post" action="/equipment/details/<%= equipment.id %>/" class="d-inline">
+                                  <button class="btn btn-success" type="submit"><i class="mdi mdi-file-find"></i></button>
+                                </form>
+                                <% if(session.authenticated && session.User.permissions === "admin"){ %>
+                                  <form method="post" action="/equipment/delete/<%= equipment.id %>/" class="d-inline">
+                    								<button class="btn btn-danger" type="submit"><i class="mdi mdi-delete"></i></button>
+                    							</form>
+                                <%}%>
+                              </div>
                             </td>
                         </tr>
                       <% }); %>
@@ -69,7 +75,7 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-          I/M: Índice de Mantenibilidad - 
+          I/M: Índice de Mantenibilidad -
           I/R: Índice de Reparabilidad
         </div>
       </div>
