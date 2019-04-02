@@ -80,7 +80,8 @@ module.exports.routes = {
     action: 'update',
   },
 
-  '/parts':{
+
+  '/parts/list':{
     controller: 'SpareParts',
     action: 'list_view',
   },
@@ -88,7 +89,6 @@ module.exports.routes = {
     controller: 'SpareParts',
     action: 'new_part',
   },
-
   '/parts/new/create':{
     controller: 'SpareParts',
     action: 'create',
