@@ -62,15 +62,28 @@ module.exports = {
   */
   list_view: async function(req,res){
 
-    var session = req.session;
     var equipments = await Equipment.find({});
 
     if(!equipments){
       // No se encontraron equipos registrados.
       return res.redirect('/');
     }else{
-      return res.view('pages/equipment/equipment_list', {equipments, session});
+      return res.view('pages/equipment/equipment_list', {equipments});
     }
   },
+
+  details_view: async function(req,res){
+
+    var equipmentId = req.param('id');
+
+    var equipment = await Equipment.findOne({id:id});
+
+    if(equipment){
+      return res.view('pages/equipment/equipment_details', {equipment});
+    }else{
+      return res.redirect('/equipment/list');
+    }
+  },
+
 
 };
