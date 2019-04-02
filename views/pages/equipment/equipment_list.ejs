@@ -7,7 +7,7 @@
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item">
-                          <a href="#">Home</a>
+                          <a href="/">Home</a>
                       </li>
                       <li class="breadcrumb-item active" aria-current="page">Equipos</li>
                   </ol>
@@ -61,7 +61,7 @@
                                 <form method="post" action="/equipment/details/<%= equipment.id %>/" class="d-inline">
                                   <button class="btn btn-success" type="submit"><i class="mdi mdi-file-find"></i></button>
                                 </form>
-                                <% if(session.authenticated && session.User.permissions === "admin"){ %>
+                                <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
                                   <form method="post" action="/equipment/delete/<%= equipment.id %>/" class="d-inline">
                     								<button class="btn btn-danger" type="submit"><i class="mdi mdi-delete"></i></button>
                     							</form>
