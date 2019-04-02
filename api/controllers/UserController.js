@@ -21,13 +21,13 @@ module.exports = {
 
       if(!user){
           //Usuario o contrasena no valida
-          res.redirect('/');
+          res.redirect('/signin');
       }else{
           //Usuario valido
           req.session.authenticated = true;
           req.session.User = user;
           //res.send("Bienvenido " + req.session.User.name + " " + user.lastname);
-          res.redirect('/equipment/list');
+          res.redirect('/');
       }
 
   },
@@ -63,6 +63,15 @@ module.exports = {
     res.redirect('/');
 
   },
+
+  signout: async function(req,res){
+    if(!req.session.User){
+      return res.redirect('/');
+    }else{
+      req.session.User = undefined;
+      return res.redirect('/');
+    }
+  }
 
 
   //TODO: Make an action to reset password. Set password of an user to "1234".

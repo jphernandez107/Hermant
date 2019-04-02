@@ -19,10 +19,10 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/homepage': {
+  '/': {
     view: 'pages/index',
   },
-  '/': {
+  '/signin': {
     view: 'pages/signin',
     locals: {
       layout: 'layouts/signin_layout'
@@ -41,6 +41,11 @@ module.exports.routes = {
       controller: 'user',
       action : 'login'
   },
+  '/signout':{
+    controller: 'user',
+    action: 'signout',
+  },
+
 
   '/equipment/list':{
     controller: 'equipment',
