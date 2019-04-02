@@ -59,6 +59,20 @@ module.exports.routes = {
     action: 'update',
   },
 
+  '/parts':{
+    controller: 'SpareParts',
+    action: 'list_view',
+  },
+  '/parts/new':{
+    controller: 'SpareParts',
+    action: 'new_part',
+  },
+
+  '/parts/new/create':{
+    controller: 'SpareParts',
+    action: 'create',
+  },
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
