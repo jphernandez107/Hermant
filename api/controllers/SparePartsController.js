@@ -25,7 +25,7 @@ create: async function(req,res){
     var model = String(req.param('modelo'));
     var internalCode = String(req.param('codigo interno'));
     var externalCode = String(req.param('codigo externo'));
-    var stock = Num(req.param('cantidad'));
+    var stock = Number(req.param('cantidad'));
     var application = String(req.param('aplicacion'));
 
 
