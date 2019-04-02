@@ -23,7 +23,7 @@ module.exports.routes = {
     view: 'pages/index',
   },
   '/signin': {
-    view: 'pages/signin',
+    view: 'pages/user/signin',
     locals: {
       layout: 'layouts/signin_layout'
     }
@@ -44,6 +44,22 @@ module.exports.routes = {
   '/signout':{
     controller: 'user',
     action: 'signout',
+  },
+  '/resetpass/admin':{
+    controller:'user',
+    action: 'reset_pass_admin_view',
+  },
+  '/resetpass/admin/new':{
+    controller:'user',
+    action: 'reset_pass_admin',
+  },
+  '/resetpass/user':{
+    controller:'user',
+    action: 'reset_pass_user_view',
+  },
+  '/resetpass/user/new':{
+    controller:'user',
+    action: 'reset_pass_user',
   },
 
 
