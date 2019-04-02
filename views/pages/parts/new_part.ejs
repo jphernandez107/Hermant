@@ -1,0 +1,92 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-5 align-self-center">
+    </div>
+    <div class="col-7 align-self-center">
+      <div class="d-flex align-items-center justify-content-end">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/parts">Respuestos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Repuesto</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card card-body">
+      <h3 class="card-title">Nuevo Repuesto</h3>
+      <h5 class="card-subtitle"> Ingrese los datos del repuesto que desea agregar </h5>
+      <form class="form-horizontal m-t-30" method="POST" action="/parts/new/create">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Tipo</label>
+              <select class="custom-select col-12" name="tipo">
+                <option selected>Aceite</option>
+                <option>Aire</option>
+                <option>Filtro</option>
+                <option>Liquidos</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Marca</label>
+              <select class="custom-select col-12" name="marca">
+                <option selected>matiFiltros</option>
+                <option value="1">Apple</option>
+                <option value="2">Samsung</option>
+                <option value="3">Caterpillar</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Modelo</label>
+              <input class="form-control" type="text" placeholder="Modelo" name="modelo">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Codigo Interno</label>
+              <input class="form-control" type="text" placeholder="Código Interno" name="codigo interno">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Código Externo</label>
+              <input class="form-control" type="text" placeholder="Código Externo" name="codigo externo">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input class="form-control" type="number" placeholder="Cantidad"  name="cantidad">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Aplicación</label>
+                <select class="custom-select col-12" name="aplicacion">
+                  <option selected>Motor</option>
+                  <option value="1">Aire</option>
+                  <option value="2">Ruedas</option>
+                  <option value="3">Que se yo</option>
+                </select>
+              </div>
+        </div>
+            <input type="submit" value="Guardar" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
