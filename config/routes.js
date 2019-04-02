@@ -29,7 +29,9 @@ module.exports.routes = {
     }
   },
   '/signup': {
-    view: 'pages/signup',
+    //view: 'pages/signup',
+    controller: 'user',
+    action: 'signup_view',
   },
   '/signup/newUser': {
     controller: 'user',
