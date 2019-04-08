@@ -74,9 +74,9 @@ module.exports = {
 
   details_view: async function(req,res){
 
-    var equipmentId = req.param('id');
+    var equipmentId = req.param('idEquip');
 
-    var equipment = await Equipment.findOne({id:id});
+    var equipment = await Equipment.findOne({id:equipmentId});
 
     if(equipment){
       return res.view('pages/equipment/equipment_details', {equipment});

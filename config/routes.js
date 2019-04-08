@@ -75,6 +75,10 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'create',
   },
+  '/equipment/details/:idEquip':{
+    controller: 'equipment',
+    action: 'details_view',
+  },
   '/equipment/update/:id/:d/:b':{
     controller: 'equipment',
     action: 'update',
