@@ -1,0 +1,146 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item active" aria-current="page"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%>></li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">CÓDIGO</th>
+                  <th class="border-top-0" style="text-align: center;">MARCA</th>
+                  <th class="border-top-0" style="text-align: center;">MODELO</th>
+                  <th class="border-top-0" style="text-align: center;">S/N</th>
+                  <th class="border-top-0" style="text-align: center;">ORIGEN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= equipment.code %></td>
+                <td class="txt-oflo"><%= equipment.brand %></td>
+                <td class="txt-oflo"><%= equipment.model %></td>
+                <td class="txt-oflo"><%= equipment.serialNumber %></td>
+                <td class="txt-oflo"><%= equipment.origin %></td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">AÑO</th>
+                  <th class="border-top-0" style="text-align: center;">FECHA SERVICIO</th>
+                  <th class="border-top-0" style="text-align: center;">POTENCIA</th>
+                  <th class="border-top-0" style="text-align: center;">PESO</th>
+                  <th class="border-top-0" style="text-align: center;">PRECIO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= equipment.manufDate %></td>
+                <td class="txt-oflo"><%= equipment.serviceDate %></td>
+                <td class="txt-oflo"><%= equipment.power %></td>
+                <td class="txt-oflo"><%= equipment.weight %></td>
+                <td class="txt-oflo"><%= equipment.price %></td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">HORAS TOTALES</th>
+                  <th class="border-top-0" style="text-align: center;">HORAS PARCIALES</th>
+                  <th class="border-top-0" style="text-align: center;">MANTENIMIENTO</th>
+                  <th class="border-top-0" style="text-align: center;">OBSERVACIONES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= equipment.totalHours %></td>
+                <td class="txt-oflo"><%= equipment.partialHours %></td>
+                <td class="txt-oflo">BARRA</td>
+                <td class="txt-oflo"><%= equipment.observations %></td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-10">
+            <h3 class="card-title">Mantenimientos</h3>
+          </div>
+          <div class="col-2">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                <i class="mdi mdi-plus-circle-outline"></i>
+                <span class="hide-menu">Nuevo Mantenimiento</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-10">
+            <h3 class="card-title">Reparaciones</h3>
+          </div>
+          <div class="col-2">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                <i class="mdi mdi-plus-circle-outline"></i>
+                <span class="hide-menu">Nueva Reparacion</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

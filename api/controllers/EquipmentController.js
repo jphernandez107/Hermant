@@ -68,8 +68,22 @@ module.exports = {
       // No se encontraron equipos registrados.
       return res.redirect('/');
     }else{
-      return res.view('pages/equipment/equipment_list', {equipments:equipments});
+      return res.view('pages/equipment/equipment_list', {equipments});
     }
   },
+
+  details_view: async function(req,res){
+
+    var equipmentId = req.param('idEquip');
+
+    var equipment = await Equipment.findOne({id:equipmentId});
+
+    if(equipment){
+      return res.view('pages/equipment/equipment_details', {equipment});
+    }else{
+      return res.redirect('/equipment/list');
+    }
+  },
+
 
 };

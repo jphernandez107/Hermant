@@ -19,17 +19,19 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/homepage': {
+  '/': {
     view: 'pages/index',
   },
-  '/': {
-    view: 'pages/signin',
+  '/signin': {
+    view: 'pages/user/signin',
     locals: {
       layout: 'layouts/signin_layout'
     }
   },
   '/signup': {
-    view: 'pages/signup',
+    //view: 'pages/signup',
+    controller: 'user',
+    action: 'signup_view',
   },
   '/signup/newUser': {
     controller: 'user',
@@ -39,6 +41,27 @@ module.exports.routes = {
       controller: 'user',
       action : 'login'
   },
+  '/signout':{
+    controller: 'user',
+    action: 'signout',
+  },
+  '/resetpass/admin':{
+    controller:'user',
+    action: 'reset_pass_admin_view',
+  },
+  '/resetpass/admin/new':{
+    controller:'user',
+    action: 'reset_pass_admin',
+  },
+  '/resetpass/user':{
+    controller:'user',
+    action: 'reset_pass_user_view',
+  },
+  '/resetpass/user/new':{
+    controller:'user',
+    action: 'reset_pass_user',
+  },
+
 
   '/equipment/list':{
     controller: 'equipment',
@@ -52,9 +75,27 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'create',
   },
+  '/equipment/details/:idEquip':{
+    controller: 'equipment',
+    action: 'details_view',
+  },
   '/equipment/update/:id/:d/:b':{
     controller: 'equipment',
     action: 'update',
+  },
+
+
+  '/parts/list':{
+    controller: 'SpareParts',
+    action: 'list_view',
+  },
+  '/parts/new':{
+    controller: 'SpareParts',
+    action: 'new_part',
+  },
+  '/parts/new/create':{
+    controller: 'SpareParts',
+    action: 'create',
   },
 
   /***************************************************************************

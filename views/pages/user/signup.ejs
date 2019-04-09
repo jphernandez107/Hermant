@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/styles/local/signin_style.css">
+<!--- Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles-->
+
+
+        <div class="fadeIn first">
+          <img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" id="icon" alt="UserIcon">
+        </div>
+
+
+          <form method="post" action="/signup/newUser">
+            <input type="text" id="dni" class="fadeIn second" name="dni" placeholder="DNI">
+            <input type="text" id="name" class="fadeIn third" name="name" placeholder="NOMBRE">
+            <input type="text" id="lastname" class="fadeIn fourth" name="lastname" placeholder="APELLIDO">
+
+
+            <!--div class="container custom-select">
+              <select class="custom-select fadeIn fourth" type="text" name="permissions" style="text-align: center;">
+                <option selected>PERMISOS</option>
+                <option value="admin">Administrador</option>
+                <option value="engineer">Ingeniero</option>
+                <option value="maintManager">Jefe Mantenimiento</option>
+                <option value="constManager">Jefe Obra</option>
+                <option value="depositManager">Jefe Deposito</option>
+              </select>
+            </div-->
+            <div class="drop">
+              <div class="option active placeholder" data-value="placeholder">
+                PERMISOS
+              </div>
+              <div class="option" data-value="admin">
+                ADIMINISTRADOR
+              </div>
+              <div class="option" data-value="engineer">
+                INGENIERO
+              </div>
+              <div class="option" data-value="maintManager">
+                JEFE MANTENIMIENTO
+              </div>
+              <div class="option" data-value="constManager">
+                JEFE OBRA
+              </div>
+              <div class="option" data-value="depositManager">
+                JEFE DEPOSITO
+              </div>
+            </div>
+            <input type="submit" class="fadeIn fourth" value="Agregar">
+          </form>
+      </div>
+    </div>
