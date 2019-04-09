@@ -16,15 +16,18 @@ module.exports.bootstrap = async function() {
   // For example:
   // ```
   // // Set up fake development data (or if we already have some, avast)
-  // if (await User.count() > 0) {
-  //   return;
-  // }
+   if (await User.count() > 0) {
+     return;
+   }
   //
-  // await User.createEach([
-  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
-  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
-  //   // etc.
-  // ]);
+   await User.createEach([
+     { dni: '0', password: '0', name: 'admin', lastname: 'admin', permissions:'admin', },
+     { dni: '1', password: '1', name: 'ingeniero', lastname: 'ingeniero', permissions:'engineer',},
+     { dni: '2', password: '2', name: 'mantenimiento', lastname: 'mantenimiento', permissions:'maintManager', },
+     { dni: '3', password: '3', name: 'obra', lastname: 'obra', permissions:'constManager', },
+     { dni: '4', password: '4', name: 'deposito', lastname: 'deposito', permissions:'depositManager', },
+     // etc.
+   ]);
   // ```
 
 };
