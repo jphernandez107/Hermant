@@ -21,12 +21,11 @@ module.exports = {
 
       if(!user){
           //Usuario o contrasena no valida
-          return res.redirect('/signin');
+          return res.view('pages/user/signin', {msg:"Usuario invalido, por favor verifique los datos."});
       }else{
           //Usuario valido
           req.session.authenticated = true;
           req.session.User = user;
-          //res.send("Bienvenido " + req.session.User.name + " " + user.lastname);
           return res.redirect('/');
       }
 
@@ -68,6 +67,7 @@ module.exports = {
     if(!req.session.User){
       return res.redirect('/');
     }else{
+      req.session.authenticated = false;
       req.session.User = undefined;
       return res.redirect('/');
     }
