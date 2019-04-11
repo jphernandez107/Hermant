@@ -44,6 +44,16 @@ module.exports.bootstrap = async function() {
        { internalCode: 'KER203', externalCode: '1250033', type: 'Filtro', application: 'Combustible', brand:'YPF', model:'C403', stock:'19', },
      ]);
    }
+   if (await ConstructionSite.count() > 0) {
+     complete +=1;
+   }else{
+     await ConstructionSite.createEach([
+       { code: 'T01', name: 'Taller', province: 'Jujuy', district: 'S.S. de Jujuy', distance:'0', initDate:'-', finishDate:'-', maxTemp:'28', minTemp:'6', altitude:'1250', },
+       { code: 'C01', name: 'Cantera Rio Grande', province: 'Jujuy', district: 'S.S. de Jujuy', distance:'7', initDate:'2019', finishDate:'2022', maxTemp:'28', minTemp:'6', altitude:'1250', },
+       { code: 'A03', name: 'Mina Aguilar', province: 'Jujuy', district: 'Humahuaca', distance:'234', initDate:'2017', finishDate:'2020', maxTemp:'25', minTemp:'-10', altitude:'3980', },
+       { code: 'S02', name: 'Dique Susques', province: 'Jujuy', district: 'Susques', distance:'203', initDate:'2019', finishDate:'2021', maxTemp:'22', minTemp:'-8', altitude:'3900', },
+     ]);
+   }
 
 
    return;
