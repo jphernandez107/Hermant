@@ -10,24 +10,43 @@
  */
 
 module.exports.bootstrap = async function() {
+  var complete = 0;
 
-  // By convention, this is a good place to set up fake data during development.
-  //
-  // For example:
-  // ```
-  // // Set up fake development data (or if we already have some, avast)
    if (await User.count() > 0) {
-     return;
+     complete += 1;
+   }else{
+     await User.createEach([
+       { dni: '0', password: '0', name: 'admin', lastname: 'admin', permissions:'admin', },
+       { dni: '1', password: '1', name: 'ingeniero', lastname: 'ingeniero', permissions:'engineer',},
+       { dni: '2', password: '2', name: 'mantenimiento', lastname: 'mantenimiento', permissions:'maintManager', },
+       { dni: '3', password: '3', name: 'obra', lastname: 'obra', permissions:'constManager', },
+       { dni: '4', password: '4', name: 'deposito', lastname: 'deposito', permissions:'depositManager', },
+     ]);
    }
-  //
-   await User.createEach([
-     { dni: '0', password: '0', name: 'admin', lastname: 'admin', permissions:'admin', },
-     { dni: '1', password: '1', name: 'ingeniero', lastname: 'ingeniero', permissions:'engineer',},
-     { dni: '2', password: '2', name: 'mantenimiento', lastname: 'mantenimiento', permissions:'maintManager', },
-     { dni: '3', password: '3', name: 'obra', lastname: 'obra', permissions:'constManager', },
-     { dni: '4', password: '4', name: 'deposito', lastname: 'deposito', permissions:'depositManager', },
-     // etc.
-   ]);
-  // ```
+   if (await Equipment.count() > 0) {
+     complete += 1;
+   }else{
+     await Equipment.createEach([
+       { code: 'FDR386', brand: 'Komatsu', model: 'AR-304', designation: 'Excavadora', serialNumber:'019238201', origin:'Brasil', manufDate:'2019', serviceDate:'2019', power:'200', price:'2000000', observations:'Equipo por default' },
+       { code: 'SDD034', brand: 'Samsung', model: 'GT-502', designation: 'Topadora', serialNumber:'019123334', origin:'Mexico', manufDate:'2019', serviceDate:'2019', power:'220', price:'3000000', observations:'Equipo por default' },
+       { code: 'TTR440', brand: 'Caterpillar', model: 'KR-123', designation: 'Cargadora', serialNumber:'12339033', origin:'Brasil', manufDate:'2019', serviceDate:'2019', power:'120', price:'1500000', observations:'Equipo por default' },
+       { code: 'FDR230', brand: 'Komatsu', model: 'AR-603', designation: 'Retroexcavadora', serialNumber:'019223949', origin:'Brasil', manufDate:'2019', serviceDate:'2019', power:'190', price:'2000000', observations:'Equipo por default' },
+
+     ]);
+   }
+   if (await SpareParts.count() > 0) {
+     complete +=1;
+   }else{
+     await SpareParts.createEach([
+       { internalCode: 'KOD345', externalCode: '1239390', type: 'Filtro', application: 'Aceite Motor', brand:'YPF', model:'Y220', stock:'40', },
+       { internalCode: 'DOS233', externalCode: '5230002', type: 'Aceite', application: 'Motor', brand:'SHELL', model:'S520', stock:'100', },
+       { internalCode: 'PDD403', externalCode: '1232113', type: 'Liquido', application: 'Refrigerante', brand:'YPF', model:'R120', stock:'40', },
+       { internalCode: 'KER203', externalCode: '1250033', type: 'Filtro', application: 'Combustible', brand:'YPF', model:'C403', stock:'19', },
+     ]);
+   }
+
+
+   return;
+
 
 };
