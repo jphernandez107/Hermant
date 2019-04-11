@@ -1,0 +1,165 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-5 align-self-center">
+    </div>
+    <div class="col-7 align-self-center">
+      <div class="d-flex align-items-center justify-content-end">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/site/list">Obras</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%=site.name%> en <%=site.province%></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><%=site.name%> en <%=site.province%></h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">CÓDIGO</th>
+                  <th class="border-top-0" style="text-align: center;">NOMBRE</th>
+                  <th class="border-top-0" style="text-align: center;">PROVINCIA</th>
+                  <th class="border-top-0" style="text-align: center;">LOCALIDAD</th>
+                  <th class="border-top-0" style="text-align: center;">DISTANCIA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= site.code %></td>
+                <td class="txt-oflo"><%= site.name %></td>
+                <td class="txt-oflo"><%= site.province %></td>
+                <td class="txt-oflo"><%= site.district %></td>
+                <td class="txt-oflo"><%= site.distance %>Km</td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">FECHA INICIO</th>
+                  <th class="border-top-0" style="text-align: center;">FECHA FIN</th>
+                  <th class="border-top-0" colspan="2" style="text-align: center;">TEMPERATURA</th>
+                  <th class="border-top-0" style="text-align: center;">ALTURA SNM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= site.initDate %></td>
+                <td class="txt-oflo"><%= site.finishDate %></td>
+                <td class="txt-oflo"><%= site.minTemp %>˚C</td>
+                <td class="txt-oflo"><%= site.maxTemp %>˚C</td>
+                <td class="txt-oflo"><%= site.altitude %>m</td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-center" style="height:130px; width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">OBSERVACIONES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td class="txt-oflo"><%= site.observations %></td>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">TODOS LOS EQUIPOS</h4>
+        <div class="table-responsive text-center" style="height:350px; width: 102%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">CÓDIGO</th>
+                  <th class="border-top-0" style="text-align: center;">DESIGNACIÓN</th>
+                  <th class="border-top-0" style="text-align: center;">MARCA</th>
+                  <th class="border-top-0" style="text-align: center;">MODELO</th>
+                  <th class="border-top-0" style="text-align: center;">ACCIÓN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% equipments.forEach(function(equipment){ %>
+                  <tr>
+                    <td class="txt-oflo"><a href="/equipment/details/<%=equipment.id%>"><%= equipment.code %></a></td>
+                    <td class="txt-oflo"><%= equipment.designation %></td>
+                    <td class="txt-oflo"><%= equipment.brand %></td>
+                    <td class="txt-oflo"><%= equipment.model %></td>
+                    <td class="txt-oflo"><a href="#" class="btn btn-warning">AGREGAR</a></td>
+                  </tr>
+                <%});%>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">EQUIPOS EN ESTA OBRA</h4>
+        <div class="table-responsive text-center" style="height:350px; width: 102%">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="border-top-0" style="text-align: center;">CÓDIGO</th>
+                  <th class="border-top-0" style="text-align: center;">DESIGNACIÓN</th>
+                  <th class="border-top-0" style="text-align: center;">MARCA</th>
+                  <th class="border-top-0" style="text-align: center;">MODELO</th>
+                  <th class="border-top-0" style="text-align: center;">ACCIÓN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% equipments.forEach(function(equipment){ %>
+                  <tr>
+                    <td class="txt-oflo"><a href="/equipment/details/<%=equipment.id%>"><%= equipment.code %></a></td>
+                    <td class="txt-oflo"><%= equipment.designation %></td>
+                    <td class="txt-oflo"><%= equipment.brand %></td>
+                    <td class="txt-oflo"><%= equipment.model %></td>
+                    <td class="txt-oflo"><a href="#" class="btn btn-danger">QUITAR</a></td>
+                  </tr>
+                <%});%>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

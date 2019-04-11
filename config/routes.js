@@ -113,6 +113,27 @@ module.exports.routes = {
     action: 'create',
   },
 
+  '/site/list':{
+    controller: 'ConstructionSite',
+    action: 'list_view',
+  },
+  'GET /site/new':{
+    controller: 'ConstructionSite',
+    action: 'new_site',
+  },
+  'POST /site/new':{
+    controller: 'ConstructionSite',
+    action: 'create',
+  },
+  '/site/details/:idSite':{
+    controller: 'ConstructionSite',
+    action: 'details_view',
+  },
+  '/site/delete/:idSite':{
+    controller: 'ConstructionSite',
+    action: 'delete',
+  },
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
