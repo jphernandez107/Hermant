@@ -94,9 +94,9 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'details_view',
   },
-  '/equipment/update/:id/:d/:b':{
+  '/equipment/delete/:idEquip':{
     controller: 'equipment',
-    action: 'update',
+    action: 'delete',
   },
 
 

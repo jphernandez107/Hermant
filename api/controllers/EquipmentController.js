@@ -85,5 +85,16 @@ module.exports = {
     }
   },
 
+  /*
+    Eliminamos un equipo
+  */
+  delete: async function(req,res){
+    var idEquip = req.param('idEquip');
+
+    await Equipment.destroy({id:idEquip});
+
+    return res.redirect('/equipment/list');
+  },
+
 
 };

@@ -58,13 +58,9 @@
                             </td>
                             <td style="text-align: center;">
                               <div class="btn-group" role="group">
-                                <form method="post" action="/equipment/details/<%= equipment.id %>/" class="d-inline">
-                                  <button class="btn btn-success" type="submit"><i class="mdi mdi-file-find"></i></button>
-                                </form>
+                                <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <form method="post" action="/equipment/delete/<%= equipment.id %>/" class="d-inline">
-                    								<button class="btn btn-danger" type="submit"><i class="mdi mdi-delete"></i></button>
-                    							</form>
+                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>
