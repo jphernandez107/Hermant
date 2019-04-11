@@ -82,11 +82,11 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'list_view',
   },
-  '/equipment/new':{
+  'GET /equipment/new':{
     controller: 'equipment',
     action: 'new_equipment',
   },
-  '/equipment/new/create':{
+  'POST /equipment/new':{
     controller: 'equipment',
     action: 'create',
   },
