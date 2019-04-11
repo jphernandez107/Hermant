@@ -22,46 +22,61 @@ module.exports.routes = {
   '/': {
     view: 'pages/index',
   },
-  '/signin': {
+  '/user/signin': {
     view: 'pages/user/signin',
     locals: {
       layout: 'layouts/signin_layout'
     }
   },
-  '/signup': {
+  'GET /user/signup': {
     //view: 'pages/signup',
     controller: 'user',
     action: 'signup_view',
   },
-  '/signup/newUser': {
+  'POST /user/signup': {
     controller: 'user',
     action: 'signup'
   },
-  '/login': {
+  '/user/login': {
       controller: 'user',
       action : 'login'
   },
-  '/signout':{
+  '/user/signout':{
     controller: 'user',
     action: 'signout',
   },
-  '/resetpass/admin':{
+  'GET /user/resetpass':{
     controller:'user',
-    action: 'reset_pass_admin_view',
+    action: 'reset_pass_view',
   },
-  '/resetpass/admin/new':{
+  'POST /user/resetpass':{
     controller:'user',
-    action: 'reset_pass_admin',
+    action: 'reset_pass',
   },
-  '/resetpass/user':{
+  'GET /user/changepass':{
     controller:'user',
-    action: 'reset_pass_user_view',
+    action: 'change_pass_view',
   },
-  '/resetpass/user/new':{
+  'POST /user/changepass':{
     controller:'user',
-    action: 'reset_pass_user',
+    action: 'change_pass',
   },
-
+  '/user/list':{
+    controller:'user',
+    action: 'list_view',
+  },
+  '/user/delete/:idUser':{
+    controller:'user',
+    action: 'delete',
+  },
+  'GET /user/edit/:idUser':{
+    controller:'user',
+    action: 'edit',
+  },
+  'POST /user/edit/:idUser': {
+    controller: 'user',
+    action: 'edited'
+  },
 
   '/equipment/list':{
     controller: 'equipment',

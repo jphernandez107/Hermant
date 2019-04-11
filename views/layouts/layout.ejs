@@ -133,17 +133,17 @@
                         <!-- ============================================================== -->
                         <% if(!req.session.User) {%>
                           <li class="nav-item">
-                              <a class="nav-link waves-effect waves-dark pro-pic" href="/signin"><i class="mdi mdi-account"></i> Iniciar Sesión</a>
+                              <a class="nav-link waves-effect waves-dark pro-pic" href="/user/signin"><i class="mdi mdi-account"></i> Iniciar Sesión</a>
                           </li>
                         <%}else{%>
                           <!--li class="nav-item">
-                              <a class="nav-link waves-effect waves-dark pro-pic" href="/signout"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"> Cerrar Sesión <%=req.session.User.name%></a>
+                              <a class="nav-link waves-effect waves-dark pro-pic" href="/user/signout"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"> Cerrar Sesión <%=req.session.User.name%></a>
                           </li-->
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" alt="user" class="rounded-circle" width="31"> <%=req.session.User.name%></a>
                               <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                  <a class="dropdown-item" href="/resetpass/user"><i class="mdi mdi-account-key m-r-5 m-l-5"></i> Cambiar Contraseña</a>
-                                  <a class="dropdown-item" href="/signout"><i class="mdi mdi-exit-to-app m-r-5 m-l-5"></i> Cerrar Sesión</a>
+                                  <a class="dropdown-item" href="/user/changepass"><i class="mdi mdi-account-key m-r-5 m-l-5"></i> Cambiar Contraseña</a>
+                                  <a class="dropdown-item" href="/user/signout"><i class="mdi mdi-exit-to-app m-r-5 m-l-5"></i> Cerrar Sesión</a>
                               </div>
                           </li>
                         <%}%>
@@ -174,7 +174,7 @@
                       </li>
                       <% if(!req.session.User) {%>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/signin" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/signin" aria-expanded="false">
                                 <i class="mdi mdi-account"></i>
                                 <span class="hide-menu">Iniciar Sesion</span>
                             </a>
@@ -200,22 +200,22 @@
                         </li>
                         <% if(req.session.User.permissions === "admin"){%>
                           <li class="sidebar-item">
-                              <a class="sidebar-link waves-effect waves-dark dropdown-toggle" data-togle="collapse" href="#" aria-expanded="false">
+                              <a class="sidebar-link waves-effect waves-dark" data-togle="collapse" href="/user/list" aria-expanded="false">
                                   <i class="mdi mdi-account-multiple"></i>
                                   <span class="hide-menu">Usuarios</span>
                               </a>
-                              <ul class="collapse list-unstyled" id="homeSubmenu">
+                              <!--ul class="collapse list-unstyled" id="homeSubmenu">
                                 <li class="sidebar-item">
-                                  <a class="sidebar-link waves-effect waves-dark" href="/signup">
+                                  <a class="sidebar-link waves-effect waves-dark" href="/user/signup">
                                     <i class="mdi mdi-account-plus"></i>  <span class="hide-menu"> Agregar Usuario</span>
                                   </a>
                                 </li>
                                 <li class="sidebar-item">
-                                  <a class="sidebar-link waves-effect waves-dark" href="/resetpass/admin">
+                                  <a class="sidebar-link waves-effect waves-dark" href="/user/resetpass">
                                     <i class="mdi mdi-account-key"></i>  <span class="hide-menu"> Restaurar Contraseña</span>
                                   </a>
                                 </li>
-                              </ul>
+                              </ul-->
                           </li>
                         <%}%>
                       <%} else if(req.session.User.permissions === "constManager"){ %>

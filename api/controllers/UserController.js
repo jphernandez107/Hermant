@@ -73,35 +73,33 @@ module.exports = {
     }
   },
 
-  reset_pass_admin_view: async function(req,res){
+  reset_pass_view: async function(req,res){
     return res.view('pages/user/reset_pass_admin')
   },
-
-  reset_pass_admin: async function(req,res){
+  reset_pass: async function(req,res){
     var dni = req.param('dni');
     var dni2 = req.param('dni2');
     var password = 1234;
 
     if(dni != dni2){
       // TODO: los DNI no son iguales;
-      return res.redirect('/signup')
+      return res.redirect('/user/signup')
     }else{
       var user = await User.updateOne({dni:dni}).set({password:password});
 
       if(!user){
         // TODO: No existe usuario con ese dni.
-        return res.redirect('/signup')
+        return res.redirect('/user/signup')
       }else{
         // TODO: Exito
         return res.redirect('/');
       }
     }
   },
-  reset_pass_user_view: async function(req,res){
-    return res.view('pages/user/reset_pass_user')
+  change_pass_view: async function(req,res){
+    return res.view('pages/user/change_pass_user')
   },
-
-  reset_pass_user: async function(req,res){
+  change_pass: async function(req,res){
     var passActual = req.param('passActual');
     var passNueva = req.param('passNueva');
     var passNueva2 = req.param('passNueva2');
@@ -129,18 +127,66 @@ module.exports = {
 
     if(dni != dni2){
       // TODO: los DNI no son iguales;
-      return res.redirect('/signup')
+      return res.redirect('/user/signup')
     }else{
       var user = await User.updateOne({dni:dni}).set({password:password});
 
       if(!user){
         // TODO: No existe usuario con ese dni.
-        return res.redirect('/signup')
+        return res.redirect('/user/signup')
       }else{
         // TODO: Exito
         return res.redirect('/');
       }
     }
+  },
+
+  /*
+    Buscamos todos los equipos registrados en el sistema y llamamos al
+    view para mostrar una lista de los equipos.
+  */
+  list_view: async function(req,res){
+
+    var users = await User.find({});
+
+    if(!users){
+      // No se encontraron equipos registrados.
+      return res.redirect('/');
+    }else{
+      return res.view('pages/user/user_list', {users});
+    }
+  },
+
+  /*
+    Buscamos todos los equipos registrados en el sistema y llamamos al
+    view para mostrar una lista de los equipos.
+  */
+  delete: async function(req,res){
+    var idUser = req.param('idUser');
+
+    await User.destroy({id:idUser});
+
+    return res.redirect('/user/list');
+  },
+
+  edit: async function(req,res){
+    var idUser = req.param('idUser');
+
+    var user = await User.findOne({id:idUser});
+
+    return res.view('pages/user/signup', {user});
+  },
+
+  edited: async function(req,res){
+    var idUser = req.param('idUser');
+    var dni = req.param('dni');
+    var name = req.param('name');
+    var lastname = req.param('lastname');
+    var permissions = req.param('permissions');
+
+    await User.update({id:idUser}).set({dni, name, lastname, permissions});
+
+    return res.redirect('/user/list');
   },
 
 };
