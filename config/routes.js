@@ -104,11 +104,11 @@ module.exports.routes = {
     controller: 'SpareParts',
     action: 'list_view',
   },
-  '/parts/new':{
+  'GET /parts/new':{
     controller: 'SpareParts',
     action: 'new_part',
   },
-  '/parts/new/create':{
+  'POST /parts/new':{
     controller: 'SpareParts',
     action: 'create',
   },
