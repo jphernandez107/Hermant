@@ -34,7 +34,16 @@ create: async function(req,res){
 
   return res.redirect('/parts');
 },
+/*
+  Eliminamos un equipo
+*/
+delete: async function(req,res){
+  var idPart = req.param('idPart');
 
+  await SpareParts.destroy({id:idPart});
+
+  return res.redirect('/parts/list');
+},
 
 
 
