@@ -9,13 +9,19 @@
         <div class="fadeIn first">
           <img src="https://www.freeiconspng.com/uploads/excavator-png-4.jpg" id="icon" alt="UserIcon">
         </div>
+        <% var action = "signup"; %>
+        <% if(typeof user != "undefined"){ action = "edit/" + user.id;} %>
 
-
-          <form method="post" action="/signup/newUser">
-            <input type="text" id="dni" class="fadeIn second" name="dni" placeholder="DNI">
-            <input type="text" id="name" class="fadeIn third" name="name" placeholder="NOMBRE">
-            <input type="text" id="lastname" class="fadeIn fourth" name="lastname" placeholder="APELLIDO">
-
+          <form method="post" action="/user/<%= action %>">
+            <% if(typeof user != "undefined"){ %>
+              <input type="text" id="dni" class="fadeIn second" name="dni" placeholder="DNI" value=<%= user.dni %>>
+              <input type="text" id="name" class="fadeIn third" name="name" placeholder="NOMBRE" value=<%= user.name %>>
+              <input type="text" id="lastname" class="fadeIn fourth" name="lastname" placeholder="APELLIDO" value=<%= user.lastname %>>
+            <%}else{%>
+              <input type="text" id="dni" class="fadeIn second" name="dni" placeholder="DNI">
+              <input type="text" id="name" class="fadeIn third" name="name" placeholder="NOMBRE">
+              <input type="text" id="lastname" class="fadeIn fourth" name="lastname" placeholder="APELLIDO">
+            <%}%>
 
             <!--div class="container custom-select">
               <select class="custom-select fadeIn fourth" type="text" name="permissions" style="text-align: center;">

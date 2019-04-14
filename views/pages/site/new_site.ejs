@@ -1,0 +1,104 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-5 align-self-center">
+    </div>
+    <div class="col-7 align-self-center">
+      <div class="d-flex align-items-center justify-content-end">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/site/list">Obras</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nueva Obra</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card card-body">
+      <h3 class="card-title">Nueva Obra</h3>
+      <h5 class="card-subtitle"> Ingrese los datos de la obra que desea agregar </h5>
+      <form class="form-horizontal m-t-30" method="POST" action="/site/new">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input class="form-control" type="text" placeholder="Nombre" name="name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Código</label>
+              <input class="form-control" type="text" placeholder="Código" name="code">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Provincia</label> <!-- Transformar a select -->
+              <input class="form-control" type="text" placeholder="Provincia" name="province">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Localidad</label> <!-- Transformar a select -->
+              <input class="form-control" type="text" placeholder="Localidad" name="district">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Inicio</label>
+              <input class="form-control" type="text" placeholder="Fecha de Inicio" name="initDate">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Fin</label>
+              <input class="form-control" type="text" placeholder="Fecha de Fin" name="finishDate">
+            </div>
+          </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Altura SNM [m]</label>
+                <input class="form-control" type="number" placeholder="Altura SNM" name="altitude">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Temperatura Máxima [˚C]</label>
+                <input class="form-control" type="number" placeholder="Máxima Promedio" name="maxTemp">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Temperatura Mínima [˚C]</label>
+                <input class="form-control" type="number" placeholder="Mínima Promedio" name="minTemp">
+              </div>
+            </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Distancia [Km]</label>
+                  <input class="form-control" type="number" placeholder="Distancia" name="distance">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Observaciones</label>
+                  <textarea class="form-control" rows="3" name="observations"></textarea>
+                </div>
+              </div>
+            </div>
+        <input type="submit" value="Guardar" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+</div>

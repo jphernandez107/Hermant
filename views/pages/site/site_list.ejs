@@ -1,0 +1,76 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">Obras</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <!-- column -->
+  <div class="col-12">
+      <div class="card">
+          <div class="card-header">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/site/new" aria-expanded="false">
+                <i class="mdi mdi-plus-circle-outline"></i>
+                <span class="hide-menu">Nueva Obra</span>
+            </a>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title"><b>Obras</b></h3>
+            <div class="table-responsive text-center" style="height:500px; width: 100%">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0" style="width: 12%; text-align: center;">NOMBRE</th>
+                            <th class="border-top-0" style="width: 8%; text-align: center;">PROVINCIA</th>
+                            <th class="border-top-0" style="width: 12%; text-align: center;">DEPARTAMENTO</th>
+                            <th class="border-top-0" style="width: 9%; text-align: center;">EQUIPOS</th>
+                            <th class="border-top-0" style="width: 9%; text-align: center;">FIN</th>
+                            <th class="border-top-0" style="width: 26%; text-align: center;">OBSERVACIONES</th>
+                            <th class="border-top-0" style="width: 16%; text-align: center;">DETALLES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% sites.forEach(function(site){ %>
+                        <tr>
+                            <td class="txt-oflo"><%= site.name %></td>
+                            <td class="txt-oflo"><%= site.province %></td>
+                            <td class="txt-oflo"><%= site.district %></td>
+                            <td class="txt-oflo">0</td>
+                            <td class="txt-oflo"><%= site.finishDate %></td>
+                            <td class="txt-oflo"><%= site.observations %></td>
+                            <td style="text-align: center;">
+                              <div class="btn-group" role="group">
+                                <a href="/site/details/<%= site.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
+                                <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+                                  <a href="/site/delete/<%= site.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                <%}%>
+                              </div>
+                            </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+          I/M: Índice de Mantenibilidad -
+          I/R: Índice de Reparabilidad
+        </div>
+      </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Ravenue - page-view-bounce rate -->
+<!-- ============================================================== -->

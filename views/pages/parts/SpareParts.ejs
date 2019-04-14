@@ -39,6 +39,9 @@
                             <th class="border-top-0" style="width: 7%; text-align: center;">MARCA</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">MODELO</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">STOCK</th>
+                            <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+                                <th class="border-top-0" style="width: 7%; text-align: center;">ACCIÓN</th>
+                            <%}%>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +54,9 @@
                             <td class="txt-oflo"><%= parts.brand %></td>
                             <td class="txt-oflo"><%= parts.model %></td>
                             <td class="txt-oflo"><%= parts.stock %></td>
-
+                            <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+                                <td class="txt-oflo"><a href="/parts/delete/<%= parts.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a></td>
+                            <%}%>
                         </tr>
                       <% }); %>
                     </tbody>

@@ -22,56 +22,71 @@ module.exports.routes = {
   '/': {
     view: 'pages/index',
   },
-  '/signin': {
+  '/user/signin': {
     view: 'pages/user/signin',
     locals: {
       layout: 'layouts/signin_layout'
     }
   },
-  '/signup': {
+  'GET /user/signup': {
     //view: 'pages/signup',
     controller: 'user',
     action: 'signup_view',
   },
-  '/signup/newUser': {
+  'POST /user/signup': {
     controller: 'user',
     action: 'signup'
   },
-  '/login': {
+  '/user/login': {
       controller: 'user',
       action : 'login'
   },
-  '/signout':{
+  '/user/signout':{
     controller: 'user',
     action: 'signout',
   },
-  '/resetpass/admin':{
+  'GET /user/resetpass':{
     controller:'user',
-    action: 'reset_pass_admin_view',
+    action: 'reset_pass_view',
   },
-  '/resetpass/admin/new':{
+  'POST /user/resetpass':{
     controller:'user',
-    action: 'reset_pass_admin',
+    action: 'reset_pass',
   },
-  '/resetpass/user':{
+  'GET /user/changepass':{
     controller:'user',
-    action: 'reset_pass_user_view',
+    action: 'change_pass_view',
   },
-  '/resetpass/user/new':{
+  'POST /user/changepass':{
     controller:'user',
-    action: 'reset_pass_user',
+    action: 'change_pass',
   },
-
+  '/user/list':{
+    controller:'user',
+    action: 'list_view',
+  },
+  '/user/delete/:idUser':{
+    controller:'user',
+    action: 'delete',
+  },
+  'GET /user/edit/:idUser':{
+    controller:'user',
+    action: 'edit',
+  },
+  'POST /user/edit/:idUser': {
+    controller: 'user',
+    action: 'edited'
+  },
 
   '/equipment/list':{
     controller: 'equipment',
     action: 'list_view',
   },
-  '/equipment/new':{
+  'GET /equipment/new':{
     controller: 'equipment',
     action: 'new_equipment',
   },
-  '/equipment/new/create':{
+  'POST /equipment/new':{
     controller: 'equipment',
     action: 'create',
   },
@@ -79,9 +94,9 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'details_view',
   },
-  '/equipment/update/:id/:d/:b':{
+  '/equipment/delete/:idEquip':{
     controller: 'equipment',
-    action: 'update',
+    action: 'delete',
   },
 
 
@@ -89,13 +104,34 @@ module.exports.routes = {
     controller: 'SpareParts',
     action: 'list_view',
   },
-  '/parts/new':{
+  'GET /parts/new':{
     controller: 'SpareParts',
     action: 'new_part',
   },
-  '/parts/new/create':{
+  'POST /parts/new':{
     controller: 'SpareParts',
     action: 'create',
+  },
+
+  '/site/list':{
+    controller: 'ConstructionSite',
+    action: 'list_view',
+  },
+  'GET /site/new':{
+    controller: 'ConstructionSite',
+    action: 'new_site',
+  },
+  'POST /site/new':{
+    controller: 'ConstructionSite',
+    action: 'create',
+  },
+  '/site/details/:idSite':{
+    controller: 'ConstructionSite',
+    action: 'details_view',
+  },
+  '/site/delete/:idSite':{
+    controller: 'ConstructionSite',
+    action: 'delete',
   },
 
   /***************************************************************************

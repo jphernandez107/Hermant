@@ -11,9 +11,14 @@
     </div>
 
     <!-- Login Form -->
-    <form method="post" action="/login">
+    <form method="post" action="/user/login">
       <input type="text" id="login" class="fadeIn second" name="dni" placeholder="DNI">
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="CONTRASEÑA">
+      <% if(typeof msg != "undefined"){ %><!--badge badge-danger-->
+        <div class="form-group has-error">
+          <small class="help-block badge badge-danger"><%=msg%></small>
+        </div>
+      <%}%>
       <input type="submit" class="fadeIn fourth" value="Entrar">
     </form>
 
