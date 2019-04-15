@@ -3,13 +3,13 @@ module.exports = {
 list_view: async function(req,res){
 
   var session = req.session;
-  var parts = await SpareParts.find({});
+  var parts = await SparePart.find({});
 
   if(!parts){
     // No se encontraron equipos registrados.
     return res.redirect('/');
   }else{
-    return res.view('pages/parts/SpareParts', {parts, session});
+    return res.view('pages/parts/parts_list', {parts, session});
   }
 },
 
@@ -30,9 +30,9 @@ create: async function(req,res){
 
 
 
-  var part = await SpareParts.create({type, brand, model, internalCode, externalCode, stock, application});
+  var part = await SparePart.create({type, brand, model, internalCode, externalCode, stock, application});
 
-  return res.redirect('/parts');
+  return res.redirect('/parts/list');
 },
 /*
   Eliminamos un equipo
@@ -40,7 +40,7 @@ create: async function(req,res){
 delete: async function(req,res){
   var idPart = req.param('idPart');
 
-  await SpareParts.destroy({id:idPart});
+  await SparePart.destroy({id:idPart});
 
   return res.redirect('/parts/list');
 },

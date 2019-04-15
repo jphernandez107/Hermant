@@ -101,15 +101,15 @@ module.exports.routes = {
 
 
   '/parts/list':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'list_view',
   },
   'GET /parts/new':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'new_part',
   },
   'POST /parts/new':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'create',
   },
 

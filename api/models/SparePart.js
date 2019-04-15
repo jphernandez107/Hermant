@@ -31,5 +31,14 @@ module.exports = {
             type:'number',
         },
 
+
+        /*
+        Creamos una lista de planillas de lubricacion para cada tipo de repuesto.
+        */
+        lubricationSheets:{
+          collection: 'lubricationSheet',
+          via: 'spareParts',
+        },
+
     }
 }

@@ -34,10 +34,10 @@ module.exports.bootstrap = async function() {
 
      ]);
    }
-   if (await SpareParts.count() > 0) {
+   if (await SparePart.count() > 0) {
      complete +=1;
    }else{
-     await SpareParts.createEach([
+     await SparePart.createEach([
        { internalCode: 'KOD345', externalCode: '1239390', type: 'Filtro', application: 'Aceite Motor', brand:'YPF', model:'Y220', stock:'40', },
        { internalCode: 'DOS233', externalCode: '5230002', type: 'Aceite', application: 'Motor', brand:'SHELL', model:'S520', stock:'100', },
        { internalCode: 'PDD403', externalCode: '1232113', type: 'Liquido', application: 'Refrigerante', brand:'YPF', model:'R120', stock:'40', },
