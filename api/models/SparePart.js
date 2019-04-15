@@ -33,7 +33,7 @@ module.exports = {
 
 
         /*
-        Creamos una lista de planillas de lubricacion para cada tipo de repuesto.
+          Creamos una lista de planillas de lubricacion para cada repuesto
         */
         lubricationSheets:{
           collection: 'lubricationSheet',
