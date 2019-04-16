@@ -141,7 +141,9 @@ module.exports = {
 
 
     */
-
+    /*
+      Este equipo tiene una unica hoja de lubricacion asociada
+    */
     lubricationSheet:{
       model:'lubricationSheet',
     },

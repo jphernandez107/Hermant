@@ -33,11 +33,15 @@ module.exports = {
 
 
         /*
-          Creamos una lista de planillas de lubricacion para cada repuesto
+          Creamos una lista de filas de planillas de lubricacion en las que
+          aparece este repuesto.
+          Cada vez que este repuesto se asocia a un equipo en particular a traves
+          de su planilla de lubricacion, se crea una nueva fila de hoja de lubricacion
+          con este repuesto.
         */
-        lubricationSheets:{
-          collection: 'lubricationSheet',
-          via: 'spareParts',
+        lubricationSheetRows:{
+          collection: 'lubricationSheetRow',
+          via: 'sparePart',
         },
 
     }

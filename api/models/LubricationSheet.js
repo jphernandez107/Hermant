@@ -9,19 +9,22 @@ module.exports = {
 
   attributes: {
 
-    // Puede llevar muchos filtros,
-    // Puede llevar muchos aceites,
-    // Puede llevar muchos liquidos,
-
     // Esta vinculado a una maquina
 
+    /*
+      Esta hoja de lub puede pertenecer a varios equipos
+      (Siempre que sean misma marca y modelo)
+    */
     equipments:{
       collection: 'equipment',
       via: 'lubricationSheet',
     },
-    spareParts:{
-      collection: 'sparePart', //Modelo
-      via: 'lubricationSheets',    // Nombre de la lista del otro modelo
+    /*
+      Esta hoja de lub tiene muchas filas asociadas
+    */
+    lubricationSheetRows:{
+      collection: 'lubricationSheetRow', //Modelo
+      via: 'lubricationSheet',    // Nombre de la lista del otro modelo
     },
 
 
