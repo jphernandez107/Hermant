@@ -1,0 +1,430 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Planilla de Lubricación</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Planilla de lubricación para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form class="form-horizontal m-t-30" method="POST" action="/equipment/lubsheet/new/<%= equipment.id %>">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-wrench-outline"> Mantenimientos</i></h3>
+          <h4 class="card-subtitle">Configure los distintos tipos de mantenimiento de mayor a menor [Hs/Km]</h4>
+          <div class="row">
+            <% for(var i=1; i<10; i++){%>
+              <% var name = "maintenanceInput" + i;%>
+              <div class="col-1">
+                <div class="row"><label>Tipo <%=i%></label></div>
+                <div class="row">
+                  <input class="input" name="<%=name%>" type="number"></input>
+                </div>
+              </div>
+            <%}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-air-filter"> Filtros</i></h3>
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="airFilterCount" value="1" />
+              <div class="control-group" id="airFilterFields">
+                <label class="control-label" for="airFilterField1"><h5>Filtros de Aire</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="airFilterField" style="margin-bottom:20px;">
+                      <div class="col-3" id="airFilterSelectDiv">
+                        <label>Filtro</label>
+                        <select class="flex" name="airFilterSelect1" id="airFilterSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-3" id="airFilterInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="airFilterInput" name="airFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-2" id="airFilterBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-airFilter" class="btn add-more btn-success" type="button"  data-item="airFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-airFilter" class="btn remove-me btn-danger" type="button" data-item="airFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                      <div class="col-4" id="airFilterBtnDiv">
+                        <div class="row"><label>Mantenimientos</label></div>
+                        <div class="row">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">1</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">2</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">3</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4">
+                            <label class="form-check-label" for="inlineCheckbox1">4</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">5</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">6</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">7</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">8</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">9</label>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="oilFilterCount" value="1" />
+              <div class="control-group" id="oilFilterFields">
+                <label class="control-label" for="oilFilterField1"><h5>Filtros de Aceite</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="oilFilterField" style="margin-bottom:20px;">
+                      <div class="col-5" id="oilFilterSelectDiv">
+                        <label>Filtro</label>
+                        <select class="flex" name="oilFilterSelect1" id="oilFilterSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-5" id="oilFilterInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="oilFilterInput" name="oilFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-2" id="oilFilterBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-oilFilter" class="btn add-more btn-success" type="button" data-item="oilFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-oilFilter" class="btn remove-me btn-danger" type="button" data-item="oilFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="fuelFilterCount" value="1" />
+              <div class="control-group" id="fuelFilterFields">
+                <label class="control-label" for="fuelFilterField1"><h5>Filtros de Combustible</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="fuelFilterField" style="margin-bottom:20px;">
+                      <div class="col-5" id="fuelFilterSelectDiv">
+                        <label>Filtro</label>
+                        <select class="flex" name="fuelFilterSelect1" id="fuelFilterSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-5" id="fuelFilterInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="fuelFilterInput" name="fuelFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-2" id="fuelFilterBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-fuelFilter" class="btn add-more btn-success" type="button" data-item="fuelFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-fuelFilter" class="btn remove-me btn-danger" type="button" data-item="fuelFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="otherFilterCount" value="1" />
+              <div class="control-group" id="otherFilterFields">
+                <label class="control-label" for="otherFilterField1"><h5>Otros Filtros</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="otherFilterField" style="margin-bottom:20px;">
+                      <div class="col-5" id="otherFilterSelectDiv">
+                        <label>Filtro</label>
+                        <select class="flex" name="otherFilterSelect1" id="otherFilterSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-5" id="otherFilterInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="otherFilterInput" name="otherFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-2" id="otherFilterBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-otherFilter" class="btn add-more btn-success"  data-item="otherFilter" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-otherFilter" class="btn remove-me btn-danger"  data-item="otherFilter" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-oil"> Aceites</i></h3>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="motorOilCount" value="1" />
+              <div class="control-group" id="motorOilFields">
+                <label class="control-label" for="motorOilField1"><h5>Aceite de Motor</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="motorOilField" style="margin-bottom:20px;">
+                      <div class="col-9" id="motorOilSelectDiv">
+                        <label>Aceite</label>
+                        <select class="flex" name="motorOilSelect1" id="motorOilSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <!--div class="col-2" id="motorOilBtnDiv">
+                        <button id="add-motorOil" class="btn add-more btn-success" type="button"  data-item="motorOil"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-motorOil" class="btn remove-me btn-danger" type="button" data-item="motorOil"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div-->
+                      <div class="col-3">
+                        <label for="motorOilAmount1">Cantidad [L]</label>
+                        <input class="input form-control" id="motorOilAmount" name="motorOilAmount1" type="number"></input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="hydraulicOilCount" value="1" />
+              <div class="control-group" id="hydraulicOilFields">
+                <label class="control-label" for="hydraulicOilField1"><h5>Aceite Hidráulico</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="hydraulicOilField" style="margin-bottom:20px;">
+                      <div class="col-9" id="hydraulicOilSelectDiv">
+                        <label for="hydraulicOilSelect">Aceite</label>
+                        <select class="flex" name="hydraulicOilSelect1" id="hydraulicOilSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <!--div class="col-2" id="hydraulicOilBtnDiv">
+                        <button id="add-hydraulicOil" class="btn add-more btn-success" type="button"  data-item="hydraulicOil"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-hydraulicOil" class="btn remove-me btn-danger" type="button" data-item="hydraulicOil"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div-->
+                      <div class="col-3">
+                        <label for="hydraulicOilAmount1">Cantidad [L]</label>
+                        <input class="input form-control" id="hydraulicOilAmount" name="hydraulicOilAmount1" type="number"></input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="transmissionOilCount" value="1" />
+              <div class="control-group" id="transmissionOilFields">
+                <label class="control-label" for="transmissionOilField1"><h5>Aceite de Transmisión</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="transmissionOilField" style="margin-bottom:20px;">
+                      <div class="col-9" id="transmissionOilSelectDiv">
+                        <label>Aceite</label>
+                        <select class="flex" name="transmissionOilSelect1" id="transmissionOilSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <!--div class="col-2" id="transmissionOilBtnDiv">
+                        <button id="add-transmissionOil" class="btn add-more btn-success" type="button"  data-item="transmissionOil"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-transmissionOil" class="btn remove-me btn-danger" type="button" data-item="transmissionOil"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div-->
+                      <div class="col-3">
+                        <label for="transmissionOilAmount1">Cantidad [L]</label>
+                        <input class="input form-control" id="transmissionOilAmount" name="transmissionOilAmount1" type="number"></input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="otherOilCount" value="1" />
+              <div class="control-group" id="otherOilFields">
+                <label class="control-label" for="otherOilField1"><h5>Otros Aceites</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="otherOilField" style="margin-bottom:20px;">
+                      <div class="col-3" id="otherOilSelectDiv">
+                        <label>Aceite</label>
+                        <select class="flex" name="otherOilSelect1" id="otherOilSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-4" id="otherOilInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="otherOilInput" name="otherOilInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-3" id="otherOilAmountDiv">
+                        <label>Cantidad [L]</label>
+                        <input class="input form-control" id="otherOilAmount" name="otherOilAmount1" type="number"></input>
+                      </div>
+                      <div class="col-2" id="otherOilBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-otherOil" class="btn add-more btn-success"  data-item="otherOil" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-otherOil" class="btn remove-me btn-danger"  data-item="otherOil" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Liquidos</i></h3>
+
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" id="otherLiquidCount" value="1" />
+              <div class="control-group" id="otherLiquidFields">
+                <label class="control-label" for="otherLiquidField1"><h5>Otros Líquidos</h5></label>
+                <div class="controls" id="profs">
+                  <div class="col-12">
+                    <div class="form-row"id="otherLiquidField" style="margin-bottom:20px;">
+                      <div class="col-3" id="otherLiquidSelectDiv">
+                        <label>Líquido</label>
+                        <select class="flex" name="otherLiquidSelect1" id="otherLiquidSelect" style="width: 100%; height: 100%;">
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                          <option value="">YPF</option>
+                          <option value="">Shell</option>
+                        </select>
+                      </div>
+                      <div class="col-4" id="otherLiquidInputDiv">
+                        <label>Descripción</label>
+                        <input class="input form-control" id="otherLiquidInput" name="otherLiquidInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+                      <div class="col-3" id="otherLiquidAmountDiv">
+                        <label>Cantidad [L]</label>
+                        <input class="input form-control" id="otherLiquidAmount" name="otherLiquidAmount1" type="number"></input>
+                      </div>
+                      <div class="col-2" id="otherLiquidBtnDiv">
+                        <label>Acción</label><br>
+                        <button id="add-otherLiquid" class="btn add-more btn-success"  data-item="otherLiquid" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
+                        <button id="rm-otherLiquid" class="btn remove-me btn-danger"  data-item="otherLiquid" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="submit" value="Guardar" class="btn btn-primary">
+</form>
