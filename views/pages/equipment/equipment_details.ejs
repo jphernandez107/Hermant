@@ -22,6 +22,9 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
+        <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary"><i class="mdi mdi-clipboard-check"> Planilla de Lubricacion</i></a>
+        <%}%>
       </div>
     </div>
   </div>

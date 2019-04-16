@@ -134,6 +134,16 @@ module.exports.routes = {
     action: 'delete',
   },
 
+
+  'GET /lubsheet/new/:idEquip':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_view',
+  },
+  'POST /lubsheet/new/:idEquip':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_new',
+  },
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
