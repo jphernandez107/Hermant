@@ -41,7 +41,8 @@ var cssFilesToInject = [
   // items here, _above_ this one.
   'styles/**/*.css',
   '!styles/local/*.css',
-  '!styles/local/**/*.css'
+  '!styles/local/**/*.css',
+  '!styles/layout/style.min.css',
 ];
 
 
