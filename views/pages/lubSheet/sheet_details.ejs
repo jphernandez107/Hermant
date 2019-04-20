@@ -1,0 +1,263 @@
+<%var freqs = [];%>
+<%for(maint of maintFreqs){%>
+  <%freqs.push(maint.frequency);%>
+<%}%>
+<%let uniqueFreqs = [...new Set(freqs)];%> <!--Busco solo las frecuencias que no se repiten-->
+<%if(uniqueFreqs.length > 5){var sizeColApp = '2'}else{var sizeColApp = '3'}%>
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Planilla de Lubricación</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Planilla de lubricación para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+        <h3 class="card-subtitle">Proximamente podra ver la obra actual de este equipo en esta planilla.</h3>
+        <a href="#"class="btn btn-warning" id="btn-print"><i class="mdi mdi-printer"> IMPRIMIR</i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"><!--Filters-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-air-filter"> Filtros</i></h3>
+
+        <%var spanishName = 'Filtros de Aire'; var name = 'air';%>
+        <%for(var r=0; r<4; r++){%>
+          <%console.log(r);%>
+          <%if(r==0){%>
+            <%spanishName='Filtros de Aire';name = 'air';%>
+          <%}else if(r==1){%>
+            <%spanishName='Filtros de Aceite';name = 'oil';%>
+          <%}else if(r==2){%>
+            <%spanishName='Filtros de Combustible';name = 'fuel';%>
+          <%}else if(r==3){%>
+            <%spanishName='Otros Filtros';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Filter-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'filter'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>FilterField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <tr class="d-flex">
+                    <th class="col-3">FILTRO</th>
+                    <th class="col-<%=sizeColApp%>">APLICACIÓN</th>
+                    <th class="col-2">CÓD. INTERNO</th>
+                    <%for(freq of uniqueFreqs){%>
+                      <th class="col"><%=freq%></th>
+                    <%}%>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(sheetRow of sheetRows){%>
+                    <%for(part of parts){%>
+                      <%if(sheetRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col-3"><%=part.brand%> <%=part.model%></td>
+                            <td class="col-<%=sizeColApp%>"><%=sheetRow.application%></td>
+                            <td class="col-2"><%=part.internalCode%></td>
+                            <%for(maintFreq of maintFreqs){%>
+                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
+                                <%for(var i=1; i<10;i++){%>
+                                  <%if(maintFreq.type == i){%>
+                                    <td class="col">
+                                    <%if(maintFreq.change){%>
+                                      <h5>C</h5>
+                                    <%}%>
+                                    </td>
+                                  <%}%>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row"><!--Oils-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-oil"> Aceites</i></h3>
+
+        <%var spanishName = 'Aceite de Motor'; var name = 'motor';%>
+        <%for(var r=0; r<4; r++){%>
+          <%console.log(r);%>
+          <%if(r==0){%>
+            <%spanishName='Aceite de Motor';name = 'motor';%>
+          <%}else if(r==1){%>
+            <%spanishName='Aceite Hidraulico';name = 'hydraulic';%>
+          <%}else if(r==2){%>
+            <%spanishName='Aceite de Transmisión';name = 'transmission';%>
+          <%}else if(r==3){%>
+            <%spanishName='Otros Aceites';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Oil-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'oil'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <%var sizeCol = '2';%>
+                  <%if(partApp == 'other'){ sizeCol = '2';}else{sizeCol = '3'}%>
+                  <tr class="d-flex">
+                    <th class="col-<%=sizeCol%>">ACEITE</th>
+                    <th class="col-<%=sizeCol%>">CANTIDAD</th>
+                    <%if(partApp == 'other'){%>
+                      <th class="col-2">APLICACIÓN</th>
+                    <%}%>
+                    <th class="col-2">CÓD. INTERNO</th>
+                    <%for(freq of uniqueFreqs){%>
+                      <th class="col"><%=freq%></th>
+                    <%}%>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(sheetRow of sheetRows){%>
+                    <%for(part of parts){%>
+                      <%if(sheetRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col-<%=sizeCol%>"><%=part.brand%> <%=part.model%></td>
+                            <td class="col-<%=sizeCol%>"><%=sheetRow.amount%>L</td>
+                            <%if(partApp == 'other'){%>
+                              <td class="col-2"><%=sheetRow.application%></td>
+                            <%}%>
+                            <td class="col-2"><%=part.internalCode%></td>
+                            <%for(maintFreq of maintFreqs){%>
+                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
+                                <%for(var i=1; i<10;i++){%>
+                                  <%if(maintFreq.type == i){%>
+                                    <td class="col">
+                                    <%if(maintFreq.change){%>
+                                      <h5>C</h5>
+                                    <%}%>
+                                    </td>
+                                  <%}%>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row"><!--Liquids-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Liquidos</i></h3>
+
+        <%var spanishName = 'Otros Líquidos'; var name = 'other';%>
+        <%for(var r=0; r<3; r++){%>
+          <%console.log(r);%>
+          <%if(r==0){%>
+            <%spanishName='Líquido Refrigerante';name = 'coolant';%>
+          <%}else if(r==1){%>
+            <%spanishName='Líquido de Frenos';name = 'break';%>
+          <%}else if(r==2){%>
+            <%spanishName='Otros Líquidos';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Liquid-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'liquid'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>LiquidField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <%var sizeCol = '2';%>
+                  <%if(partApp == 'other'){ sizeCol = '2';}else{sizeCol = '3'}%>
+                  <tr class="d-flex">
+                    <th class="col-<%=sizeCol%>">LÍQUIDO</th>
+                    <th class="col-<%=sizeCol%>">CANTIDAD</th>
+                    <%if(partApp == 'other'){%>
+                      <th class="col-2">APLICACIÓN</th>
+                    <%}%>
+                    <th class="col-2">CÓD. INTERNO</th>
+                    <%for(freq of uniqueFreqs){%>
+                      <th class="col"><%=freq%></th>
+                    <%}%>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(sheetRow of sheetRows){%>
+                    <%for(part of parts){%>
+                      <%if(sheetRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col-<%=sizeCol%>"><%=part.brand%> <%=part.model%></td>
+                            <td class="col-<%=sizeCol%>"><%=sheetRow.amount%>L</td>
+                            <%if(partApp == 'other'){%>
+                              <td class="col-2"><%=sheetRow.application%></td>
+                            <%}%>
+                            <td class="col-2"><%=part.internalCode%></td>
+                            <%for(maintFreq of maintFreqs){%>
+                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
+                                <%for(var i=1; i<10;i++){%>
+                                  <%if(maintFreq.type == i){%>
+                                    <td class="col">
+                                    <%if(maintFreq.change){%>
+                                      <h5>C</h5>
+                                    <%}%>
+                                    </td>
+                                  <%}%>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+
+      </div>
+    </div>
+  </div>
+</div>
