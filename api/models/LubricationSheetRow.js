@@ -29,6 +29,11 @@ module.exports = {
       model: 'sparePart', //Modelo   // Nombre de la lista del otro modelo
     },
 
+    maintenanceFrequencies:{
+      collection: 'MaintenanceFrequency',
+      via: 'lubricationSheetRow'
+    },
+
   },
 
 };
