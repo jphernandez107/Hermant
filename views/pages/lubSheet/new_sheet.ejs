@@ -28,22 +28,32 @@
   </div>
 </div>
 
-
-<form class="form-horizontal m-t-30" method="POST" action="/equipment/lubsheet/new/<%= equipment.id %>">
+<form class="form-horizontal m-t-30" method="POST" action="/lubsheet/new/<%= equipment.id %>">
+  <%if(typeof sheet != undefined){%>
+    <input type="hidden" name="" value="sheet" id="sheetID" name="sheetName">
+  <%}else{%>
+    <!--input type="hidden" name="" value="" id="sheetID" name="sheetName"-->
+  <%}%>
 
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title"><i class="mdi mdi-wrench-outline"> Mantenimientos</i></h3>
-          <h4 class="card-subtitle">Configure los distintos tipos de mantenimiento de mayor a menor [Hs/Km]</h4>
-          <div class="row">
+          <h4 class="card-subtitle">Configure las distintas frecuencias de mantenimiento de mayor a menor [Hs/Km]</h4>
+          <div class="row justify-content-md-center">
             <% for(var i=1; i<10; i++){%>
-              <% var name = "maintenanceInput" + i;%>
-              <div class="col-1">
-                <div class="row"><label>Tipo <%=i%></label></div>
-                <div class="row">
-                  <input class="input" name="<%=name%>" type="number"></input>
+              <% var name = "maintenanceInput" + i; var labname = "maintenanceLabel" + i;%>
+              <div class="col-md-auto text-center">
+                <div class="row text-center">
+                  <div class="col-12">
+                    <label id="<%=labname%>" hidden>Frecuencia <%=i%></label>
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col-12">
+                    <input class="input maintenanceInput" name="<%=name%>" id="<%=name%>" type="number" hidden></input>
+                  </div>
                 </div>
               </div>
             <%}%>
@@ -53,78 +63,62 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row"><!--Filters-->
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title"><i class="mdi mdi-air-filter"> Filtros</i></h3>
-          <div class="row">
+
+          <div class="row"><!--airFilter-->
             <div class="col-12">
-              <input type="hidden" id="airFilterCount" value="1" />
+              <input type="hidden" id="airFilterCount" name="airFilterCount" value="1" />
               <div class="control-group" id="airFilterFields">
                 <label class="control-label" for="airFilterField1"><h5>Filtros de Aire</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="airFilterField" style="margin-bottom:20px;">
-                      <div class="col-3" id="airFilterSelectDiv">
-                        <label>Filtro</label>
-                        <select class="flex" name="airFilterSelect1" id="airFilterSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
-                      </div>
-                      <div class="col-3" id="airFilterInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="airFilterInput" name="airFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
-                      </div>
-                      <div class="col-2" id="airFilterBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-airFilter" class="btn add-more btn-success" type="button"  data-item="airFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-airFilter" class="btn remove-me btn-danger" type="button" data-item="airFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
-                      </div>
-                      <div class="col-4" id="airFilterBtnDiv">
-                        <div class="row"><label>Mantenimientos</label></div>
-                        <div class="row">
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1">1</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">2</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3">3</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4">
-                            <label class="form-check-label" for="inlineCheckbox1">4</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">5</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3">6</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1">7</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">8</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3">9</label>
-                          </div>
-                        </div>
+                  <div class="col-12" id="airFilterParent">
+                    <div class="row text-center">
+                      <div class="col-3"><label>Filtro</label></div>
+                      <div class="col-3"><label>Descripción</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
 
+                    <div class="d-flex mb-3 row text-center" id="airFilterRow1" style="margin-bottom:20px;">
+
+                      <div class="col-3 p-2 align-self-center" id="airFilterSelectCol">
+                          <select class="" name="airFilterSelect1" id="airFilterSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'filter'){%>
+                                <%if(part.application === 'air'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
+                      </div>
+
+                      <div class="col-3 p-2" id="airFilterInputCol">
+                          <input class="input form-control" id="airFilterInput1" name="airFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+                      </div>
+
+                      <div class="col-2 p-2" id="airFilterBtnCol">
+                          <button id="add-airFilter" class="btn add-more btn-success" type="button"  data-part="Filter" data-app="air"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-airFilter" class="btn remove-me btn-danger" type="button" data-part="Filter" data-app="air" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="oilFilterMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "airFilterMaintenanceCheckbox1";%>
+                            <% var className = "airFilterMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -133,31 +127,56 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--oilFilter-->
             <div class="col-12">
-              <input type="hidden" id="oilFilterCount" value="1" />
+              <input type="hidden" id="oilFilterCount" name="oilFilterCount" value="1" />
               <div class="control-group" id="oilFilterFields">
                 <label class="control-label" for="oilFilterField1"><h5>Filtros de Aceite</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="oilFilterField" style="margin-bottom:20px;">
-                      <div class="col-5" id="oilFilterSelectDiv">
-                        <label>Filtro</label>
-                        <select class="flex" name="oilFilterSelect1" id="oilFilterSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="oilFilterParent">
+                    <div class="row text-center">
+                      <div class="col-3"><label>Filtro</label></div>
+                      <div class="col-3"><label>Descripción</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="oilFilterRow1" style="margin-bottom:20px;">
+
+                      <div class="col-3 p-2 align-self-center" id="oilFilterSelectCol">
+                          <select class="" name="oilFilterSelect1" id="oilFilterSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'filter'){%>
+                                <%if(part.application === 'oil'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <div class="col-5" id="oilFilterInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="oilFilterInput" name="oilFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+
+                      <div class="col-3 p-2" id="oilFilterInputCol">
+                          <input class="input form-control" id="oilFilterInput1" name="oilFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
                       </div>
-                      <div class="col-2" id="oilFilterBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-oilFilter" class="btn add-more btn-success" type="button" data-item="oilFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-oilFilter" class="btn remove-me btn-danger" type="button" data-item="oilFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-2 p-2" id="oilFilterBtnCol">
+                          <button id="add-oilFilter" class="btn add-more btn-success" type="button"  data-part="Filter" data-app="oil"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-oilFilter" class="btn remove-me btn-danger" type="button" data-part="Filter" data-app="oil" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="oilFilterMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "oilFilterMaintenanceCheckbox1";%>
+                            <% var className = "oilFilterMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -166,31 +185,56 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--fuelFilter-->
             <div class="col-12">
-              <input type="hidden" id="fuelFilterCount" value="1" />
+              <input type="hidden" id="fuelFilterCount" name="fuelFilterCount" value="1" />
               <div class="control-group" id="fuelFilterFields">
                 <label class="control-label" for="fuelFilterField1"><h5>Filtros de Combustible</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="fuelFilterField" style="margin-bottom:20px;">
-                      <div class="col-5" id="fuelFilterSelectDiv">
-                        <label>Filtro</label>
-                        <select class="flex" name="fuelFilterSelect1" id="fuelFilterSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="fuelFilterParent">
+                    <div class="row text-center">
+                      <div class="col-3"><label>Filtro</label></div>
+                      <div class="col-3"><label>Descripción</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="fuelFilterRow1" style="margin-bottom:20px;">
+
+                      <div class="col-3 p-2 align-self-center" id="fuelFilterSelectCol">
+                          <select class="" name="fuelFilterSelect1" id="fuelFilterSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'filter'){%>
+                                <%if(part.application === 'fuel'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <div class="col-5" id="fuelFilterInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="fuelFilterInput" name="fuelFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+
+                      <div class="col-3 p-2" id="fuelFilterInputCol">
+                          <input class="input form-control" id="fuelFilterInput1" name="fuelFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
                       </div>
-                      <div class="col-2" id="fuelFilterBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-fuelFilter" class="btn add-more btn-success" type="button" data-item="fuelFilter"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-fuelFilter" class="btn remove-me btn-danger" type="button" data-item="fuelFilter"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-2 p-2" id="fuelFilterBtnCol">
+                          <button id="add-fuelFilter" class="btn add-more btn-success" type="button"  data-part="Filter" data-app="fuel"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-fuelFilter" class="btn remove-me btn-danger" type="button" data-part="Filter" data-app="fuel" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="fuelFilterMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "fuelFilterMaintenanceCheckbox1";%>
+                            <% var className = "fuelFilterMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -199,31 +243,56 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--otherFilter-->
             <div class="col-12">
-              <input type="hidden" id="otherFilterCount" value="1" />
+              <input type="hidden" id="otherFilterCount" name="otherFilterCount" value="1" />
               <div class="control-group" id="otherFilterFields">
                 <label class="control-label" for="otherFilterField1"><h5>Otros Filtros</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="otherFilterField" style="margin-bottom:20px;">
-                      <div class="col-5" id="otherFilterSelectDiv">
-                        <label>Filtro</label>
-                        <select class="flex" name="otherFilterSelect1" id="otherFilterSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="otherFilterParent">
+                    <div class="row text-center">
+                      <div class="col-3"><label>Filtro</label></div>
+                      <div class="col-3"><label>Descripción</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="otherFilterRow1" style="margin-bottom:20px;">
+
+                      <div class="col-3 p-2 align-self-center" id="otherFilterSelectCol">
+                          <select class="" name="otherFilterSelect1" id="otherFilterSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'filter'){%>
+                                <%if(part.application === 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <div class="col-5" id="otherFilterInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="otherFilterInput" name="otherFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+
+                      <div class="col-3 p-2" id="otherFilterInputCol">
+                          <input class="input form-control" id="otherFilterInput1" name="otherFilterInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
                       </div>
-                      <div class="col-2" id="otherFilterBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-otherFilter" class="btn add-more btn-success"  data-item="otherFilter" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-otherFilter" class="btn remove-me btn-danger"  data-item="otherFilter" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-2 p-2" id="otherFilterBtnCol">
+                          <button id="add-otherFilter" class="btn add-more btn-success" type="button"  data-part="Filter" data-app="other"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-otherFilter" class="btn remove-me btn-danger" type="button" data-part="Filter" data-app="other" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="otherFilterMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "otherFilterMaintenanceCheckbox1";%>
+                            <% var className = "otherFilterMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -236,36 +305,70 @@
       </div>
     </div>
   </div>
-  <div class="row">
+
+  <div class="row"><!--Oils-->
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title"><i class="mdi mdi-oil"> Aceites</i></h3>
 
-          <div class="row">
+          <div class="row"><!--motorOil-->
             <div class="col-12">
-              <input type="hidden" id="motorOilCount" value="1" />
+              <input type="hidden" id="motorOilCount" name="motorOilCount" value="1" />
               <div class="control-group" id="motorOilFields">
                 <label class="control-label" for="motorOilField1"><h5>Aceite de Motor</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="motorOilField" style="margin-bottom:20px;">
-                      <div class="col-9" id="motorOilSelectDiv">
-                        <label>Aceite</label>
-                        <select class="flex" name="motorOilSelect1" id="motorOilSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="motorOilParent">
+                    <div class="row text-center">
+                      <div class="col-3"><label>Aceite Normal</label></div>
+                      <div class="col-3"><label>Aceite Baja Temperatura</label></div>
+                      <div class="col-2"><label>Cantidad [L]</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="motorOilRow1" style="margin-bottom:20px;">
+
+                      <div class="col-3 p-2 align-self-center" id="motorOilSelectCol">
+                          <select class="" name="motorOilSelect1" id="motorOilSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'oil'){%>
+                                <%if(part.application === 'motor'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <!--div class="col-2" id="motorOilBtnDiv">
-                        <button id="add-motorOil" class="btn add-more btn-success" type="button"  data-item="motorOil"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-motorOil" class="btn remove-me btn-danger" type="button" data-item="motorOil"><i class="mdi mdi-minus-circle-outline"></i></button>
-                      </div-->
-                      <div class="col-3">
-                        <label for="motorOilAmount1">Cantidad [L]</label>
-                        <input class="input form-control" id="motorOilAmount" name="motorOilAmount1" type="number"></input>
+                      <div class="col-3 p-2 align-self-center" id="motorOilLowTempSelectCol">
+                          <select class="" name="motorOilLowTempSelect1" id="motorOilLowTempSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'oil'){%>
+                                <%if(part.application === 'motor'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
+                      </div>
+
+                      <div class="col-2 p-2" id="motorOilAmountInputCol">
+                          <input class="input form-control" id="motorOilAmountInput1" name="motorOilAmountInput1" type="number" placeholder="1" data-items="8" value="Primario"/>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="motorOilMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "motorOilMaintenanceCheckbox1";%>
+                            <% var className = "motorOilMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -274,30 +377,56 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--hydraulicOil-->
             <div class="col-12">
-              <input type="hidden" id="hydraulicOilCount" value="1" />
+              <input type="hidden" id="hydraulicOilCount" name="hydraulicOilCount" value="1" />
               <div class="control-group" id="hydraulicOilFields">
                 <label class="control-label" for="hydraulicOilField1"><h5>Aceite Hidráulico</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="hydraulicOilField" style="margin-bottom:20px;">
-                      <div class="col-9" id="hydraulicOilSelectDiv">
-                        <label for="hydraulicOilSelect">Aceite</label>
-                        <select class="flex" name="hydraulicOilSelect1" id="hydraulicOilSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="hydraulicOilParent">
+                    <div class="row text-center">
+                      <div class="col-4"><label>Aceite</label></div>
+                      <div class="col-4"><label>Cantidad [L]</label></div>
+                      <!--div class="col-2"><label>Acción</label></div-->
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="hydraulicOilRow1" style="margin-bottom:20px;">
+
+                      <div class="col-4 p-2 align-self-center" id="hydraulicOilSelectCol">
+                          <select class="" name="hydraulicOilSelect1" id="hydraulicOilSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'oil'){%>
+                                <%if(part.application === 'hydraulic'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <!--div class="col-2" id="hydraulicOilBtnDiv">
-                        <button id="add-hydraulicOil" class="btn add-more btn-success" type="button"  data-item="hydraulicOil"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-hydraulicOil" class="btn remove-me btn-danger" type="button" data-item="hydraulicOil"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-4 p-2" id="hydraulicOilAmountInputCol">
+                          <input class="input form-control" id="hydraulicOilAmountInput1" name="hydraulicOilAmountInput1" type="number" placeholder="1" data-items="8" value="Primario"/>
+                      </div>
+
+                      <!--div class="col-2 p-2" id="hydraulicOilBtnCol">
+                          <button id="add-hydraulicOil" class="btn add-more btn-success" type="button"  data-part="Oil" data-app="hydraulic" hidden><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-hydraulicOil" class="btn remove-me btn-danger" type="button" data-part="Oil" data-app="hydraulic" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
                       </div-->
-                      <div class="col-3">
-                        <label for="hydraulicOilAmount1">Cantidad [L]</label>
-                        <input class="input form-control" id="hydraulicOilAmount" name="hydraulicOilAmount1" type="number"></input>
+
+                      <div class="col-4 p-2 align-self-center" id="hydraulicOilMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "hydraulicOilMaintenanceCheckbox1";%>
+                            <% var className = "hydraulicOilMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -306,30 +435,56 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--transmissionOil-->
             <div class="col-12">
-              <input type="hidden" id="transmissionOilCount" value="1" />
+              <input type="hidden" id="transmissionOilCount" name="transmissionOilCount" value="1" />
               <div class="control-group" id="transmissionOilFields">
                 <label class="control-label" for="transmissionOilField1"><h5>Aceite de Transmisión</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="transmissionOilField" style="margin-bottom:20px;">
-                      <div class="col-9" id="transmissionOilSelectDiv">
-                        <label>Aceite</label>
-                        <select class="flex" name="transmissionOilSelect1" id="transmissionOilSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="transmissionOilParent">
+                    <div class="row text-center">
+                      <div class="col-4"><label>Aceite</label></div>
+                      <div class="col-4"><label>Cantidad [L]</label></div>
+                      <!--div class="col-2"><label>Acción</label></div-->
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="transmissionOilRow1" style="margin-bottom:20px;">
+
+                      <div class="col-4 p-2 align-self-center" id="transmissionOilSelectCol">
+                          <select class="" name="transmissionOilSelect1" id="transmissionOilSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'oil'){%>
+                                <%if(part.application === 'transmission'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <!--div class="col-2" id="transmissionOilBtnDiv">
-                        <button id="add-transmissionOil" class="btn add-more btn-success" type="button"  data-item="transmissionOil"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-transmissionOil" class="btn remove-me btn-danger" type="button" data-item="transmissionOil"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-4 p-2" id="transmissionOilAmountInputCol">
+                          <input class="input form-control" id="transmissionOilAmountInput1" name="transmissionOilAmountInput1" type="number" placeholder="1" data-items="8" value="Primario"/>
+                      </div>
+
+                      <!--div class="col-2 p-2" id="transmissionOilBtnCol">
+                          <button id="add-transmissionOil" class="btn add-more btn-success" type="button"  data-part="Oil" data-app="transmission"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-transmissionOil" class="btn remove-me btn-danger" type="button" data-part="Oil" data-app="transmission" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
                       </div-->
-                      <div class="col-3">
-                        <label for="transmissionOilAmount1">Cantidad [L]</label>
-                        <input class="input form-control" id="transmissionOilAmount" name="transmissionOilAmount1" type="number"></input>
+
+                      <div class="col-4 p-2 align-self-center" id="transmissionOilMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "transmissionOilMaintenanceCheckbox1";%>
+                            <% var className = "transmissionOilMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -338,35 +493,61 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"><!--otherOil-->
             <div class="col-12">
-              <input type="hidden" id="otherOilCount" value="1" />
+              <input type="hidden" id="otherOilCount" name="otherOilCount" value="1" />
               <div class="control-group" id="otherOilFields">
                 <label class="control-label" for="otherOilField1"><h5>Otros Aceites</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="otherOilField" style="margin-bottom:20px;">
-                      <div class="col-3" id="otherOilSelectDiv">
-                        <label>Aceite</label>
-                        <select class="flex" name="otherOilSelect1" id="otherOilSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="otherOilParent">
+                    <div class="row text-center">
+                      <div class="col-2"><label>Aceite</label></div>
+                      <div class="col-2"><label>Descrpición</label></div>
+                      <div class="col-2"><label>Cantidad [L]</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row text-center" id="otherOilRow1" style="margin-bottom:20px;">
+
+                      <div class="col-2 p-2 align-self-center" id="otherOilSelectCol">
+                          <select class="" name="otherOilSelect1" id="otherOilSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'oil'){%>
+                                <%if(part.application === 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%}%>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <div class="col-4" id="otherOilInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="otherOilInput" name="otherOilInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+
+                      <div class="col-2 p-2" id="otherOilInputCol">
+                          <input class="input form-control" id="otherOilInput1" name="otherOilInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
                       </div>
-                      <div class="col-3" id="otherOilAmountDiv">
-                        <label>Cantidad [L]</label>
-                        <input class="input form-control" id="otherOilAmount" name="otherOilAmount1" type="number"></input>
+
+                      <div class="col-2 p-2" id="otherOilAmountInputCol">
+                          <input class="input form-control" id="otherOilAmountInput1" name="otherOilAmountInput1" type="number" placeholder="1" data-items="8"/>
                       </div>
-                      <div class="col-2" id="otherOilBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-otherOil" class="btn add-more btn-success"  data-item="otherOil" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-otherOil" class="btn remove-me btn-danger"  data-item="otherOil" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-2 p-2" id="otherOilBtnCol">
+                          <button id="add-otherOil" class="btn add-more btn-success" type="button"  data-part="Oil" data-app="other"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-otherOil" class="btn remove-me btn-danger" type="button" data-part="Oil" data-app="other" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 align-self-center" id="otherOilMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "otherOilMaintenanceCheckbox1";%>
+                            <% var className = "otherOilMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -379,41 +560,65 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row"><!--Liquids-->
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Liquidos</i></h3>
 
-          <div class="row">
+          <div class="row"><!--otherLiquid-->
             <div class="col-12">
-              <input type="hidden" id="otherLiquidCount" value="1" />
+              <input type="hidden" id="otherLiquidCount" name="otherLiquidCount" value="1" />
               <div class="control-group" id="otherLiquidFields">
                 <label class="control-label" for="otherLiquidField1"><h5>Otros Líquidos</h5></label>
                 <div class="controls" id="profs">
-                  <div class="col-12">
-                    <div class="form-row"id="otherLiquidField" style="margin-bottom:20px;">
-                      <div class="col-3" id="otherLiquidSelectDiv">
-                        <label>Líquido</label>
-                        <select class="flex" name="otherLiquidSelect1" id="otherLiquidSelect" style="width: 100%; height: 100%;">
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                          <option value="">YPF</option>
-                          <option value="">Shell</option>
-                        </select>
+                  <div class="col-12" id="otherLiquidParent">
+                    <div class="row text-center">
+                      <div class="col-2"><label>Líquido</label></div>
+                      <div class="col-2"><label>Descrpición</label></div>
+                      <div class="col-2"><label>Cantidad [L]</label></div>
+                      <div class="col-2"><label>Acción</label></div>
+                      <div class="col-4"><label>Mantenimientos</label></div>
+                    </div>
+
+                    <div class="d-flex mb-3 row align-self-center" id="otherLiquidRow1" style="margin-bottom:20px;">
+
+                      <div class="col-2 p-2 text-center" id="otherLiquidSelectCol">
+                          <select class="" name="otherLiquidSelect1" id="otherLiquidSelect1" style="width: 100%; height: 100%;">
+                            <option value="">Seleccione una opción</option>
+                            <%for (let part of parts){%>
+                              <%if(part.type === 'liquid'){%>
+                                <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                              <%}%>
+                            <%}%>
+                          </select>
                       </div>
-                      <div class="col-4" id="otherLiquidInputDiv">
-                        <label>Descripción</label>
-                        <input class="input form-control" id="otherLiquidInput" name="otherLiquidInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
+
+                      <div class="col-2 p-2 text-center" id="otherLiquidInputCol">
+                          <input class="input form-control" id="otherLiquidInput1" name="otherLiquidInput1" type="text" placeholder="Primario" data-items="8" value="Primario"/>
                       </div>
-                      <div class="col-3" id="otherLiquidAmountDiv">
-                        <label>Cantidad [L]</label>
-                        <input class="input form-control" id="otherLiquidAmount" name="otherLiquidAmount1" type="number"></input>
+
+                      <div class="col-2 p-2 text-center" id="otherLiquidAmountInputCol">
+                          <input class="input form-control" id="otherLiquidAmountInput1" name="otherLiquidAmountInput1" type="number" placeholder="1" data-items="8"/>
                       </div>
-                      <div class="col-2" id="otherLiquidBtnDiv">
-                        <label>Acción</label><br>
-                        <button id="add-otherLiquid" class="btn add-more btn-success"  data-item="otherLiquid" type="button"><i class="mdi mdi-plus-circle-outline"></i></button>
-                        <button id="rm-otherLiquid" class="btn remove-me btn-danger"  data-item="otherLiquid" type="button"><i class="mdi mdi-minus-circle-outline"></i></button>
+
+                      <div class="col-2 p-2 text-center" id="otherLiquidBtnCol">
+                          <button id="add-otherLiquid" class="btn add-more btn-success" type="button"  data-part="Liquid" data-app="other"><i class="mdi mdi-plus-circle-outline"></i></button>
+                          <button id="rm-otherLiquid" class="btn remove-me btn-danger" type="button" data-part="Liquid" data-app="other" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                      </div>
+
+                      <div class="col-4 p-2 text-center" id="otherLiquidMaintCol">
+                        <div class="row justify-content-md-center align-items-center">
+                          <% for(var i=1; i<10; i++){%>
+                            <% var name = "otherLiquidMaintenanceCheckbox1";%>
+                            <% var className = "otherLiquidMaintenanceCheckbox1";%>
+                              <div class="form-check form-check-inline">
+                                <input class="<%=className%>" type="hidden"" name="<%=name%>" value="">
+                                <input class="form-check-input maintenanceCheck<%=i%> <%=className%>" type="checkbox" name="<%=name%>" id="<%=name%>" hidden>
+                                <label class="form-check-label maintenanceCheckLabel<%=i%>" for="<%=name%>" hidden><%=i%></label>
+                              </div>
+                          <%}%>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -426,5 +631,10 @@
       </div>
     </div>
   </div>
-  <input type="submit" value="Guardar" class="btn btn-primary">
+
+  <div class="row text-center">
+    <div class="col-12">
+      <input type="submit" value="Guardar" class="btn btn-primary">
+    </div>
+  </div>
 </form>
