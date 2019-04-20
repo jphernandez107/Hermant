@@ -23,7 +23,10 @@
       <div class="card-body">
         <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
         <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary"><i class="mdi mdi-clipboard-check"> Planilla de Lubricacion</i></a>
+          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
+        <%}%>
+        <% if(equipment.lubricationSheet != null){ %>
+          <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
         <%}%>
       </div>
     </div>
