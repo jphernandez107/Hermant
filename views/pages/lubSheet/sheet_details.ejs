@@ -3,7 +3,7 @@
   <%freqs.push(maint.frequency);%>
 <%}%>
 <%let uniqueFreqs = [...new Set(freqs)];%> <!--Busco solo las frecuencias que no se repiten-->
-<%if(uniqueFreqs.length > 5){var sizeColApp = '2'}else{var sizeColApp = '3'}%>
+<%if(uniqueFreqs.length > 7){var sizeColApp = '2'}else{var sizeColApp = '3'}%>
 <div class="page-breadcrumb">
   <div class="row">
       <div class="col-5 align-self-center">
@@ -125,21 +125,25 @@
             <%spanishName='Otros Aceites';name = 'other';%>
           <%}%>
           <div class="row"><!--Oil-->
-            <div class="col-12 text-center">
+            <div class="col-12 text-center table-responsive">
               <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'oil'; var partApp = name;%>
                 <thead>
                   <tr>
                     <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
-                  <%var sizeCol = '2';%>
-                  <%if(partApp == 'other'){ sizeCol = '2';}else{sizeCol = '3'}%>
+                  <%var sizeCol = '2'; var sizeColOilCode = '2'%>
+                  <%if(partApp == 'other'){ %>
+                    <%if(uniqueFreqs.length > 7){sizeColOilCode = '1';sizeCol = '2'}%>
+                  <%}else{%>
+                    <%if(uniqueFreqs.length > 7){sizeCol = '2'}else{sizeCol = '3'}%>
+                  <%}%>
                   <tr class="d-flex">
                     <th class="col-<%=sizeCol%>">ACEITE</th>
                     <th class="col-<%=sizeCol%>">CANTIDAD</th>
                     <%if(partApp == 'other'){%>
                       <th class="col-2">APLICACIÓN</th>
                     <%}%>
-                    <th class="col-2">CÓD. INTERNO</th>
+                    <th class="col-<%=sizeColOilCode%>">CÓD. INTERNO</th>
                     <%for(freq of uniqueFreqs){%>
                       <th class="col"><%=freq%></th>
                     <%}%>
@@ -156,7 +160,7 @@
                             <%if(partApp == 'other'){%>
                               <td class="col-2"><%=sheetRow.application%></td>
                             <%}%>
-                            <td class="col-2"><%=part.internalCode%></td>
+                            <td class="col-<%=sizeColOilCode%>"><%=part.internalCode%></td>
                             <%for(maintFreq of maintFreqs){%>
                               <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
                                 <%for(var i=1; i<10;i++){%>
@@ -207,15 +211,19 @@
                   <tr>
                     <th class="col-12"><label class="control-label" for="<%=name%>LiquidField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
-                  <%var sizeCol = '2';%>
-                  <%if(partApp == 'other'){ sizeCol = '2';}else{sizeCol = '3'}%>
+                  <%var sizeCol = '2'; var sizeColOilCode = '2'%>
+                  <%if(partApp == 'other'){ %>
+                    <%if(uniqueFreqs.length > 7){sizeColOilCode = '1';sizeCol = '1'}%>
+                  <%}else{%>
+                    <%if(uniqueFreqs.length > 7){sizeCol = '2'}else{sizeCol = '3'}%>
+                  <%}%>
                   <tr class="d-flex">
                     <th class="col-<%=sizeCol%>">LÍQUIDO</th>
                     <th class="col-<%=sizeCol%>">CANTIDAD</th>
                     <%if(partApp == 'other'){%>
                       <th class="col-2">APLICACIÓN</th>
                     <%}%>
-                    <th class="col-2">CÓD. INTERNO</th>
+                    <th class="col-<%=sizeColOilCode%>">CÓD. INTERNO</th>
                     <%for(freq of uniqueFreqs){%>
                       <th class="col"><%=freq%></th>
                     <%}%>
@@ -232,7 +240,7 @@
                             <%if(partApp == 'other'){%>
                               <td class="col-2"><%=sheetRow.application%></td>
                             <%}%>
-                            <td class="col-2"><%=part.internalCode%></td>
+                            <td class="col-<%=sizeColOilCode%>"><%=part.internalCode%></td>
                             <%for(maintFreq of maintFreqs){%>
                               <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
                                 <%for(var i=1; i<10;i++){%>
