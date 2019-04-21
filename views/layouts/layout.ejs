@@ -40,12 +40,17 @@
     <link rel="stylesheet" href="/styles/homepage_style.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/layout/style.css">
-    <link rel="stylesheet" href="/styles/layout/style.min.css">
     <link rel="stylesheet" href="/styles/progressbar_equip.css">
     <!--STYLES END-->
   </head>
 
   <body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
 
     <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
         <!-- ============================================================== -->
@@ -56,7 +61,7 @@
                 <div class="navbar-header" data-logobg="skin5">
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i class="ti-menu ti-close"></i>
+                        <i class="mdi mdi-menu mdi-close"></i>
                     </a>
                     <!-- ============================================================== -->
                     <!-- Logo -->
@@ -347,6 +352,8 @@
     <script src="/js/layout/chartist-plugin-tooltip.min.js"></script>
     <script src="/js/layout/dashboard1.js"></script>
     <script src="/js/local/custom_select_signup.js"></script>
+    <script src="/js/local/dynamic_fields_lubSheet.js"></script>
+    <script src="/js/local/dynamic_tables_lubSheet.js"></script>
 
 
 

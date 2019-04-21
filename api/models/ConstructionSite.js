@@ -36,6 +36,9 @@ module.exports = {
     altitude:{
         type: 'number',
     },
+    dust:{
+        type: 'number',
+    },
     distance:{  // Al taller
       type: 'number',
     },

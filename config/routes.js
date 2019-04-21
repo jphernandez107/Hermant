@@ -101,15 +101,15 @@ module.exports.routes = {
 
 
   '/parts/list':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'list_view',
   },
   'GET /parts/new':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'new_part',
   },
   'POST /parts/new':{
-    controller: 'SpareParts',
+    controller: 'SparePart',
     action: 'create',
   },
 
@@ -133,6 +133,21 @@ module.exports.routes = {
     controller: 'ConstructionSite',
     action: 'delete',
   },
+
+
+  'GET /lubsheet/new/:idEquip':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_view',
+  },
+  'POST /lubsheet/new/:idEquip':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_new',
+  },
+  'GET /lubsheet/details/:idEquip/:idLubSheet':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_details',
+  },
+
 
   /***************************************************************************
   *                                                                          *

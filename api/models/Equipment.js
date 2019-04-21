@@ -57,7 +57,7 @@ module.exports = {
     },
 
     // Codigo de Filtros y aceites
-
+/*
     codFAire1:{
         type:'string',
     },
@@ -140,14 +140,13 @@ module.exports = {
     },
 
 
-    /*mantenimientos:{
-        collection:'mantenimiento',
-        via:'maquina',
+    */
+    /*
+      Este equipo tiene una unica hoja de lubricacion asociada
+    */
+    lubricationSheet:{
+      model:'lubricationSheet',
     },
-
-    obra:{
-        model:'obra',
-    },*/
 
   },
 

@@ -21,7 +21,7 @@ module.exports.policies = {
   'UserController':{
     'signup_view':'isAdmin',
     'signup':'isAdmin',
-    'signin': true,
+    'login': true,
   }
 
 };

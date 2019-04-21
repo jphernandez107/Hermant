@@ -53,8 +53,10 @@
                             <td class="txt-oflo"><!--%= equipment.indiceMantenibilidad %-->1</td>
                             <td class="txt-oflo"><!--%= equipment.indiceReparabilidad %-->1</td>
                             <td class="txt-oflo"><%= equipment.totalHours %></td>
-                            <td class="txt-oflo align-middle">
-
+                            <td class="align-middle">
+                              <div class="progress" style="height: 0%;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                              </div>
                             </td>
                             <td style="text-align: center;">
                               <div class="btn-group" role="group">

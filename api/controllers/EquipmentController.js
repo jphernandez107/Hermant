@@ -62,7 +62,7 @@ module.exports = {
   */
   list_view: async function(req,res){
 
-    var equipments = await Equipment.find({});
+    var equipments = await Equipment.find({}).sort([{designation:'ASC'},{brand:'ASC'},{createdAt:'ASC'}]);
 
     if(!equipments){
       // No se encontraron equipos registrados.
