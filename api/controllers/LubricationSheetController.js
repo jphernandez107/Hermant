@@ -77,7 +77,6 @@ module.exports = {
 
       for(var j=1; j<=count[i]; j++){
         // Estoy dentro de cada fila y creo el nuevo repuesto correspondiente
-        console.log("subfila " + j);
         var amount = 1;
         var desc = "";
         var part = req.param(item + 'Select' + j);
@@ -92,6 +91,14 @@ module.exports = {
           }
 
           var row = await LubricationSheetRow.create({sparePart:part, application:desc, amount:amount, lubricationSheet:lubSheet.id}).fetch();
+
+          if(item === "motorOil"){
+            part = req.param(item + 'LowTempSelect' + j);
+            if(part != ""){
+              desc = "lowTemperature";
+              var row = await LubricationSheetRow.create({sparePart:part, application:desc, amount:amount, lubricationSheet:lubSheet.id}).fetch();
+            }
+          }
 
           var maints = req.param(item + 'MaintenanceCheckbox' + j);
           console.log(maints);
