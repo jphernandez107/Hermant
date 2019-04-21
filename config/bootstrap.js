@@ -47,6 +47,7 @@ module.exports.bootstrap = async function() {
        { internalCode: 'KER203', externalCode: '1250033', type: 'oil', application: 'other', brand:'YPF', model:'O093', stock:'19', },
        { internalCode: 'KER203', externalCode: '1250033', type: 'liquid', application: 'break', brand:'YPF', model:'B476', stock:'19', },
        { internalCode: 'KER203', externalCode: '1250033', type: 'oil', application: 'motor', brand:'YPF', model:'LT123', stock:'19', },
+       { internalCode: 'OLE325', externalCode: '1250033', type: 'liquid', application: 'other', brand:'YPF', model:'OL493', stock:'19', },
 
      ]);
    }
