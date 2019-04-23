@@ -132,7 +132,7 @@
                     <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
                   <%var sizeCol = '2'; var sizeColOilCode = '2'%>
-                  <%if(partApp == 'other'){ %>
+                  <%if(partApp == 'other' || partApp == 'motor'){ %>
                     <%if(uniqueFreqs.length > 7){sizeColOilCode = '1';sizeCol = '2'}%>
                   <%}else{%>
                     <%if(uniqueFreqs.length > 7){sizeCol = '2'}else{sizeCol = '3'}%>
@@ -140,7 +140,7 @@
                   <tr class="d-flex">
                     <th class="col-<%=sizeCol%>">ACEITE</th>
                     <th class="col-<%=sizeCol%>">CANTIDAD</th>
-                    <%if(partApp == 'other'){%>
+                    <%if(partApp == 'other' || partApp == 'motor'){%>
                       <th class="col-2">APLICACIÓN</th>
                     <%}%>
                     <th class="col-<%=sizeColOilCode%>">CÓD. INTERNO</th>
@@ -157,7 +157,7 @@
                           <tr class="d-flex">
                             <td class="col-<%=sizeCol%>"><%=part.brand%> <%=part.model%></td>
                             <td class="col-<%=sizeCol%>"><%=sheetRow.amount%>L</td>
-                            <%if(partApp == 'other'){%>
+                            <%if(partApp == 'other' || partApp == 'motor'){%>
                               <td class="col-2"><%=sheetRow.application%></td>
                             <%}%>
                             <td class="col-<%=sizeColOilCode%>"><%=part.internalCode%></td>
