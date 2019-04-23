@@ -44,13 +44,13 @@
                     <tbody>
                       <% sites.forEach(function(site){ %>
                         <tr>
-                            <td class="txt-oflo"><%= site.name %></td>
-                            <td class="txt-oflo"><%= site.province %></td>
-                            <td class="txt-oflo"><%= site.district %></td>
-                            <td class="txt-oflo">0</td>
-                            <td class="txt-oflo"><%= site.finishDate %></td>
-                            <td class="txt-oflo"><%= site.observations %></td>
-                            <td style="text-align: center;">
+                            <td class="txt-oflo align-middle"><%= site.name %></td>
+                            <td class="txt-oflo align-middle"><%= site.province %></td>
+                            <td class="txt-oflo align-middle"><%= site.district %></td>
+                            <td class="txt-oflo align-middle">0</td>
+                            <td class="txt-oflo align-middle"><%= site.finishDate %></td>
+                            <td class="txt-oflo align-middle"><%= site.observations %></td>
+                            <td style="text-align: center; align-middle">
                               <div class="btn-group" role="group">
                                 <a href="/site/details/<%= site.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>

@@ -45,23 +45,23 @@
                     <tbody>
                       <% users.forEach(function(user){ %>
                         <tr>
-                            <td class="txt-oflo"><%= user.name %></td>
-                            <td class="txt-oflo"><%= user.lastname %></td>
-                            <td class="txt-oflo"><%= user.dni %></td>
+                            <td class="txt-oflo align-middle"><%= user.name %></td>
+                            <td class="txt-oflo align-middle"><%= user.lastname %></td>
+                            <td class="txt-oflo align-middle"><%= user.dni %></td>
                             <%if("admin" == user.permissions){%>
-                              <td class="txt-oflo">Administrador</td>
+                              <td class="txt-oflo align-middle">Administrador</td>
                             <%}else if("engineer" == user.permissions){%>
-                              <td class="txt-oflo">Ingeniero</td>
+                              <td class="txt-oflo align-middle">Ingeniero</td>
                             <%}else if("constManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Obra</td>
+                              <td class="txt-oflo align-middle">Jefe de Obra</td>
                             <%}else if("maintManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Mantenimiento</td>
+                              <td class="txt-oflo align-middle">Jefe de Mantenimiento</td>
                             <%}else if("depositManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Deposito</td>
+                              <td class="txt-oflo align-middle">Jefe de Deposito</td>
                             <%}else{%>
-                              <td class="txt-oflo">Error</td>
+                              <td class="txt-oflo align-middle">Error</td>
                             <%}%>
-                            <td style="text-align: center;">
+                            <td style="text-align: center; align-middle">
                               <div class="btn-group" role="group">
                                 <a href="/user/edit/<%= user.id %>"class="btn btn-success"><i class="mdi mdi-pencil"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
