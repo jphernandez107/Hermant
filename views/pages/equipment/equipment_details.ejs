@@ -23,10 +23,10 @@
       <div class="card-body">
         <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
         <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
+          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary btn-rounded"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
         <%}%>
         <% if(equipment.lubricationSheet != null){ %>
-          <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
+          <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info btn-rounded"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
         <%}%>
       </div>
     </div>
@@ -120,12 +120,12 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="row">
-          <div class="col-10">
+        <div class="row align-middle">
+          <div class="col-9">
             <h3 class="card-title">Mantenimientos</h3>
           </div>
-          <div class="col-2">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+          <div class="col-3 text-center">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="#" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nuevo Mantenimiento</span>
             </a>
@@ -139,12 +139,12 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="row">
-          <div class="col-10">
+        <div class="row align-middle">
+          <div class="col-9">
             <h3 class="card-title">Reparaciones</h3>
           </div>
-          <div class="col-2">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+          <div class="col-3 text-center">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="#" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nueva Reparacion</span>
             </a>

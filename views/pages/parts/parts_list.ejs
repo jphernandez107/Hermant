@@ -21,7 +21,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/parts/new" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="/parts/new" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nuevo Respuesto</span>
             </a>
@@ -55,7 +55,7 @@
                             <td class="txt-oflo align-middle"><%= parts.model %></td>
                             <td class="txt-oflo align-middle"><%= parts.stock %></td>
                             <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                <td class="txt-oflo align-middle"><a href="/parts/delete/<%= parts.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a></td>
+                                <td class="txt-oflo align-middle"><a href="/parts/delete/<%= parts.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a></td>
                             <%}%>
                         </tr>
                       <% }); %>

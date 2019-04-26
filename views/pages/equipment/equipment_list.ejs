@@ -21,7 +21,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/equipment/new" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="/equipment/new" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nuevo Equipo</span>
             </a>
@@ -60,9 +60,9 @@
                             </td>
                             <td style="text-align: center;">
                               <div class="btn-group" role="group">
-                                <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
+                                <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>

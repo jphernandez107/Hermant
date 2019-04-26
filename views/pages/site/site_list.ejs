@@ -21,7 +21,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/site/new" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="/site/new" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nueva Obra</span>
             </a>
@@ -52,9 +52,9 @@
                             <td class="txt-oflo align-middle"><%= site.observations %></td>
                             <td style="text-align: center; align-middle">
                               <div class="btn-group" role="group">
-                                <a href="/site/details/<%= site.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
+                                <a href="/site/details/<%= site.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/site/delete/<%= site.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/site/delete/<%= site.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>
