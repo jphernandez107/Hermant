@@ -6624,7 +6624,7 @@ a.text-purple:hover, a.text-purple:focus {
     white-space: pre-wrap !important; }
   pre,
   blockquote {
-    border: 1px solid #afb5c1;
+    border: 1px solid #000;
     page-break-inside: avoid; }
   thead {
     display: table-header-group; }
@@ -6640,9 +6640,25 @@ a.text-purple:hover, a.text-purple:focus {
   h3 {
     page-break-after: avoid; }
   @page {
-    size: a3; }
+    size: a4; }
+  aside, footer, header, nav{
+    display: none;
+    width: 0px;
+    max-width: 0px;
+  }
+  .page-breadcrumb{
+    display: none;
+  }
+  .btn{
+    display: none;
+  }
+  .page-wrapper{
+    background-color: #fff !important;
+    margin-left: 0px !important;
+  }
   body {
-    min-width: 992px !important; }
+    min-width: 992px !important;
+    background-color: #fff !important;}
   .container {
     min-width: 992px !important; }
   .navbar {
@@ -6650,23 +6666,25 @@ a.text-purple:hover, a.text-purple:focus {
   .badge {
     border: 1px solid #000; }
   .table {
-    border-collapse: collapse !important; }
+    border-collapse: collapse !important;
+    page-break-inside: avoid;
+    break-inside: avoid;}
     .table td,
     .table th {
       background-color: #fff !important; }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #dee2e6 !important; }
+    border: 1px solid #000 !important; }
   .table-dark {
     color: inherit; }
     .table-dark th,
     .table-dark td,
     .table-dark thead th,
     .table-dark tbody + tbody {
-      border-color: #dee2e6; }
+      border-color: #000; }
   .table .thead-dark th {
     color: inherit;
-    border-color: #dee2e6; } }
+    border-color: #000; } }
 
 /*******************
 Padding margin property
