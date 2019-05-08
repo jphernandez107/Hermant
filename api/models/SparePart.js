@@ -31,6 +31,10 @@ module.exports = {
             type:'number',
         },
 
+        pricePerUnit:{
+            type:'number',
+        },
+
 
         /*
           Creamos una lista de filas de planillas de lubricacion en las que
