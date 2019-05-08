@@ -21,13 +21,27 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
-        <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary btn-rounded"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
-        <%}%>
-        <% if(equipment.lubricationSheet != null){ %>
-          <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info btn-rounded"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
-        <%}%>
+        <div class="row">
+          <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
+        </div>
+        <div class="row justify-content-between align-center">
+          <div class="col">
+            <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+              <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary btn-rounded"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
+            <%}%>
+            <% if(equipment.lubricationSheet != null){ %>
+              <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info btn-rounded"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
+            <%}%>
+          </div>
+          <div class="col-3">
+            <div class="input-group">
+              <input type="number" min="0" name="" placeholder="Horas de Uso" class="form-control">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="mdi mdi-plus-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
