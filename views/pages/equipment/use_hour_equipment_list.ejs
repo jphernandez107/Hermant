@@ -1,0 +1,77 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                          <a href="/equipment/list">Equipos</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">Horas de Uso de Equipos</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <!-- column -->
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <% if(typeof constructionSite != "undefined"){%>
+              <h3 class="card-title"><b>Equipos en <%=constructionSite.name%>, <%=constructionSite.district%>, <%=constructionSite.province%></b></h3>
+            <%}else{%>
+              <h3 class="card-title"><b>Equipos</b></h3>
+            <%}%>
+            <div class="table-responsive text-center" style="height:500px; width: 100%">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-1" style="text-align: center;">CÓDIGO</th>
+                            <th class="col-2" style="text-align: center;">DESIGNACIÓN</th>
+                            <th class="col-2" style="text-align: center;">MARCA</th>
+                            <th class="col-1" style="text-align: center;">MODELO</th>
+                            <th class="col-2" style="text-align: center;">HORÓMETRO</th>
+                            <th class="col-4" style="text-align: center;">ADMINISTRAR HORAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% equipments.forEach(function(equipment){ %>
+                        <tr class="d-flex">
+                            <td class="col-1 align-middle"><%= equipment.code %></td>
+                            <td class="col-2 align-middle"><%= equipment.designation %></td>
+                            <td class="col-2 align-middle"><%= equipment.brand %></td>
+                            <td class="col-1 align-middle"><%= equipment.model %></td>
+                            <td class="col-2 align-middle"><%= equipment.totalHours %></td>
+                            <td style="col-4 align-middle">
+                              <form class="form-inline" method="post" action="/equipmentusehour/new/<%=equipment.id%>">
+                                <div class="input-group">
+                                  <input type="text" min="0" name="datepicker" class="form-control" width="150">
+                                  <input type="number" min="0" name="timeOfUse" placeholder="Horas de Uso" class="form-control">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='/equipment/new_use_hour/<%=equipment.id%>?time='" type="submit"><i class="mdi mdi-plus-circle"></i></button>
+                                  </div>
+                                  <!--div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"><i class="mdi mdi-minus-circle"></i></button>
+                                  </div-->
+                                </div>
+                              </form>
+                            </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Ravenue - page-view-bounce rate -->
+<!-- ============================================================== -->

@@ -46,6 +46,12 @@ module.exports = {
         type: 'string',
     },
 
+
+    equipmentUseHours:{
+      collection: 'equipmentUseHour',
+      via: 'constructionSite',
+    },
+
   },
 
 };

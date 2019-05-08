@@ -56,96 +56,15 @@ module.exports = {
         type:'string',
     },
 
-    // Codigo de Filtros y aceites
-/*
-    codFAire1:{
-        type:'string',
-    },
-    codFAire2:{
-        type:'string',
-    },
-    codFComb1:{
-        type:'string',
-    },
-    codFComb2:{
-        type:'string',
-    },
-    codFComb3:{
-        type:'string',
-    },
-    codFComb4:{
-        type:'string',
-    },
-    codFAceiteMotor:{
-        type:'string',
-    },
-    codFAceiteHid1:{
-        type:'string',
-    },
-    codFAceiteHid2:{
-        type:'string',
-    },
-
-    codAceiteMotor:{
-        type:'string',
-    },
-    codAceiteHid:{
-        type:'string',
-    },
-    codAceiteDif:{
-        type:'string',
-    },
-    codAceiteTrans:{
-        type:'string',
-    },
-    codAceiteMandoFinal:{
-        type:'string',
-    },
-
-    cantAceiteMotor:{
-        type:'number',
-    },
-    cantAceiteHid:{
-        type:'number',
-    },
-    cantAceiteDif:{
-        type:'number',
-    },
-    cantAceiteTrans:{
-        type:'number',
-    },
-    cantAceiteMandoFinal:{
-        type:'number',
-    },
-
-    codLiqRefrigerante:{
-        type:'string',
-    },
-    codLiqFreno:{
-        type:'string',
-    },
-
-    cantLiqRefrigerante:{
-        type:'number',
-    },
-    cantLiqFreno:{
-        type:'number',
-    },
-
-    indiceMantenibilidad:{    // Costo de mantenimiento en relacion con la produccion -- Gasto en mant + rep / horas totales de la maquina
-        type:'number',
-    },
-    indiceReparabilidad:{   // time Rep de fallos / time entre fallas
-        type:'number'
-    },
-
-
-    */
     /*
       Este equipo tiene una unica hoja de lubricacion asociada
     */
     lubricationSheet:{
       model:'lubricationSheet',
+    },
+    equipmentUseHours:{
+      collection: 'equipmentUseHour',
+      via: 'equipment',
     },
     maintenances:{
       collection: 'maintenance',
