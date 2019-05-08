@@ -20,7 +20,23 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'pages/index',
+    controller: 'EquipmentUseHour',
+    action: 'calendar_events_list',
+    //view: 'pages/calendar/calendar',
+  },
+  '/calendar/events': {
+    controller: 'EquipmentUseHour',
+    action: 'readJsonFile',
+    //view: 'pages/calendar/calendar',
+  },
+
+  '/json': {
+    controller: 'EquipmentUseHour',
+    action: 'writeJsonFile',
+    //view: 'pages/calendar/calendar',
+  },
+  '/calendar': {
+    view: 'pages/calendar/calendar',
   },
   '/user/signin': {
     view: 'pages/user/signin',
