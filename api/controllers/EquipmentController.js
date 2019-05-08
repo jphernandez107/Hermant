@@ -78,8 +78,14 @@ module.exports = {
 
     var equipment = await Equipment.findOne({id:equipmentId});
 
+    var maintenances = await Maintenance.find({equipment:equipmentId}).populate('maintenanceRows');
+
     if(equipment){
-      return res.view('pages/equipment/equipment_details', {equipment});
+      if(maintenances){
+        return res.view('pages/equipment/equipment_details', {equipment, maintenances});
+      }else{
+        return res.view('pages/equipment/equipment_details', {equipment});
+      }
     }else{
       return res.redirect('/equipment/list');
     }

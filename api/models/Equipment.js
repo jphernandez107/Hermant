@@ -147,6 +147,10 @@ module.exports = {
     lubricationSheet:{
       model:'lubricationSheet',
     },
+    maintenances:{
+      collection: 'maintenance',
+      via: 'equipment'
+    }
 
   },
 
