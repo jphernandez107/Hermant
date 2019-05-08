@@ -115,6 +115,14 @@ module.exports.routes = {
     action: 'delete',
   },
 
+  '/equipmentusehour/list':{
+    controller: 'EquipmentUseHour',
+    action: 'list_view',
+  },
+  'POST /equipmentusehour/new/:idEquip':{
+    controller: 'EquipmentUseHour',
+    action: 'new_use_hour',
+  },
 
   '/parts/list':{
     controller: 'SparePart',
