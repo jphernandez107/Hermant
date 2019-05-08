@@ -1,0 +1,214 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Mantenimiento</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Detalle de Mantenimiento (<%=maintenance.maintenanceFrequency%>Hs) para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+        <h3 class="card-text mb-2">Mantenimiento realizado el dia <%=maintenance.date%>.</h3>
+        <h3 class="card-text mb-2">Costo aproximado: U$D<%=maintenance.maintenanceCost%>.</h3>
+        <h3 class="card-text mb-2">Tiempo empleado: <%=maintenance.maintenanceTime%>Hs.</h3>
+        <!--a href="#"class="btn btn-warning" id="btn-print"><i class="mdi mdi-printer"> IMPRIMIR</i></a-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"><!--Filters-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-air-filter"> Filtros</i></h3>
+
+        <%var spanishName = 'Filtros de Aire'; var name = 'air';%>
+        <%for(var r=0; r<4; r++){%>
+          <%console.log(r);%>
+          <%if(r==0){%>
+            <%spanishName='Filtros de Aire';name = 'air';%>
+          <%}else if(r==1){%>
+            <%spanishName='Filtros de Aceite';name = 'oil';%>
+          <%}else if(r==2){%>
+            <%spanishName='Filtros de Combustible';name = 'fuel';%>
+          <%}else if(r==3){%>
+            <%spanishName='Otros Filtros';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Filter-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'filter'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>FilterField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <tr class="d-flex">
+                    <th class="col">FILTRO</th>
+                    <th class="col">APLICACIÓN</th>
+                    <th class="col">CANTIDAD</th>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(maintenanceRow of maintenanceRows){%>
+                    <%for(part of parts){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.application%></td>
+                            <td class="col"><%=maintenanceRow.amount%></td>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"><!--Oils-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-oil"> Aceites</i></h3>
+
+        <%var spanishName = 'Aceite de Motor'; var name = 'motor';%>
+        <%for(var r=0; r<4; r++){%>
+          <%if(r==0){%>
+            <%spanishName='Aceite de Motor';name = 'motor';%>
+          <%}else if(r==1){%>
+            <%spanishName='Aceite Hidraulico';name = 'hydraulic';%>
+          <%}else if(r==2){%>
+            <%spanishName='Aceite de Transmisión';name = 'transmission';%>
+          <%}else if(r==3){%>
+            <%spanishName='Otros Aceites';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Oil-->
+            <div class="col-12 text-center table-responsive">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'oil'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <tr class="d-flex">
+                    <th class="col">ACEITE</th>
+                    <th class="col">CANTIDAD</th>
+                    <%if(partApp == 'other' || partApp == 'motor'){%>
+                      <th class="col">APLICACIÓN</th>
+                    <%}%>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(maintenanceRow of maintenanceRows){%>
+                    <%for(part of parts){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.amount%>L</td>
+                            <%if(partApp == 'other' || partApp == 'motor'){%>
+                              <td class="col"><%=maintenanceRow.application%></td>
+                            <%}%>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row"><!--Liquids-->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Liquidos</i></h3>
+
+        <%var spanishName = 'Otros Líquidos'; var name = 'other';%>
+        <%for(var r=0; r<3; r++){%>
+          <%if(r==0){%>
+            <%spanishName='Líquido Refrigerante';name = 'coolant';%>
+          <%}else if(r==1){%>
+            <%spanishName='Líquido de Frenos';name = 'break';%>
+          <%}else if(r==2){%>
+            <%spanishName='Otros Líquidos';name = 'other';%>
+          <%}%>
+          <div class="row"><!--Liquid-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'liquid'; var partApp = name;%>
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="<%=name%>LiquidField1"><h4><%=spanishName%></h4></label></th>
+                  </tr>
+                  <tr class="d-flex">
+                    <th class="col">LÍQUIDO</th>
+                    <th class="col">CANTIDAD</th>
+                    <%if(partApp == 'other'){%>
+                      <th class="col">APLICACIÓN</th>
+                    <%}%>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(maintenanceRow of maintenanceRows){%>
+                    <%for(part of parts){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
+                        <%if(part.type == partType && part.application == partApp){%>
+                          <tr class="d-flex">
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.amount%>L</td>
+                            <%if(partApp == 'other'){%>
+                              <td class="col"><%=maintenanceRow.application%></td>
+                            <%}%>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
+                          </tr>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <%}%>
+
+      </div>
+    </div>
+  </div>
+</div>
