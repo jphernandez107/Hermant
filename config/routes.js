@@ -172,6 +172,19 @@ module.exports.routes = {
     action: 'lubsheet_details',
   },
 
+  'GET /maintenance/new/:idEquip':{
+    controller: 'maintenance',
+    action: 'maintenance_view',
+  },
+  'POST /maintenance/new/:idEquip':{
+    controller: 'maintenance',
+    action: 'maintenance_new',
+  },
+  'GET /maintenance/details/:idEquip/:idMaintenance':{
+    controller: 'maintenance',
+    action: 'maintenance_details',
+  },
+
 
   /***************************************************************************
   *                                                                          *
