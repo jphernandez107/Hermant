@@ -10,33 +10,18 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` your home page.            *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
-
   '/': {
     controller: 'EquipmentUseHour',
-    action: 'calendar_events_list',
-    //view: 'pages/calendar/calendar',
+    action: 'show_calendar',
   },
   '/calendar/events': {
     controller: 'EquipmentUseHour',
     action: 'readJsonFile',
-    //view: 'pages/calendar/calendar',
   },
 
-  '/json': {
-    controller: 'EquipmentUseHour',
-    action: 'writeJsonFile',
-    //view: 'pages/calendar/calendar',
-  },
   '/calendar': {
-    view: 'pages/calendar/calendar',
+    controller: 'EquipmentUseHour',
+    action: 'show_calendar',
   },
   '/user/signin': {
     view: 'pages/user/signin',
@@ -45,7 +30,6 @@ module.exports.routes = {
     }
   },
   'GET /user/signup': {
-    //view: 'pages/signup',
     controller: 'user',
     action: 'signup_view',
   },
@@ -184,18 +168,6 @@ module.exports.routes = {
     controller: 'maintenance',
     action: 'maintenance_details',
   },
-
-
-  /***************************************************************************
-  *                                                                          *
-  * More custom routes here...                                               *
-  * (See https://sailsjs.com/config/routes for examples.)                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the routes in this file, it   *
-  * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
-  * not match any of those, it is matched against static assets.             *
-  *                                                                          *
-  ***************************************************************************/
 
 
 };
