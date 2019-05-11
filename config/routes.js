@@ -107,6 +107,10 @@ module.exports.routes = {
     controller: 'EquipmentUseHour',
     action: 'new_use_hour',
   },
+  'GET /equipmentusehour/reloadevents':{
+    controller: 'EquipmentUseHour',
+    action: 'reload_events',
+  },
 
   '/parts/list':{
     controller: 'SparePart',

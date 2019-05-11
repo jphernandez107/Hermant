@@ -51,17 +51,17 @@ module.exports = {
   },
 
   readJsonFile: async function (req, res) {
-    //Busco el archivo JSON con los datos de los eventos y lo devuelvo.
-    //'use strict';
-    //const fs = require('fs');
-    //let rawdata = fs.readFileSync('./assets/json/calendar_events.json');
-    //let events = JSON.parse(rawdata);
-    let ev = await Events.findOne({id:1});
-    let events = ev.events;
+    let ev = await Events.find({});
+    let events = ev[ev.length - 1].events;
     if(events){
       return res.json(events)
     }
 
+  },
+
+  reload_events: async function(req,res){
+    update_calendar_events_list();
+    return res.redirect('back');
   },
 
 };
@@ -102,7 +102,7 @@ async function update_calendar_events_list(){
 
 
   // Busco todas las obras y a cada ID de obra le asigno un color aleatorio
-  var colorArray = ['#0A6633', '#F0B3A9', '#F3D3FF', '#22AA99', '#00B3E6',
+  var colorArray = ['#0A6633', '#F0B3A9', '#F3D347', '#22AA99', '#00B3E6',
                     '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                     '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
                     '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
@@ -117,7 +117,6 @@ async function update_calendar_events_list(){
 
   for(equipment of equipments){
     // Calculo el promedio de horas de uso que tiene cada equipo
-    console.log(equipment.code);
     var dates = [];
     var totalHours = 0;
     var avg = 7;
@@ -200,12 +199,14 @@ async function update_calendar_events_list(){
   events = events.substring(0, events.length-1);
   events += ']';
 
-  if(Events.count() > 0){
-    await Events.updateOne({id:1}).set({events:events.JSON.parse(events)});
-  }else{
-    console.log("creando JSON");
-    await Events.create({events:JSON.parse(events)});
-  }
+  await Events.destroy({});
+  await Events.create({events:JSON.parse(events)});
+
+  // if(Events.count() > 0){
+  //   await Events.updateOne({id:1}).set({events:events.JSON.parse(events)});
+  // }else{
+  //   await Events.create({events:JSON.parse(events)});
+  // }
 
   // 'use strict';
   //  const Fs = require('fs-extra');
