@@ -21,11 +21,11 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark" href="/user/signup" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark btn btn-success btn-rounded" href="/user/signup" aria-expanded="false">
                 <i class="mdi mdi-account-plus"></i>
                 <span class="hide-menu">Nuevo Usuario </span>
             </a>
-            <a class="sidebar-link waves-effect waves-dark" href="/user/resetpass">
+            <a class="sidebar-link waves-effect waves-dark btn btn-secondary btn-rounded" href="/user/resetpass">
               <i class="mdi mdi-account-key"></i>  <span class="hide-menu"> Restaurar Contraseña</span>
             </a>
           </div>
@@ -45,27 +45,27 @@
                     <tbody>
                       <% users.forEach(function(user){ %>
                         <tr>
-                            <td class="txt-oflo"><%= user.name %></td>
-                            <td class="txt-oflo"><%= user.lastname %></td>
-                            <td class="txt-oflo"><%= user.dni %></td>
+                            <td class="txt-oflo align-middle"><%= user.name %></td>
+                            <td class="txt-oflo align-middle"><%= user.lastname %></td>
+                            <td class="txt-oflo align-middle"><%= user.dni %></td>
                             <%if("admin" == user.permissions){%>
-                              <td class="txt-oflo">Administrador</td>
+                              <td class="txt-oflo align-middle">Administrador</td>
                             <%}else if("engineer" == user.permissions){%>
-                              <td class="txt-oflo">Ingeniero</td>
+                              <td class="txt-oflo align-middle">Ingeniero</td>
                             <%}else if("constManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Obra</td>
+                              <td class="txt-oflo align-middle">Jefe de Obra</td>
                             <%}else if("maintManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Mantenimiento</td>
+                              <td class="txt-oflo align-middle">Jefe de Mantenimiento</td>
                             <%}else if("depositManager" == user.permissions){%>
-                              <td class="txt-oflo">Jefe de Deposito</td>
+                              <td class="txt-oflo align-middle">Jefe de Deposito</td>
                             <%}else{%>
-                              <td class="txt-oflo">Error</td>
+                              <td class="txt-oflo align-middle">Error</td>
                             <%}%>
-                            <td style="text-align: center;">
+                            <td style="text-align: center; align-middle">
                               <div class="btn-group" role="group">
-                                <a href="/user/edit/<%= user.id %>"class="btn btn-success"><i class="mdi mdi-pencil"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/user/delete/<%= user.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/user/edit/<%= user.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-pencil"></i></a>
+                                  <a href="/user/delete/<%= user.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>

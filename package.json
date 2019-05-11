@@ -33,5 +33,10 @@
   "license": "",
   "engines": {
     "node": "^10.15"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "assets/json/*"
+    ]
   }
 }

@@ -117,13 +117,15 @@
               </thead>
               <tbody>
                 <% equipments.forEach(function(equipment){ %>
+                <% if (equipment.constructionSite !== site.id) { %>
                   <tr>
                     <td class="txt-oflo"><a href="/equipment/details/<%=equipment.id%>"><%= equipment.code %></a></td>
                     <td class="txt-oflo"><%= equipment.designation %></td>
                     <td class="txt-oflo"><%= equipment.brand %></td>
                     <td class="txt-oflo"><%= equipment.model %></td>
-                    <td class="txt-oflo"><a href="#" class="btn btn-warning">AGREGAR</a></td>
+                    <td class="txt-oflo"><a href="/site/details/add/<%= equipment.id %>/<%= site.id%>" class="btn btn-warning btn-rounded">AGREGAR</a></td>
                   </tr>
+                  <%};%>
                 <%});%>
               </tbody>
             </table>
@@ -148,13 +150,15 @@
               </thead>
               <tbody>
                 <% equipments.forEach(function(equipment){ %>
+                <% if (equipment.constructionSite === site.id) { %>
                   <tr>
                     <td class="txt-oflo"><a href="/equipment/details/<%=equipment.id%>"><%= equipment.code %></a></td>
                     <td class="txt-oflo"><%= equipment.designation %></td>
                     <td class="txt-oflo"><%= equipment.brand %></td>
                     <td class="txt-oflo"><%= equipment.model %></td>
-                    <td class="txt-oflo"><a href="#" class="btn btn-danger">QUITAR</a></td>
+                    <td class="txt-oflo"><a href="/site/details/delete/<%= equipment.id %>/<%= site.id%>" class="btn btn-danger btn-rounded">QUITAR</a></td>
                   </tr>
+                  <%};%>
                 <%});%>
               </tbody>
             </table>

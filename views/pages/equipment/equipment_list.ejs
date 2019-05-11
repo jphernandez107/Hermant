@@ -21,10 +21,20 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/equipment/new" aria-expanded="false">
-                <i class="mdi mdi-plus-circle-outline"></i>
-                <span class="hide-menu">Nuevo Equipo</span>
-            </a>
+            <div class="row justify-content-between">
+              <div class="col">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="/equipment/new" aria-expanded="false">
+                    <i class="mdi mdi-plus-circle-outline"></i>
+                    <span class="hide-menu">Nuevo Equipo</span>
+                </a>
+              </div>
+              <div class="col-3">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-warning btn-rounded" href="/equipmentusehour/list" aria-expanded="false">
+                    <i class="mdi mdi-timetable"></i>
+                    <span class="hide-menu">Administrar Horas de Uso de Equipos</span>
+                </a>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <h3 class="card-title"><b>Equipos</b></h3>
@@ -46,13 +56,13 @@
                     <tbody>
                       <% equipments.forEach(function(equipment){ %>
                         <tr>
-                            <td class="txt-oflo"><%= equipment.code %></td>
-                            <td class="txt-oflo"><%= equipment.designation %></td>
-                            <td class="txt-oflo"><%= equipment.brand %></td>
-                            <td class="txt-oflo"><%= equipment.model %></td>
-                            <td class="txt-oflo"><!--%= equipment.indiceMantenibilidad %-->1</td>
-                            <td class="txt-oflo"><!--%= equipment.indiceReparabilidad %-->1</td>
-                            <td class="txt-oflo"><%= equipment.totalHours %></td>
+                            <td class="txt-oflo align-middle"><%= equipment.code %></td>
+                            <td class="txt-oflo align-middle"><%= equipment.designation %></td>
+                            <td class="txt-oflo align-middle"><%= equipment.brand %></td>
+                            <td class="txt-oflo align-middle"><%= equipment.model %></td>
+                            <td class="txt-oflo align-middle"><!--%= equipment.indiceMantenibilidad %-->1</td>
+                            <td class="txt-oflo align-middle"><!--%= equipment.indiceReparabilidad %-->1</td>
+                            <td class="txt-oflo align-middle"><%= equipment.totalHours %></td>
                             <td class="align-middle">
                               <div class="progress" style="height: 0%;">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
@@ -60,9 +70,9 @@
                             </td>
                             <td style="text-align: center;">
                               <div class="btn-group" role="group">
-                                <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
+                                <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>

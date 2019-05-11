@@ -10,17 +10,18 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` your home page.            *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
-
   '/': {
-    view: 'pages/index',
+    controller: 'EquipmentUseHour',
+    action: 'show_calendar',
+  },
+  '/calendar/events': {
+    controller: 'EquipmentUseHour',
+    action: 'readJsonFile',
+  },
+
+  '/calendar': {
+    controller: 'EquipmentUseHour',
+    action: 'show_calendar',
   },
   '/user/signin': {
     view: 'pages/user/signin',
@@ -29,7 +30,6 @@ module.exports.routes = {
     }
   },
   'GET /user/signup': {
-    //view: 'pages/signup',
     controller: 'user',
     action: 'signup_view',
   },
@@ -99,6 +99,18 @@ module.exports.routes = {
     action: 'delete',
   },
 
+  '/equipmentusehour/list':{
+    controller: 'EquipmentUseHour',
+    action: 'list_view',
+  },
+  'POST /equipmentusehour/new/:idEquip':{
+    controller: 'EquipmentUseHour',
+    action: 'new_use_hour',
+  },
+  'GET /equipmentusehour/reloadevents':{
+    controller: 'EquipmentUseHour',
+    action: 'reload_events',
+  },
 
   '/parts/list':{
     controller: 'SparePart',
@@ -133,6 +145,14 @@ module.exports.routes = {
     controller: 'ConstructionSite',
     action: 'delete',
   },
+  'GET /site/details/add/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'setSite',
+  },
+  'GET /site/details/delete/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'deleteSite',
+  },
 
 
   'GET /lubsheet/new/:idEquip':{
@@ -148,17 +168,18 @@ module.exports.routes = {
     action: 'lubsheet_details',
   },
 
-
-  /***************************************************************************
-  *                                                                          *
-  * More custom routes here...                                               *
-  * (See https://sailsjs.com/config/routes for examples.)                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the routes in this file, it   *
-  * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
-  * not match any of those, it is matched against static assets.             *
-  *                                                                          *
-  ***************************************************************************/
+  'GET /maintenance/new/:idEquip':{
+    controller: 'maintenance',
+    action: 'maintenance_view',
+  },
+  'POST /maintenance/new/:idEquip':{
+    controller: 'maintenance',
+    action: 'maintenance_new',
+  },
+  'GET /maintenance/details/:idEquip/:idMaintenance':{
+    controller: 'maintenance',
+    action: 'maintenance_details',
+  },
 
 
 };

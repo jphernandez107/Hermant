@@ -21,7 +21,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/site/new" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="/site/new" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nueva Obra</span>
             </a>
@@ -32,29 +32,31 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th class="border-top-0" style="width: 11%; text-align: center;">CÓDIGO</th>
                             <th class="border-top-0" style="width: 12%; text-align: center;">NOMBRE</th>
                             <th class="border-top-0" style="width: 8%; text-align: center;">PROVINCIA</th>
                             <th class="border-top-0" style="width: 12%; text-align: center;">DEPARTAMENTO</th>
                             <th class="border-top-0" style="width: 9%; text-align: center;">EQUIPOS</th>
                             <th class="border-top-0" style="width: 9%; text-align: center;">FIN</th>
-                            <th class="border-top-0" style="width: 26%; text-align: center;">OBSERVACIONES</th>
+                            <th class="border-top-0" style="width: 15%; text-align: center;">OBSERVACIONES</th>
                             <th class="border-top-0" style="width: 16%; text-align: center;">DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
                       <% sites.forEach(function(site){ %>
                         <tr>
-                            <td class="txt-oflo"><%= site.name %></td>
-                            <td class="txt-oflo"><%= site.province %></td>
-                            <td class="txt-oflo"><%= site.district %></td>
-                            <td class="txt-oflo">0</td>
-                            <td class="txt-oflo"><%= site.finishDate %></td>
-                            <td class="txt-oflo"><%= site.observations %></td>
-                            <td style="text-align: center;">
+                            <td class="txt-oflo align-middle"><%= site.code %></td>
+                            <td class="txt-oflo align-middle"><%= site.name %></td>
+                            <td class="txt-oflo align-middle"><%= site.province %></td>
+                            <td class="txt-oflo align-middle"><%= site.district %></td>
+                            <td class="txt-oflo align-middle">0</td>
+                            <td class="txt-oflo align-middle"><%= site.finishDate %></td>
+                            <td class="txt-oflo align-middle"><%= site.observations %></td>
+                            <td style="text-align: center; align-middle">
                               <div class="btn-group" role="group">
-                                <a href="/site/details/<%= site.id %>"class="btn btn-success"><i class="mdi mdi-file-find"></i></a>
+                                <a href="/site/details/<%= site.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/site/delete/<%= site.id %>"class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/site/delete/<%= site.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
                                 <%}%>
                               </div>
                             </td>
