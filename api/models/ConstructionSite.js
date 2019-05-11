@@ -45,7 +45,9 @@ module.exports = {
     observations:{
         type: 'string',
     },
-
-  },
-
+    equipments:{
+        collection: 'Equipment',
+        via: 'constructionSite',
+    },
+}
 };

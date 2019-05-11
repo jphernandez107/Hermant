@@ -147,7 +147,14 @@ module.exports.routes = {
     controller: 'lubricationSheet',
     action: 'lubsheet_details',
   },
-
+  'GET /site/details/add/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'setSite',
+  },
+  'GET /site/details/delete/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'deleteSite',
+  },
 
   /***************************************************************************
   *                                                                          *

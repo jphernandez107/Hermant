@@ -34,10 +34,15 @@ module.exports = {
 		var price = Number(req.param('precio'));
 		var observations = String(req.param('observaciones'));
 
+        console.log("hola");
+    var constructionSite = await ConstructionSite.findOne({code:'T01'});
+
+    console.log(constructionSite);
+
 
     var equipment = await Equipment.create({designation,brand,model,totalHours,partialHours,code,
                                       serialNumber,origin,manufDate,serviceDate,
-                                      power,weight,price,observations});
+                                      power,weight,price,observations, constructionSite:constructionSite.id});
 
     return res.redirect('/equipment/list');
   },
@@ -96,5 +101,19 @@ module.exports = {
     return res.redirect('/equipment/list');
   },
 
+  setSite: async function(req, res){
+      var idEquipo = req.param('idEquip');
+      var idSite = req.param('idSite');
+      console.log(idEquipo + ' ' + idSite);
+      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSite});
+      return res.redirect('/site/details/' + idSite);
+  },
+  deleteSite: async function(req, res){
+      var idEquipo = req.param('idEquip');
+      var idSite = req.param('idSite');
+      var idSiteTaller = 1; //se pone en el id del taller
+      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSiteTaller});
+      return res.redirect('/site/details/' + idSite);
+    }
 
 };

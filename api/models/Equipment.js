@@ -55,6 +55,9 @@ module.exports = {
     observations:{
         type:'string',
     },
+    constructionSite: {
+        model: 'constructionSite'
+    },
 
     // Codigo de Filtros y aceites
 /*
