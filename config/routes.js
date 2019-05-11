@@ -10,18 +10,17 @@
 
 module.exports.routes = {
 
-  '/': {
-    controller: 'EquipmentUseHour',
-    action: 'show_calendar',
-  },
-  '/calendar/events': {
-    controller: 'EquipmentUseHour',
-    action: 'readJsonFile',
-  },
+  /***************************************************************************
+  *                                                                          *
+  * Make the view located at `views/homepage.ejs` your home page.            *
+  *                                                                          *
+  * (Alternatively, remove this and add an `index.html` file in your         *
+  * `assets` directory)                                                      *
+  *                                                                          *
+  ***************************************************************************/
 
-  '/calendar': {
-    controller: 'EquipmentUseHour',
-    action: 'show_calendar',
+  '/': {
+    view: 'pages/index',
   },
   '/user/signin': {
     view: 'pages/user/signin',
@@ -30,6 +29,7 @@ module.exports.routes = {
     }
   },
   'GET /user/signup': {
+    //view: 'pages/signup',
     controller: 'user',
     action: 'signup_view',
   },
@@ -99,14 +99,6 @@ module.exports.routes = {
     action: 'delete',
   },
 
-  '/equipmentusehour/list':{
-    controller: 'EquipmentUseHour',
-    action: 'list_view',
-  },
-  'POST /equipmentusehour/new/:idEquip':{
-    controller: 'EquipmentUseHour',
-    action: 'new_use_hour',
-  },
 
   '/parts/list':{
     controller: 'SparePart',
@@ -155,19 +147,25 @@ module.exports.routes = {
     controller: 'lubricationSheet',
     action: 'lubsheet_details',
   },
+  'GET /site/details/add/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'setSite',
+  },
+  'GET /site/details/delete/:idEquip/:idSite':{
+    controller: 'equipment',
+    action: 'deleteSite',
+  },
 
-  'GET /maintenance/new/:idEquip':{
-    controller: 'maintenance',
-    action: 'maintenance_view',
-  },
-  'POST /maintenance/new/:idEquip':{
-    controller: 'maintenance',
-    action: 'maintenance_new',
-  },
-  'GET /maintenance/details/:idEquip/:idMaintenance':{
-    controller: 'maintenance',
-    action: 'maintenance_details',
-  },
+  /***************************************************************************
+  *                                                                          *
+  * More custom routes here...                                               *
+  * (See https://sailsjs.com/config/routes for examples.)                    *
+  *                                                                          *
+  * If a request to a URL doesn't match any of the routes in this file, it   *
+  * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
+  * not match any of those, it is matched against static assets.             *
+  *                                                                          *
+  ***************************************************************************/
 
 
 };

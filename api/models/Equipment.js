@@ -55,6 +55,9 @@ module.exports = {
     observations:{
         type:'string',
     },
+    constructionSite: {
+        model: 'constructionSite'
+    },
 
     /*
       Este equipo tiene una unica hoja de lubricacion asociada

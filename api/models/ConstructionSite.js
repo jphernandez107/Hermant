@@ -45,13 +45,9 @@ module.exports = {
     observations:{
         type: 'string',
     },
-
-
-    equipmentUseHours:{
-      collection: 'equipmentUseHour',
-      via: 'constructionSite',
+    equipments:{
+        collection: 'Equipment',
+        via: 'constructionSite',
     },
-
-  },
-
+}
 };
