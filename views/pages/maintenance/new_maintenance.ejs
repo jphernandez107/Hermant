@@ -1,0 +1,364 @@
+<%var sizeColApp = '3'%>
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Nuevo Mantenimiento</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Nuevo mantenimiento para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form class="form-horizontal m-t-30" method="POST" action="/maintenance/new/<%= equipment.id %>">
+  <%if(typeof sheet != "undefined"){%>
+    <input type="hidden" value="maintenance" id="sheetID" name="sheetName">
+  <%}else{var sheet = ""}%>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-wrench-outline"> Mantenimientos </i></h3>
+          <h4 class="card-subtitle">Seleccione el tipo de mantenimiento que desea registrar</h4>
+          <div class="row justify-content-md-center">
+            <div class="col-md-auto text-center">
+              <div class="row text-center">
+                <div class="col-4">
+                  <label class="h3">Fecha</label>
+                </div>
+                <div class="col-4">
+                  <label class="h3">Frecuencia</label>
+                </div>
+                <div class="col-4">
+                  <label class="h4">Tiempo Empleado [Hs]</label>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-4">
+                  <input type="text" id="datepicker" name="datepicker" class="text-center">
+                </div>
+                <div class="col-4" >
+                  <select name="maintenanceFrequency" id="MaintenanceFrequency" width="200">
+                    <option value="0">Elija el Mantenimiento</option>
+                    <% for(mF of uniqueFreqs){ %>
+                      <option value="<%=mF.type%>,<%=mF.frequency%>"><%=mF.frequency%> [Hs/Km]</option>
+                    <%}%>
+                  </select>
+                </div>
+                <div class="col-4 text-center">
+                  <input type="number" id="maintenanceTime" name="maintenanceTime" value="1" min="0.5" class="text-center">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row"><!--Filters-->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-air-filter"> Filtros</i></h3>
+
+          <%var spanishName = 'Filtros de Aire'; var name = 'air';%>
+          <%for(var r=0; r<4; r++){%>
+            <%if(r==0){%>
+              <%spanishName='Filtros de Aire';name = 'air';%>
+            <%}else if(r==1){%>
+              <%spanishName='Filtros de Aceite';name = 'oil';%>
+            <%}else if(r==2){%>
+              <%spanishName='Filtros de Combustible';name = 'fuel';%>
+            <%}else if(r==3){%>
+              <%spanishName='Otros Filtros';name = 'other';%>
+            <%}%>
+            <div class="row"><!--Filter-->
+              <div class="col-12 text-center">
+                <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'Filter'; var partApp = name;%>
+                  <thead>
+                    <tr>
+                      <th class="col-12"><label class="control-label" for="<%=name%>FilterField1"><h4><%=spanishName%></h4></label></th>
+                    </tr>
+                    <tr class="d-flex">
+                      <th class="col-4">FILTRO</th>
+                      <th class="col">APLICACIÓN</th>
+                      <th class="col">CÓD. INTERNO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%var repeatRow = 1; var rowCount = 1;%>
+                    <%for(sheetRow of sheetRows){%>
+                      <%for(part of parts){%>
+                        <%if(sheetRow.sparePart == part.id){%>
+                          <%if(part.type == partType.toLowerCase() && part.application == partApp){%>
+                            <tr class="d-flex" data-maint-freq="">
+                              <td class="col-4 text-center">
+                                <% var classOption = "";%>
+                                <%for(maintF of sheetRow.maintenanceFrequencies){%>
+                                  <%if(maintF.change){%>
+                                    <%classOption += ' change-'; classOption += maintF.type;%>
+                                  <%}else{%>
+                                    <%classOption += ' noChange-'; classOption += maintF.type;%>
+                                  <%}%>
+                                <%}%>
+                                <input type="hidden" name="<%=partApp + partType%>SheetRowID<%=repeatRow%>" value="<%=sheetRow.id%>">
+                                <select class="<%=classOption%>" style="width:inherit;" name="<%=partApp + partType%>Select<%=repeatRow%>">
+                                  <%rowCount = repeatRow; repeatRow++;%>
+                                  <option value="">NO SE CAMBIA</option>
+                                  <%for(part2 of parts){%>
+                                    <%if(part.internalCode == part2.internalCode){%>
+                                      <%if(part.id == part2.id){%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part.id%>" selected data-default="def"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}else{%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part2.id%>"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}%>
+                                    <%}%>
+                                  <%}%>
+                                </select>
+                              </td>
+                              <td class="col"><%=sheetRow.application%></td>
+                              <td class="col"><%=part.internalCode%></td>
+                            </tr>
+                          <%}%>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                    <input type="hidden" name="<%=partApp + partType%>Count" value="<%=rowCount%>">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"><!--Oils-->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-oil"> Aceites</i></h3>
+
+          <%var spanishName = 'Aceites de Motor'; var name = 'motor';%>
+          <%for(var r=0; r<4; r++){%>
+            <%if(r==0){%>
+              <%spanishName='Aceite de Motor';name = 'motor';%>
+            <%}else if(r==1){%>
+              <%spanishName='Aceite Hidraulico';name = 'hydraulic';%>
+            <%}else if(r==2){%>
+              <%spanishName='Aceite de Transmisión';name = 'transmission';%>
+            <%}else if(r==3){%>
+              <%spanishName='Otros Aceites';name = 'other';%>
+            <%}%>
+            <div class="row"><!--Oil-->
+              <div class="col-12 text-center">
+                <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'Oil'; var partApp = name;%>
+                  <thead>
+                    <tr>
+                      <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
+                    </tr>
+                    <tr class="d-flex">
+                      <th class="col-4">ACEITE</th>
+                      <th class="col-3 text-center">CANTIDAD [L]</th>
+                      <%if(partApp == 'other' || partApp == 'motor'){%>
+                        <th class="col">APLICACIÓN</th>
+                      <%}%>
+                      <th class="col">CÓD. INTERNO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%var repeatRow = 1; var rowCount = 1;%>
+                    <%for(sheetRow of sheetRows){%>
+                      <%for(part of parts){%>
+                        <%if(sheetRow.sparePart == part.id){%>
+                          <%if(part.type == partType.toLowerCase() && part.application == partApp){%>
+                            <tr class="d-flex" data-maint-freq="">
+                              <td class="col-4 text-center">
+                                <% var classOption = "";%>
+                                <%for(maintF of sheetRow.maintenanceFrequencies){%>
+                                  <%if(maintF.change){%>
+                                    <%classOption += ' change-'; classOption += maintF.type;%>
+                                  <%}else{%>
+                                    <%classOption += ' noChange-'; classOption += maintF.type;%>
+                                  <%}%>
+                                <%}%>
+                                <input type="hidden" name="<%=partApp + partType%>SheetRowID<%=repeatRow%>" value="<%=sheetRow.id%>">
+                                <select class="<%=classOption%>" style="width:inherit;" name="<%=partApp + partType%>Select<%=repeatRow%>">
+                                  <option value="">NO SE CAMBIA</option>
+                                  <%for(part2 of parts){%>
+                                    <%if(part.internalCode == part2.internalCode){%>
+                                      <%if(part.id == part2.id){%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part.id%>" selected data-default="def"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}else{%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part2.id%>"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}%>
+                                    <%}%>
+                                  <%}%>
+                                </select>
+                              </td>
+                              <td class="col-3"><input type="number" class="text-center" name="<%=partApp + partType%>AmountInput<%=repeatRow%>" value="<%=sheetRow.amount%>"></td>
+                              <%if(partApp == 'other' || partApp == 'motor'){%>
+                                <td class="col"><%=sheetRow.application%></td>
+                              <%}%>
+                              <td class="col"><%=part.internalCode%></td>
+                              <%rowCount = repeatRow; repeatRow++;%>
+                            </tr>
+                          <%}%>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                    <input type="hidden" name="<%=partApp + partType%>Count" value="<%=rowCount%>">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"><!--Liquids-->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Liquidos</i></h3>
+
+          <%var spanishName = 'Otros Líquidos'; var name = 'other';%>
+          <%for(var r=0; r<3; r++){%>
+            <%console.log(r);%>
+            <%if(r==0){%>
+              <%spanishName='Líquido Refrigerante';name = 'coolant';%>
+            <%}else if(r==1){%>
+              <%spanishName='Líquido de Frenos';name = 'break';%>
+            <%}else if(r==2){%>
+              <%spanishName='Otros Líquidos';name = 'other';%>
+            <%}%>
+            <div class="row"><!--Liquid-->
+              <div class="col-12 text-center">
+                <table class="table table-bordered table-dark table-sm table-hover table-sheet"><%var partType = 'Liquid'; var partApp = name;%>
+                  <thead>
+                    <tr>
+                      <th class="col-12"><label class="control-label" for="<%=name%>LiquidField1"><h4><%=spanishName%></h4></label></th>
+                    </tr>
+                    <tr class="d-flex">
+                      <th class="col-4">LÍQUIDO</th>
+                      <th class="col-3">CANTIDAD [L]</th>
+                      <%if(partApp == 'other'){%>
+                        <th class="col">APLICACIÓN</th>
+                      <%}%>
+                      <th class="col">CÓD. INTERNO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%var repeatRow = 1; var rowCount = 1;%>
+                    <%for(sheetRow of sheetRows){%>
+                      <%for(part of parts){%>
+                        <%if(sheetRow.sparePart == part.id){%>
+                          <%if(part.type == partType.toLowerCase() && part.application == partApp){%>
+                            <tr class="d-flex" data-maint-freq="">
+                              <td class="col-4 text-center">
+                                <% var classOption = "";%>
+                                <%for(maintF of sheetRow.maintenanceFrequencies){%>
+                                  <%if(maintF.change){%>
+                                    <%classOption += ' change-'; classOption += maintF.type;%>
+                                  <%}else{%>
+                                    <%classOption += ' noChange-'; classOption += maintF.type;%>
+                                  <%}%>
+                                <%}%>
+                                <input type="hidden" name="<%=partApp + partType%>SheetRowID<%=repeatRow%>" value="<%=sheetRow.id%>">
+                                <select class="<%=classOption%>" style="width:inherit;" name="<%=partApp + partType%>Select<%=repeatRow%>">
+                                  <option value="">NO SE CAMBIA</option>
+                                  <%for(part2 of parts){%>
+                                    <%if(part.internalCode == part2.internalCode){%>
+                                      <%if(part.id == part2.id){%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part.id%>" selected data-default="def"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}else{%>
+                                        <%if(part2.stock >= sheetRow.amount){%>
+                                          <option value="<%=part2.id%>"><%=part2.brand%> <%=part2.model%></option>
+                                        <%}%>
+                                      <%}%>
+                                    <%}%>
+                                  <%}%>
+                                </select>
+                              </td>
+                              <td class="col-3"><input type="number" class="text-center" name="<%=partApp + partType%>AmountInput<%=repeatRow%>" value="<%=sheetRow.amount%>"></td>
+                              <%if(partApp == 'other' || partApp == 'motor'){%>
+                                <td class="col"><%=sheetRow.application%></td>
+                              <%}%>
+                              <td class="col"><%=part.internalCode%></td>
+                              <%rowCount = repeatRow; repeatRow++;%>
+                            </tr>
+                          <%}%>
+                        <%}%>
+                      <%}%>
+                    <%}%>
+                    <input type="hidden" name="<%=partApp + partType%>Count" value="<%=rowCount%>">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <%}%>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"><!--Observations-->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-oil-temperature"> Observaciones</i></h3>
+          <div class="row text-center">
+            <div class="col">
+              <textarea class="form-control" name="observationsTextArea" value="" style="width:inherit;" placeholder="Observaciones" rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row text-center">
+    <div class="col-12">
+      <input type="submit" value="Nuevo Mantenimiento" class="btn btn-primary btn-rounded" id="newMaintenanceBtn" disabled>
+    </div>
+  </div>
+</form>

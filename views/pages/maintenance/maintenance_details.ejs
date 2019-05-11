@@ -1,9 +1,3 @@
-<%var freqs = [];%>
-<%for(maint of maintFreqs){%>
-  <%freqs.push(maint.frequency);%>
-<%}%>
-<%let uniqueFreqs = [...new Set(freqs)];%> <!--Busco solo las frecuencias que no se repiten-->
-<%if(uniqueFreqs.length > 7){var sizeColApp = '2'}else{var sizeColApp = '3'}%>
 <div class="page-breadcrumb">
   <div class="row">
       <div class="col-5 align-self-center">
@@ -17,7 +11,7 @@
                       </li>
                       <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
                       <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Planilla de Lubricación</li>
+                      <li class="breadcrumb-item active" aria-current="page">Mantenimiento</li>
                   </ol>
               </nav>
           </div>
@@ -28,9 +22,11 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Planilla de lubricación para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
-        <h3 class="card-subtitle">Proximamente podra ver la obra actual de este equipo en esta planilla.</h3>
-        <a href="#"class="btn btn-warning" id="btn-print"><i class="mdi mdi-printer"> IMPRIMIR</i></a>
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Detalle de Mantenimiento (<%=maintenance.maintenanceFrequency%>Hs) para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+        <h3 class="card-text mb-2">Mantenimiento realizado el dia <%=maintenance.date%>.</h3>
+        <h3 class="card-text mb-2">Costo aproximado: U$D<%=maintenance.maintenanceCost%>.</h3>
+        <h3 class="card-text mb-2">Tiempo empleado: <%=maintenance.maintenanceTime%>Hs.</h3>
+        <!--a href="#"class="btn btn-warning" id="btn-print"><i class="mdi mdi-printer"> IMPRIMIR</i></a-->
       </div>
     </div>
   </div>
@@ -62,36 +58,24 @@
                     <th class="col-12"><label class="control-label" for="<%=name%>FilterField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
                   <tr class="d-flex">
-                    <th class="col-3">FILTRO</th>
-                    <th class="col-<%=sizeColApp%>">APLICACIÓN</th>
-                    <th class="col-2">CÓD. INTERNO</th>
-                    <%for(freq of uniqueFreqs){%>
-                      <th class="col"><%=freq%></th>
-                    <%}%>
+                    <th class="col">FILTRO</th>
+                    <th class="col">APLICACIÓN</th>
+                    <th class="col">CANTIDAD</th>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <%for(sheetRow of sheetRows){%>
+                  <%for(maintenanceRow of maintenanceRows){%>
                     <%for(part of parts){%>
-                      <%if(sheetRow.sparePart == part.id){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
                         <%if(part.type == partType && part.application == partApp){%>
                           <tr class="d-flex">
-                            <td class="col-3"><%=part.brand%> <%=part.model%></td>
-                            <td class="col-<%=sizeColApp%>"><%=sheetRow.application%></td>
-                            <td class="col-2"><%=part.internalCode%></td>
-                            <%for(maintFreq of maintFreqs){%>
-                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
-                                <%for(var i=1; i<10;i++){%>
-                                  <%if(maintFreq.type == i){%>
-                                    <td class="col">
-                                    <%if(maintFreq.change){%>
-                                      <h5>C</h5>
-                                    <%}%>
-                                    </td>
-                                  <%}%>
-                                <%}%>
-                              <%}%>
-                            <%}%>
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.application%></td>
+                            <td class="col"><%=maintenanceRow.amount%></td>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
                           </tr>
                         <%}%>
                       <%}%>
@@ -106,6 +90,7 @@
     </div>
   </div>
 </div>
+
 <div class="row"><!--Oils-->
   <div class="col-12">
     <div class="card">
@@ -130,49 +115,29 @@
                   <tr>
                     <th class="col-12"><label class="control-label" for="<%=name%>OilField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
-                  <%var sizeCol = '2'; var sizeColOilCode = '2'%>
-                  <%if(partApp == 'other' || partApp == 'motor'){ %>
-                    <%if(uniqueFreqs.length > 7){sizeColOilCode = '1';sizeCol = '2'}%>
-                  <%}else{%>
-                    <%if(uniqueFreqs.length > 7){sizeCol = '2'}else{sizeCol = '3'}%>
-                  <%}%>
                   <tr class="d-flex">
-                    <th class="col-<%=sizeCol%>">ACEITE</th>
-                    <th class="col-<%=sizeCol%>">CANTIDAD</th>
+                    <th class="col">ACEITE</th>
+                    <th class="col">CANTIDAD</th>
                     <%if(partApp == 'other' || partApp == 'motor'){%>
-                      <th class="col-2">APLICACIÓN</th>
+                      <th class="col">APLICACIÓN</th>
                     <%}%>
-                    <th class="col-<%=sizeColOilCode%>">CÓD. INTERNO</th>
-                    <%for(freq of uniqueFreqs){%>
-                      <th class="col"><%=freq%></th>
-                    <%}%>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <%for(sheetRow of sheetRows){%>
+                  <%for(maintenanceRow of maintenanceRows){%>
                     <%for(part of parts){%>
-                      <%if(sheetRow.sparePart == part.id){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
                         <%if(part.type == partType && part.application == partApp){%>
                           <tr class="d-flex">
-                            <td class="col-<%=sizeCol%>"><%=part.brand%> <%=part.model%></td>
-                            <td class="col-<%=sizeCol%>"><%=sheetRow.amount%>L</td>
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.amount%>L</td>
                             <%if(partApp == 'other' || partApp == 'motor'){%>
-                              <td class="col-2"><%=sheetRow.application%></td>
+                              <td class="col"><%=maintenanceRow.application%></td>
                             <%}%>
-                            <td class="col-<%=sizeColOilCode%>"><%=part.internalCode%></td>
-                            <%for(maintFreq of maintFreqs){%>
-                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
-                                <%for(var i=1; i<10;i++){%>
-                                  <%if(maintFreq.type == i){%>
-                                    <td class="col">
-                                    <%if(maintFreq.change){%>
-                                      <h5>C</h5>
-                                    <%}%>
-                                    </td>
-                                  <%}%>
-                                <%}%>
-                              <%}%>
-                            <%}%>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
                           </tr>
                         <%}%>
                       <%}%>
@@ -195,7 +160,6 @@
 
         <%var spanishName = 'Otros Líquidos'; var name = 'other';%>
         <%for(var r=0; r<3; r++){%>
-          <%console.log(r);%>
           <%if(r==0){%>
             <%spanishName='Líquido Refrigerante';name = 'coolant';%>
           <%}else if(r==1){%>
@@ -210,49 +174,29 @@
                   <tr>
                     <th class="col-12"><label class="control-label" for="<%=name%>LiquidField1"><h4><%=spanishName%></h4></label></th>
                   </tr>
-                  <%var sizeCol = '2'; var sizeColOilCode = '2'%>
-                  <%if(partApp == 'other'){ %>
-                    <%if(uniqueFreqs.length > 7){sizeColOilCode = '1';sizeCol = '1'}%>
-                  <%}else{%>
-                    <%if(uniqueFreqs.length > 7){sizeCol = '2'}else{sizeCol = '3'}%>
-                  <%}%>
                   <tr class="d-flex">
-                    <th class="col-<%=sizeCol%>">LÍQUIDO</th>
-                    <th class="col-<%=sizeCol%>">CANTIDAD</th>
+                    <th class="col">LÍQUIDO</th>
+                    <th class="col">CANTIDAD</th>
                     <%if(partApp == 'other'){%>
-                      <th class="col-2">APLICACIÓN</th>
+                      <th class="col">APLICACIÓN</th>
                     <%}%>
-                    <th class="col-<%=sizeColOilCode%>">CÓD. INTERNO</th>
-                    <%for(freq of uniqueFreqs){%>
-                      <th class="col"><%=freq%></th>
-                    <%}%>
+                    <th class="col">CÓD. INTERNO</th>
+                    <th class="col">COSTO</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <%for(sheetRow of sheetRows){%>
+                  <%for(maintenanceRow of maintenanceRows){%>
                     <%for(part of parts){%>
-                      <%if(sheetRow.sparePart == part.id){%>
+                      <%if(maintenanceRow.sparePart == part.id){%>
                         <%if(part.type == partType && part.application == partApp){%>
                           <tr class="d-flex">
-                            <td class="col-<%=sizeCol%>"><%=part.brand%> <%=part.model%></td>
-                            <td class="col-<%=sizeCol%>"><%=sheetRow.amount%>L</td>
+                            <td class="col"><%=part.brand%> <%=part.model%></td>
+                            <td class="col"><%=maintenanceRow.amount%>L</td>
                             <%if(partApp == 'other'){%>
-                              <td class="col-2"><%=sheetRow.application%></td>
+                              <td class="col"><%=maintenanceRow.application%></td>
                             <%}%>
-                            <td class="col-<%=sizeColOilCode%>"><%=part.internalCode%></td>
-                            <%for(maintFreq of maintFreqs){%>
-                              <%if(maintFreq.lubricationSheetRow == sheetRow.id){%>
-                                <%for(var i=1; i<10;i++){%>
-                                  <%if(maintFreq.type == i){%>
-                                    <td class="col">
-                                    <%if(maintFreq.change){%>
-                                      <h5>C</h5>
-                                    <%}%>
-                                    </td>
-                                  <%}%>
-                                <%}%>
-                              <%}%>
-                            <%}%>
+                            <td class="col"><%=part.internalCode%></td>
+                            <td class="col">U$D<%=maintenanceRow.partialCost%></td>
                           </tr>
                         <%}%>
                       <%}%>

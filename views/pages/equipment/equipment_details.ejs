@@ -21,13 +21,27 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
-        <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-          <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary btn-rounded"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
-        <%}%>
-        <% if(equipment.lubricationSheet != null){ %>
-          <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info btn-rounded"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
-        <%}%>
+        <div class="row">
+          <h2 class="card-title"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></h2>
+        </div>
+        <div class="row justify-content-between align-center">
+          <div class="col">
+            <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+              <a href="/lubsheet/new/<%= equipment.id %>"class="btn btn-primary btn-rounded"><i class="mdi mdi-clipboard-text"> Planilla de Mantenimiento</i></a>
+            <%}%>
+            <% if(equipment.lubricationSheet != null){ %>
+              <a href="/lubsheet/details/<%= equipment.id %>/<%= equipment.lubricationSheet %>"class="btn btn-info btn-rounded"><i class="mdi mdi-clipboard-arrow-down-outline"> Planilla de Mantenimiento</i></a>
+            <%}%>
+          </div>
+          <div class="col-3">
+            <div class="input-group">
+              <input type="number" min="0" name="" placeholder="Horas de Uso" class="form-control">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="mdi mdi-plus-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -125,10 +139,45 @@
             <h3 class="card-title">Mantenimientos</h3>
           </div>
           <div class="col-3 text-center">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="#" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-warning btn-rounded" href="/maintenance/new/<%=equipment.id%>" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nuevo Mantenimiento</span>
             </a>
+          </div>
+        </div>
+        <div class="row align-middle">
+          <div class="text-center col-12" style="max-height:500px; min-height: 250px;width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr class="d-flex">
+                  <th class="col">FRECUENCIA [HS/KM]</th>
+                  <th class="col">FECHA</th>
+                  <th class="col">HORAS DEL EQUIPO [HS]</th>
+                  <th class="col">REPUESTOS CAMBIADOS</th>
+                  <th class="col">COSTO</th>
+                  <th class="col">DETALLES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%for(maintenance of maintenances){%>
+                  <tr class="d-flex">
+                    <td class='col'><%=maintenance.maintenanceFrequency%></td>
+                    <td class='col'><%=maintenance.date%></td>
+                    <td class='col'><%=maintenance.totalHoursEquipment%></td>
+                    <td class='col'><%=maintenance.maintenanceRows.length%></td>
+                    <td class='col'>U$D<%=maintenance.maintenanceCost%></td>
+                    <td class='col'>
+                      <div class="btn-group" role="group">
+                        <a href="/maintenance/details/<%=equipment.id%>/<%= maintenance.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
+                        <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+                          <a href="/maintenance/delete/<%=equipment.id%>/<%= maintenance.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
+                        <%}%>
+                      </div>
+                    </td>
+                  </tr>
+                <%}%>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -144,7 +193,7 @@
             <h3 class="card-title">Reparaciones</h3>
           </div>
           <div class="col-3 text-center">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-success btn-rounded" href="#" aria-expanded="false">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link btn btn-warning btn-rounded" href="#" aria-expanded="false">
                 <i class="mdi mdi-plus-circle-outline"></i>
                 <span class="hide-menu">Nueva Reparacion</span>
             </a>
