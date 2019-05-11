@@ -32,18 +32,20 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th class="border-top-0" style="width: 11%; text-align: center;">CÓDIGO</th>
                             <th class="border-top-0" style="width: 12%; text-align: center;">NOMBRE</th>
                             <th class="border-top-0" style="width: 8%; text-align: center;">PROVINCIA</th>
                             <th class="border-top-0" style="width: 12%; text-align: center;">DEPARTAMENTO</th>
                             <th class="border-top-0" style="width: 9%; text-align: center;">EQUIPOS</th>
                             <th class="border-top-0" style="width: 9%; text-align: center;">FIN</th>
-                            <th class="border-top-0" style="width: 26%; text-align: center;">OBSERVACIONES</th>
+                            <th class="border-top-0" style="width: 15%; text-align: center;">OBSERVACIONES</th>
                             <th class="border-top-0" style="width: 16%; text-align: center;">DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
                       <% sites.forEach(function(site){ %>
                         <tr>
+                            <td class="txt-oflo align-middle"><%= site.code %></td>
                             <td class="txt-oflo align-middle"><%= site.name %></td>
                             <td class="txt-oflo align-middle"><%= site.province %></td>
                             <td class="txt-oflo align-middle"><%= site.district %></td>
