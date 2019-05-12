@@ -47,8 +47,8 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      // adapter: 'sails-mysql',
-      // url: 'mysql://user:password@host:port/database',
+      url: 'postgres://ezblbkjogbamnc:708a03ceb12485787aecf2862f1ba3d586e42af112655729c1a8e0e0bcd15225@ec2-23-23-241-119.compute-1.amazonaws.com:5432/d3sm8lftarfv59', // Seteado por heroku automaticamente.
+      ssl: true,
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
