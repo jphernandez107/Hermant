@@ -81,7 +81,7 @@ module.exports = {
 
     var equipmentId = req.param('idEquip');
 
-    var equipment = await Equipment.findOne({id:equipmentId});
+    var equipment = await Equipment.findOne({id:equipmentId}).populate('constructionSite');
 
     var maintenances = await Maintenance.find({equipment:equipmentId}).populate('maintenanceRows');
 

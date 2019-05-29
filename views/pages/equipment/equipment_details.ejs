@@ -109,14 +109,14 @@
               <thead>
                 <tr>
                   <th class="border-top-0" style="text-align: center;">HORAS TOTALES</th>
-                  <th class="border-top-0" style="text-align: center;">HORAS PARCIALES</th>
+                  <th class="border-top-0" style="text-align: center;">OBRA</th>
                   <th class="border-top-0" style="text-align: center;">MANTENIMIENTO</th>
                   <th class="border-top-0" style="text-align: center;">OBSERVACIONES</th>
                 </tr>
               </thead>
               <tbody>
                 <td class="txt-oflo"><%= equipment.totalHours %>Hs</td>
-                <td class="txt-oflo"><%= equipment.partialHours %>Hs</td>
+                <td class="txt-oflo"><a href="/site/details/<%=equipment.constructionSite.id%>"><%= equipment.constructionSite.name %></td>
                 <td class="txt-oflo">
                   <div class="progress" style="height: 0%;">
                     <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
