@@ -52,30 +52,15 @@ $(document).ready(function(){
   });
 
   var next = 1;
-  $(".add-more").click(function(e){
+  $(".add-more-repair").click(function(e){ // el . busca por clase, el # busca por id
     e.preventDefault();
-    var item = $(this).attr("data-app") + $(this).attr("data-part");
+    var item = $(this).attr("data-app"); //item = repair
     next = parseInt($("#" + item + "Count").attr("value"));
 
-    var addto = "#" + item + "Field" + next;
-    var addRemove = "#" + item + "Field" + (next);
+    // var addto = "#" + item + "Field" + next;
+    // var addRemove = "#" + item + "Field" + (next);
     next = next + 1;
-    $("#" + item + "Field" + next).attr('data-source',$(addto).attr('data-source'));
-
-    var inputValue = "Primario";
-    switch (next) {
-      case 1:
-        inputValue = "Primario";
-        break;
-      case 2:
-        inputValue = "Secundario";
-        break;
-      case 3:
-        inputValue = "Terciario";
-        break;
-      default:
-        inputValue = "Otro";
-    }
+    // $("#" + item + "Field" + next).attr('data-source',$(addto).attr('data-source'));
 
     var row = document.getElementById(item + 'Row1');
     var parent = document.getElementById(item + 'Parent');
@@ -85,73 +70,42 @@ $(document).ready(function(){
     // Modifico los atributos de los componentes de la nueva fila.
     tmpRow.setAttribute('id', item + 'Row' + next);
 
-    tmpRow.children[0].children[0].setAttribute('id',item + 'Select' + next);
-    tmpRow.children[0].children[0].setAttribute('name',item + 'Select' + next);
+    tmpRow.children[0].children[0].setAttribute('id',item + 'PartInput' + next);
+    tmpRow.children[0].children[0].setAttribute('name',item + 'PartInput' + next);
+    tmpRow.children[0].children[0].setAttribute('value',"");
 
-    tmpRow.children[1].children[0].setAttribute('id',item + 'Input' + next);
-    tmpRow.children[1].children[0].setAttribute('name',item + 'Input' + next);
-    tmpRow.children[1].children[0].setAttribute('value',inputValue);
+    tmpRow.children[1].children[0].setAttribute('id',item + 'CostInput' + next);
+    tmpRow.children[1].children[0].setAttribute('name',item + 'CostInput' + next);
+    tmpRow.children[1].children[0].setAttribute('value',"");
 
-    document.getElementById('rm-'+item).hidden = false;
+    document.getElementById('rm-'+item + 'Part').hidden = false;
 
-    var checks = tmpRow.getElementsByClassName(item + 'MaintenanceCheckbox1');
-    console.log('length ' + checks.length);
-    for(var i=0; i<checks.length; i++){
-      if(checks[i].type == "checkbox" || checks[i].type == "hidden"){
-        var newName = item + 'MaintenanceCheckbox' + next;
-        checks[i].setAttribute('name', newName);
-      }
-    }
-
-    if("otherOil" != item && "otherLiquid" != item){
-      while (tmpRow.children[2].lastElementChild) {
-        tmpRow.children[2].removeChild(tmpRow.children[2].lastElementChild);
-      }
-    }else{
-      while (tmpRow.children[3].lastElementChild) {
-        tmpRow.children[3].removeChild(tmpRow.children[3].lastElementChild);
-      }
-      tmpRow.children[2].children[0].setAttribute('id',item + 'AmountInput' + next);
-      tmpRow.children[2].children[0].setAttribute('name',item + 'AmountInput' + next);
+    while (tmpRow.children[2].lastElementChild) {
+      tmpRow.children[2].removeChild(tmpRow.children[2].lastElementChild);
     }
 
     parent.appendChild(tmpRow);
 
-    /*if("otherOil" === item || "otherLiquid" === item){
-      var inputId = item + 'Amount' + next;
-      var inputDiv = document.getElementById(item + 'AmountDiv');
-      var input = document.getElementById(item + 'Amount');
-      var tmpInput = input.cloneNode(true);
-      tmpInput.setAttribute('name',inputId);
-      tmpInput.setAttribute('id',inputId);
-      tmpInput.value = inputValue;
-      inputDiv.appendChild(tmpInput);
-    }*/
 
     $("#" + item + "Count").attr("value", next);
 
   });
-  $('.remove-me').click(function(e){
+  $('.remove-me-repair').click(function(e){
     e.preventDefault();
-    var item = $(this).attr("data-app") + $(this).attr("data-part");
+    var item = $(this).attr("data-app");
     next = parseInt($("#" + item + "Count").attr("value"));
     if(next > 1){
       var fieldNum = next;
       document.getElementById(item + 'Row' + next).remove(true);
 
-      /*if("otherOil" == item || "otherLiquid" === item){
-        $("#" + item + "Amount" + fieldNum).remove();
-      }*/
       next = next - 1
     }
     if(next == 1){
-      document.getElementById('rm-'+item).hidden = true;
+      document.getElementById('rm-'+item + 'Part').hidden = true;
     }
     $("#" + item + "Count").attr("value", next);
   });
 
-  $(".sheetName").on("change paste keyup", function() {
-    //console.log("Tengo una sheet registrada");
-  });
+
 
 });

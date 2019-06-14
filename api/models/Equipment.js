@@ -69,10 +69,16 @@ module.exports = {
       collection: 'equipmentUseHour',
       via: 'equipment',
     },
+
     maintenances:{
       collection: 'maintenance',
       via: 'equipment'
-    }
+  },
+
+    repairs: {
+        collection: 'repair',
+        via: 'equipment'
+    },
 
   },
 
