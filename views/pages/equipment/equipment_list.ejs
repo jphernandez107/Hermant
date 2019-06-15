@@ -46,7 +46,7 @@
                             <th class="border-top-0" style="width: 12%; text-align: center;">DESIGNACIÓN</th>
                             <th class="border-top-0" style="width: 10%; text-align: center;">MARCA</th>
                             <th class="border-top-0" style="width: 10%; text-align: center;">MODELO</th>
-                            <th class="border-top-0" style="width: 7%; text-align: center;">I/M</th>
+                            <th class="border-top-0" style="width: 7%; text-align: center;">I/C [U$D/Hr]</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">I/R</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">HORÓMETRO</th>
                             <th class="border-top-0" style="width: 25%; text-align: center;">PRÓXIMO MANTENIMIENTO</th>
@@ -60,7 +60,17 @@
                             <td class="txt-oflo align-middle"><%= equipment.designation %></td>
                             <td class="txt-oflo align-middle"><%= equipment.brand %></td>
                             <td class="txt-oflo align-middle"><%= equipment.model %></td>
-                            <td class="txt-oflo align-middle"><!--%= equipment.indiceMantenibilidad %-->1</td>
+                            <td class="txt-oflo align-middle">
+                              <%if(typeof lastCostIndexes != "undefined"){%>
+                                <%for(costI of lastCostIndexes){%>
+                                  <%if(costI.equipment === equipment.id){%>
+                                    <%=costI.index%>
+                                  <%}%>
+                                <%}%>
+                              <%}else{%>
+                                0
+                              <%}%>
+                            </td>
                             <td class="txt-oflo align-middle"><!--%= equipment.indiceReparabilidad %-->1</td>
                             <td class="txt-oflo align-middle"><%= equipment.totalHours %></td>
                             <td class="align-middle">
@@ -83,7 +93,7 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-          I/M: Índice de Mantenibilidad -
+          I/C: Índice de Costos -
           I/R: Índice de Reparabilidad
         </div>
       </div>
