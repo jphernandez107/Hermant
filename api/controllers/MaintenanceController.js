@@ -105,6 +105,26 @@ module.exports = {
     }
     maintenanceCost = Math.round(maintenanceCost * 100)/100;
     await Maintenance.updateOne({id:maintenance.id}).set({maintenanceCost:maintenanceCost});
+
+    var maints = await Maintenance.find({});
+    //var reps = await Repair.find({});
+    var costsSum = 0;
+    var minHour = equipment.totalHours;
+    for(maint of maints){
+      if(maint.totalHoursEquipment < minHour){
+        minHour = maint.totalHoursEquipment;
+      }
+      costsSum += maint.maintenanceCost;
+    }
+    // for(rep of reps){
+    //   costSum += rep.repairCost;
+    // }
+    if(equipment.totalHours > minHour){
+      costsSum = costsSum / (equipment.totalHours - minHour);
+    }
+
+    await EquipmentCostIndex.create({date, equipment:equipmentId, index:costsSum});
+
     res.redirect('/equipment/details/' + equipmentId);
 
   },
@@ -131,5 +151,5 @@ module.exports = {
     }
     return res.redirect('/equipment/list');
   },
-  
+
 };
