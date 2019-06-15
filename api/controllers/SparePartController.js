@@ -27,10 +27,13 @@ create: async function(req,res){
     var detailLink = String(req.param('detailLink'));
     var stock = Number(req.param('cantidad'));
     var application = String(req.param('aplicacion'));
+    var unitPrice = Number(req.param('unitPrice'));
 
+    if(unitPrice < 0){
+      unitPrice = 0;
+    }
 
-
-  var part = await SparePart.create({type, brand, model, internalCode, detailLink, stock, application});
+    var part = await SparePart.create({type, brand, model, internalCode, detailLink, stock, application, pricePerUnit:unitPrice});
 
   return res.redirect('/parts/list');
 },

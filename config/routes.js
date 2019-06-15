@@ -196,5 +196,8 @@ module.exports.routes = {
   controller: 'repair',
   action: 'repair_details',
 },
-
+'GET /repair/delete/:idEquip/:idRepairs':{
+  controller: 'repair',
+  action: 'repair_delete',
+},
 };

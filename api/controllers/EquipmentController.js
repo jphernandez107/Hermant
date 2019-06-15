@@ -98,9 +98,11 @@ module.exports = {
 
     var maintenances = await Maintenance.find({equipment:equipmentId}).populate('maintenanceRows');
 
+    var repairs = await Repair.find({equipment:equipmentId}).populate('repairRows');
+
     if(equipment){
       if(maintenances){
-        return res.view('pages/equipment/equipment_details', {equipment, maintenances});
+        return res.view('pages/equipment/equipment_details', {equipment, maintenances, repairs});
       }else{
         return res.view('pages/equipment/equipment_details', {equipment});
       }
