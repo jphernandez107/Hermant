@@ -26,10 +26,10 @@
             <div class="form-group">
               <label>Tipo</label>
               <select class="custom-select col-12" name="tipo">
-                <option selected>Aceite</option>
-                <option>Aire</option>
-                <option>Filtro</option>
-                <option>Liquidos</option>
+                <option selected value="oil">Aceite</option>
+                <option value="filter">Filtro</option>
+                <option value="liquid">Liquidos</option>
+                <option value="vent">Respiradero</option>
               </select>
             </div>
           </div>
@@ -71,8 +71,8 @@
         <div class="row">
           <div class="col">
             <div class="form-group">
-              <label>Código Externo</label>
-              <input class="form-control" type="text" placeholder="Código Externo" name="codigo externo">
+              <label>Link Detalle</label>
+              <input class="form-control" type="text" placeholder="Link para detalles" name="detailLink">
             </div>
           </div>
           <div class="col">
@@ -85,10 +85,15 @@
               <div class="form-group">
                 <label>Aplicación</label>
                 <select class="custom-select col-12" name="aplicacion">
-                  <option selected>Motor</option>
-                  <option value="1">Aire</option>
-                  <option value="2">Ruedas</option>
-                  <option value="3">Que se yo</option>
+                  <option selected value="air">Aire</option>
+                  <option value="oil">Aceite</option>
+                  <option value="fuel">Combustible</option>
+                  <option value="motor">Motor</option>
+                  <option value="hydraulic">Hidráulico</option>
+                  <option value="transmission">Transmisión</option>
+                  <option value="coolant">Refrigerante</option>
+                  <option value="break">Frenos</option>
+                  <option value="other">Otro</option>
                 </select>
               </div>
             </div>

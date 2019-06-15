@@ -7,7 +7,7 @@ module.exports = {
             type:'string',
         },
 
-        externalCode:{
+        detailLink:{
             type:'string',
         },
 

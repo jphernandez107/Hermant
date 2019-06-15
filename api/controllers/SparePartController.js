@@ -24,13 +24,13 @@ create: async function(req,res){
     var brand = String(req.param('marca'));
     var model = String(req.param('modelo'));
     var internalCode = String(req.param('codigo interno'));
-    var externalCode = String(req.param('codigo externo'));
+    var detailLink = String(req.param('detailLink'));
     var stock = Number(req.param('cantidad'));
     var application = String(req.param('aplicacion'));
 
 
 
-  var part = await SparePart.create({type, brand, model, internalCode, externalCode, stock, application});
+  var part = await SparePart.create({type, brand, model, internalCode, detailLink, stock, application});
 
   return res.redirect('/parts/list');
 },
