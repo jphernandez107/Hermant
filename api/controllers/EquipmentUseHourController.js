@@ -52,10 +52,18 @@ module.exports = {
 
   readJsonFile: async function (req, res) {
     let ev = await Events.find({});
-    let events = ev[ev.length - 1].events;
-    if(events){
-      return res.json(events)
+    if(ev){
+      if(ev[ev.length - 1] != undefined){
+        let events = ev[ev.length - 1].events;
+        // console.log(ev[ev.length - 1]);
+        // console.log(ev[ev.length - 1].events);
+        if(events){
+          return res.json(events)
+
+        }
+      }
     }
+    return res.json([]);
 
   },
 
@@ -192,6 +200,14 @@ async function update_calendar_events_list(){
         }
         events += '"url": "/equipment/details/' + equipment.id + '"},';
 
+        var title = '[' + nextMaintenance + 'Hs] Equipo' + equipment.code;
+        var start = newdate;
+        var url = '/equipment/details/' + equipment.id;
+        var color = "";
+        if(equipment.constructionSite != null){
+          color = String(colorArray[equipment.constructionSite]);
+        }
+
         partialHours2 += uniqueFreqs[1];
       }
     }
@@ -199,8 +215,16 @@ async function update_calendar_events_list(){
   events = events.substring(0, events.length-1);
   events += ']';
 
-  await Events.destroy({});
-  await Events.create({events:JSON.parse(events)});
+  if(await Events.count() > 0){
+    //console.log("Estoy en events mayor a 0");
+    //console.log(await Events.find({}));
+    await Events.destroy({});
+    //console.log(await Events.find({}));
+    await Events.create({events:JSON.parse(events)});
+  }else{
+    await Events.create({events:JSON.parse(events)});
+  }
+
 
   // if(Events.count() > 0){
   //   await Events.updateOne({id:1}).set({events:events.JSON.parse(events)});
