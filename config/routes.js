@@ -124,6 +124,10 @@ module.exports.routes = {
     controller: 'SparePart',
     action: 'create',
   },
+  '/parts/delete/:idPart':{
+    controller: 'SparePart',
+    action: 'delete',
+  },
 
   '/site/list':{
     controller: 'ConstructionSite',
