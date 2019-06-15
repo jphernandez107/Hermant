@@ -67,15 +67,28 @@ module.exports = {
   */
   list_view: async function(req,res){
 
-    var equipments = await Equipment.find({}).sort([{designation:'ASC'},{brand:'ASC'},{createdAt:'ASC'}]);
+   var equipments = await Equipment.find({}).sort([{designation:'ASC'},{brand:'ASC'},{createdAt:'ASC'}]).populate('costIndexes');
+   var costIndexes = await EquipmentCostIndex.find({}).sort([{createdAt:'DESC'}]);
 
-    if(!equipments){
-      // No se encontraron equipos registrados.
-      return res.redirect('/');
-    }else{
-      return res.view('pages/equipment/equipment_list', {equipments});
-    }
-  },
+   var lastCostIndexes = [];
+
+   for(equipment of equipments){
+     for(costIndex of costIndexes){
+       if(costIndex.equipment === equipment.id){
+         lastCostIndexes.push(costIndex);
+         break;
+       }
+     }
+   }
+   //console.log(equipment.length == lastCostIndexes.length);
+
+   if(!equipments){
+     // No se encontraron equipos registrados.
+     return res.redirect('/');
+   }else{
+     return res.view('pages/equipment/equipment_list', {equipments, lastCostIndexes});
+   }
+ },
 
   details_view: async function(req,res){
 
