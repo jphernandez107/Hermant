@@ -1,0 +1,115 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Nueva Reparación</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Nueva Reparación para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form class="form-horizontal m-t-30" method="POST" action="/repair/new/<%= equipment.id %>">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-wrench-outline"> Reparación </i></h3>
+          <h4 class="card-subtitle">Seleccione la fecha y el tiempo de demora de la reparación</h4>
+          <div class="row justify-content-md-center">
+            <div class="col-md-auto text-center">
+              <div class="row text-center">
+                <div class="col-6">
+                  <label class="h3">Fecha</label>
+                </div>
+                <div class="col-6">
+                  <label class="h4">Tiempo Empleado [Hs]</label>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-6">
+                  <input type="text" id="datepicker" name="datepicker" class="text-center">
+                </div>
+                <div class="col-6 text-center">
+                  <input type="number" id="repairTime" name="repairTime" value="1" class="text-center">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row"><!--Filters-->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><i class="mdi mdi-air-filter"> Respuestos</i></h3>
+
+          <%var spanishName = 'reparaciones'; var application = 'air'; var sPart = 'Filter'%>
+            <div class="row"><!--Filter-->
+              <div class="col-12">
+                <input type="hidden" id="repairCount" name="repairCount" value="1" />
+                <div class="control-group" id="repairFields">
+                  <label class="control-label" for="repairField1"><h5><%=spanishName%></h5></label>
+                  <div class="controls" id="profs">
+                    <div class="col-12" id="repairParent">
+                      <div class="row text-center">
+                        <div class="col-6"><label>Repuesto</label></div>
+                        <div class="col-4"><label>Costo</label></div>
+                        <div class="col-2"><label>Acción</label></div>
+                      </div>
+
+                      <div class="d-flex mb-3 row text-center" id="repairRow1" style="margin-bottom:20px;">
+
+                        <div class="col-6 p-2 align-self-center" id="<%=application%><%=sPart%>SelectCol">
+                          <input class="input form-control" id="repairPartInput1" name="repairPartInput1" type="text" placeholder="Descripcion" data-items="8" value=""/>
+                        </div>
+
+                        <div class="col-4 p-2" id="<%=application%><%=sPart%>InputCol">
+                            <input class="input form-control" id="repairCostInput1" name="repairCostInput1" type="text" placeholder="Precio" data-items="8" value=""/>
+                        </div>
+
+                        <div class="col-2 p-2" id="<%=application%><%=sPart%>BtnCol">
+                            <button id="add-repairPart" class="btn add-more-repair btn-success" type="button"  data-app="repair"><i class="mdi mdi-plus-circle-outline"></i></button>
+                            <button id="rm-repairPart" class="btn remove-me-repair btn-danger" type="button"  data-app="repair" hidden><i class="mdi mdi-minus-circle-outline"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-12">
+      <input type="submit" value="Guardar" class="btn btn-primary btn-rounded">
+    </div>
+  </div>
+</form>

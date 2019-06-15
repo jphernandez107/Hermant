@@ -179,7 +179,18 @@ module.exports.routes = {
   'GET /maintenance/details/:idEquip/:idMaintenance':{
     controller: 'maintenance',
     action: 'maintenance_details',
-  },
-
+},
+'GET /repair/new/:idEquip':{
+  controller: 'repair',
+  action: 'repair_view',
+},
+'POST /repair/new/:idEquip':{
+  controller: 'repair',
+  action: 'repair_new',
+},
+'GET /repair/details/:idEquip/:idRepairs':{
+  controller: 'repair',
+  action: 'repair_details',
+},
 
 };
