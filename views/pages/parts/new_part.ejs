@@ -22,7 +22,7 @@
       <h5 class="card-subtitle"> Ingrese los datos del repuesto que desea agregar </h5>
       <form class="form-horizontal m-t-30" method="POST" action="/parts/new">
         <div class="row">
-          <div class="col">
+          <div class="col-8">
             <div class="form-group">
               <label>Tipo</label>
               <select class="custom-select col-12" name="tipo">
@@ -31,6 +31,12 @@
                 <option value="liquid">Liquidos</option>
                 <option value="vent">Respiradero</option>
               </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label>Precio [usd]</label>
+              <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0">
             </div>
           </div>
         </div>
