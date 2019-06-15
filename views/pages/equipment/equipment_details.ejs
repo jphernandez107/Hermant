@@ -199,6 +199,36 @@
             </a>
           </div>
         </div>
+        <div class="row align-middle">
+          <div class="text-center col-12" style="max-height:500px; min-height: 250px;width: 100%">
+            <table class="table table-hover">
+              <thead>
+                <tr class="d-flex">
+                  <th class="col">Fecha</th>
+                  <th class="col">Horas Totales</th>
+                  <th class="col">Cantidad de Repuestos</th>
+                  <th class="col">Costo Total</th>
+                  <th class="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <%for(repair of repairs){%>
+                   <tr class="d-flex">
+                     <td class='col'><%=repair.date%></td>
+                     <td class='col'><%=repair.repairTime%></td>
+                     <td class='col'><%=repair.repairRows.length%></td>
+                     <td class='col'><%=repair.totalCost%></td>
+                     <td class='col'>
+                       <div class="btn-group" role="group">
+                         <a href="/repair/details/<%=equipment.id%>/<%= repair.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
+                         <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
+                           <a href="/repair/delete/<%=equipment.id%>/<%= repair.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
+                         <%}%>
+                       </div>
+                     </td>
+                   </tr>
+                 <%}%>
+               </tbody>
       </div>
     </div>
   </div>

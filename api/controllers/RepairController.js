@@ -57,4 +57,32 @@ module.exports = {
 
 
     },
+    repair_details:async function(req,res){
+
+      var repairId = req.param('idRepairs');
+      var equipmentId = req.param('idEquip');
+
+      var equipment = await Equipment.findOne({id:equipmentId});
+      var repair = await Repair.findOne({id:repairId});
+      var repairRows = await RepairRow.find({repair:repairId});
+
+
+      if(equipment){
+        if(repair){
+          if(repairRows){
+              return res.view('pages/repairs/repair_details', {repair, equipment, repairRows});
+          }
+        }
+      }
+      return res.redirect('/equipment/list');
+    },
+
+    repair_delete: async function(req,res){
+      var idRepair = req.param('idRepairs');
+      var equipmentId = req.param('idEquip')
+
+      await Repair.destroy({id:idRepair});
+
+      return res.redirect('/equipment/details/' + equipmentId);
+    },
 };
