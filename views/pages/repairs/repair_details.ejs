@@ -1,0 +1,73 @@
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-5 align-self-center">
+      </div>
+      <div class="col-7 align-self-center">
+          <div class="d-flex align-items-center justify-content-end">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                          <a href="/">Home</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/list">Equipos</a></li>
+                      <li class="breadcrumb-item" aria-current="page"><a href="/equipment/details/<%=equipment.id%>"><%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Mantenimiento</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><i class="mdi mdi-clipboard-check"> Detalle de Reparaciones para <%=equipment.designation%> <%=equipment.brand%> <%=equipment.model%></i></h2>
+        <h3 class="card-text mb-2">Reparación realizada el dia <%=repair.date%>.</h3>
+        <h3 class="card-text mb-2">Costo aproximado: <%=repair.totalCost%>.</h3>
+        <h3 class="card-text mb-2">Tiempo empleado: <%=repair.repairTime%> Hs.</h3>
+        <!--a href="#"class="btn btn-warning" id="btn-print"><i class="mdi mdi-printer"> IMPRIMIR</i></a-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><i class="mdi mdi-clipboard-check"> Detalles</i></h3>
+
+
+
+          <div class="row"><!--Filter-->
+            <div class="col-12 text-center">
+              <table class="table table-bordered table-dark table-sm table-hover table-sheet">
+                <thead>
+                  <tr>
+                    <th class="col-12"><label class="control-label" for="Detalles"><h4>Reparaciones</h4></label></th>
+                  </tr>
+                  <tr class="d-flex">
+                    <th class="col">Pieza Reparada</th>
+                    <th class="col">Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(repairRow of repairRows){%>
+                          <tr class="d-flex">
+                            <td class="col"><%=repairRow.part%></td>
+                            <td class="col"><%=repairRow.cost%></td>
+                          </tr>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
