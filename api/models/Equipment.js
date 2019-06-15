@@ -72,7 +72,11 @@ module.exports = {
     maintenances:{
       collection: 'maintenance',
       via: 'equipment'
-    }
+    },
+    costIndexes:{
+      collection:'EquipmentCostIndex',
+      via:'equipment'
+    },
 
   },
 
