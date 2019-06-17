@@ -152,4 +152,13 @@ module.exports = {
     return res.redirect('/equipment/list');
   },
 
+  maintenance_delete: async function(req,res){
+    var mantenanceId = req.param('idMantenance');
+    var equipmentId = req.param('idEquip')
+
+    await Maintenance.destroy({id:mantenanceId});
+
+    return res.redirect('/equipment/details/' + equipmentId);
+  },
+
 };
