@@ -42,7 +42,7 @@ module.exports = {
   */
   list_view: async function(req,res){
 
-    var sites = await ConstructionSite.find({});
+    var sites = await ConstructionSite.find({}).populate('equipments');
 
     if(!sites){
       // No se encontraron obras registradas.
