@@ -55,6 +55,9 @@ module.exports = {
     observations:{
         type:'string',
     },
+    siteCriticality:{
+        type:'number',
+    },
     constructionSite: {
         model: 'constructionSite'
     },
@@ -74,7 +77,7 @@ module.exports = {
       collection: 'maintenance',
       via: 'equipment'
     },
-    
+
     costIndexes:{
       collection:'EquipmentCostIndex',
       via:'equipment'
