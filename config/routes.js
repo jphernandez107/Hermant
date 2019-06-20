@@ -149,7 +149,7 @@ module.exports.routes = {
     controller: 'ConstructionSite',
     action: 'delete',
   },
-  'GET /site/details/add/:idEquip/:idSite':{
+  'POST /site/details/add/:idEquip/:idSite':{
     controller: 'equipment',
     action: 'setSite',
   },
