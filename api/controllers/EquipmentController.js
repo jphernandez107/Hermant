@@ -125,15 +125,17 @@ module.exports = {
   setSite: async function(req, res){
       var idEquipo = req.param('idEquip');
       var idSite = req.param('idSite');
+      var criticality = req.param('equipmentSiteCriticality');
+
       console.log(idEquipo + ' ' + idSite);
-      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSite});
+      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSite, siteCriticality:criticality});
       return res.redirect('/site/details/' + idSite);
   },
   deleteSite: async function(req, res){
       var idEquipo = req.param('idEquip');
       var idSite = req.param('idSite');
       var idSiteTaller = 1; //se pone en el id del taller
-      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSiteTaller});
+      var equipment = await Equipment.updateOne({id:idEquipo}).set({constructionSite:idSiteTaller, siteCriticality:0});
       return res.redirect('/site/details/' + idSite);
     }
 
