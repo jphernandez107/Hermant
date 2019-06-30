@@ -34,9 +34,9 @@ module.exports.datastores = {
 
   default: {
 
-    // adapter: require('sails-postgresql'),
-    // url: 'postgres://ezblbkjogbamnc:708a03ceb12485787aecf2862f1ba3d586e42af112655729c1a8e0e0bcd15225@ec2-23-23-241-119.compute-1.amazonaws.com:5432/d3sm8lftarfv59', // Seteado por heroku automaticamente.
-    // ssl: true,
+    adapter: require('sails-postgresql'),
+    url: 'postgres://ezblbkjogbamnc:708a03ceb12485787aecf2862f1ba3d586e42af112655729c1a8e0e0bcd15225@ec2-23-23-241-119.compute-1.amazonaws.com:5432/d3sm8lftarfv59', // Seteado por heroku automaticamente.
+    ssl: true,
 
     /***************************************************************************
     *                                                                          *

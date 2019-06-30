@@ -67,7 +67,7 @@ module.exports = {
   */
   list_view: async function(req,res){
 
-   var equipments = await Equipment.find({}).sort([{designation:'ASC'},{brand:'ASC'},{createdAt:'ASC'}]).populate('costIndexes');
+   var equipments = await Equipment.find({}).sort([{code:'ASC'},{designation:'ASC'},{brand:'ASC'},{createdAt:'ASC'}]).populate('costIndexes');
    var costIndexes = await EquipmentCostIndex.find({}).sort([{createdAt:'DESC'}]);
 
    var lastCostIndexes = [];

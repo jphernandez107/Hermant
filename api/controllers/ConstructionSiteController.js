@@ -55,7 +55,7 @@ module.exports = {
   details_view: async function(req,res){
 
     var idSite = req.param('idSite');
-    var equipments = await Equipment.find({});
+    var equipments = await Equipment.find({}).sort([{siteCriticality:"ASC"},{code:"ASC"}]);
 
     var site = await ConstructionSite.findOne({id:idSite});
 

@@ -146,6 +146,7 @@
                   <th class="border-top-0" style="text-align: center;">DESIGNACIÓN</th>
                   <th class="border-top-0" style="text-align: center;">MARCA</th>
                   <th class="border-top-0" style="text-align: center;">MODELO</th>
+                  <th class="border-top-0" style="text-align: center;">CRITICIDAD</th>
                   <% if (site.code != 'T01'){ %>
                   <th class="border-top-0" style="text-align: center;">ACCIÓN</th>
                   <%}%>
@@ -159,6 +160,12 @@
                     <td class="txt-oflo"><%= equipment.designation %></td>
                     <td class="txt-oflo"><%= equipment.brand %></td>
                     <td class="txt-oflo"><%= equipment.model %></td>
+                    <td class="txt-oflo">
+                      <font color="green"><b><%= equipment.siteCriticality %></b></font>
+                      <span class="" data-container="body" data-toggle="popover" title="Error" data-placement="top" data-content="Error en la criticidad">
+                        ⚠️
+                      </span>
+                      </td>
                     <% if (site.code != 'T01'){ %>
                     <td class="txt-oflo"><a href="/site/details/delete/<%= equipment.id %>/<%= site.id%>" class="btn btn-danger btn-rounded">QUITAR</a></td>
                     <%}%>
@@ -187,7 +194,7 @@
         <form class="modal-form" id="linkEquipSiteModalForm" method="post" action="/site/details/add/">
           <div class="form-group">
             <label for="equipmentSiteCriticality" class="col-form-label">Criticidad del equipo en esta obra:</label>
-            <input type="number" class="form-control" id="equipmentSiteCriticality" name="equipmentSiteCriticality">
+            <input type="number" class="form-control" id="equipmentSiteCriticality" name="equipmentSiteCriticality" step="any">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>

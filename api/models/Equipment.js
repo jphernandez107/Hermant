@@ -83,6 +83,11 @@ module.exports = {
       via:'equipment'
     },
 
+    trustIndexes:{
+      collection:'EquipmentTrustIndex',
+      via:'equipment'
+    },
+
     repairs: {
         collection: 'repair',
         via: 'equipment'
