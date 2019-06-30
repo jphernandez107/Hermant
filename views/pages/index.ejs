@@ -1,12 +1,53 @@
 <h1>Pagina principal</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chLine"></canvas>
-                </div>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title">Promedio de indices de costo por equipo</h3>
+              </div>
+              <div class="row">
+                <canvas id="costIndexChart"></canvas>
+              </div>
             </div>
         </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <h3 class="card-title">Promedio de indices de disponibilidad de todos los equipos</h3>
+            </div>
+            <div class="row">
+              <canvas id="dispIndexChart"></canvas>
+            </div>
+          </div>
+        </div>
+    </div>
+ </div>
+ <div class="row">
+   <div class="col-7">
+     <div class="card">
+         <div class="card-body">
+           <div class="row">
+             <h3 class="card-title">Promedio de gastos mensual de todos los equipos</h3>
+           </div>
+           <div class="row">
+             <canvas id="mensualCostsChart"></canvas>
+           </div>
+         </div>
      </div>
-</div>
+   </div>
+   <div class="col-5">
+     <div class="card">
+         <div class="card-body">
+           <div class="row">
+             <h3 class="card-title">Porcentajes de costos</h3>
+           </div>
+           <div class="row">
+             <canvas id="generalCostsChart"></canvas>
+           </div>
+         </div>
+     </div>
+   </div>
+ </div>
