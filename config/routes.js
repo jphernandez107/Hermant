@@ -97,6 +97,14 @@ module.exports.routes = {
     controller: 'equipment',
     action: 'delete',
   },
+  'GET /equipment/edit/:idEquipment':{
+    controller:'equipment',
+    action: 'edit',
+  },
+  'POST /equipment/edit/:idEquipment': {
+    controller: 'equipment',
+    action: 'edited'
+  },
 
   '/equipmentusehour/list':{
     controller: 'EquipmentUseHour',
@@ -126,6 +134,18 @@ module.exports.routes = {
   '/parts/delete/:idPart':{
     controller: 'SparePart',
     action: 'delete',
+  },
+  'GET /parts/edit/:idPart':{
+    controller:'SparePart',
+    action: 'edit',
+  },
+  'POST /parts/edit/:idPart': {
+    controller: 'SparePart',
+    action: 'edited'
+  },
+  'POST /parts/stock/:idPart': {
+    controller: 'SparePart',
+    action: 'add_stock'
   },
 
   '/site/list':{

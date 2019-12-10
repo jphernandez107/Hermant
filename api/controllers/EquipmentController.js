@@ -34,12 +34,8 @@ module.exports = {
 		var price = Number(req.param('precio'));
 		var observations = String(req.param('observaciones'));
 
-        console.log("hola");
     var constructionSite = await ConstructionSite.findOne({code:'T01'});
-
-    console.log(constructionSite);
-
-
+    
     var equipment = await Equipment.create({designation,brand,model,totalHours,partialHours,code,
                                       serialNumber,origin,manufDate,serviceDate,
                                       power,weight,price,observations, constructionSite:constructionSite.id});
@@ -59,7 +55,43 @@ module.exports = {
 
   },
 
-  // TODO: Agregar metodos de eliminado de maquinas.
+  /*
+    Editamos el equipo
+  */
+  edit: async function(req,res){
+    var idEquipment = req.param('idEquipment');
+    var equipment = await Equipment.findOne({id:idEquipment});
+    return res.view('pages/equipment/new_equipment', {editEquipment:equipment});
+  },
+
+  edited: async function(req,res){
+    var idEquipment = req.param('idEquipment');
+
+    var designation = String(req.param('designacion'));
+		var brand = String(req.param('marca'));
+		var model = String(req.param('modelo'));
+		var totalHours = Number(req.param('horasTotales'));
+		var partialHours = Number(req.param('horasParciales'));
+
+		var code = String(req.param('codigo'));
+		var serialNumber = String(req.param('nroSerie'));
+		var origin = String(req.param('origen'));
+		var manufDate = String(req.param('fechaFab'));
+		var serviceDate = String(req.param('fechaServicio'));
+
+    var power = Number(req.param('potencia'));
+		var weight = Number(req.param('peso'));
+		var price = Number(req.param('precio'));
+		var observations = String(req.param('observaciones'));
+
+    await Equipment.update({id:idEquipment}).set({
+      designation,brand,model,totalHours,partialHours,code,
+      serialNumber,origin,manufDate,serviceDate,
+      power,weight,price,observations
+    });
+
+    return res.redirect('/equipment/list');
+  },
 
   /*
     Buscamos todos los equipos registrados en el sistema y llamamos al

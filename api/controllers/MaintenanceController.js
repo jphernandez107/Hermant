@@ -82,14 +82,18 @@ module.exports = {
         var amount = 1;
         var part = req.param(item + 'Select' + j);
         if(part != "" && part != null){
-          if(i<4){
+          if(i<4){  // Son Filtros
             desc = req.param(item + 'Input' + j);
-          }else if(i<7){
+          }else if(i<7){  // Son Aceites
             amount = Number(req.param(item + 'AmountInput' + j));
-          }else{
+          }else{  // Son Otros Liquidos
             amount = Number(req.param(item + 'AmountInput' + j));
           }
           var sparePart = await SparePart.findOne({id:part});
+          // TODO: Chequear si el stock disponible en deposito es mayor que el necesario.
+          var newStock = sparePart.stock - amount;
+          await SparePart.update({id:part}).set({ stock:newStock });
+
           var partialCost = Number(amount * Number(sparePart.pricePerUnit));
           partialCost = Math.round(partialCost * 100)/100;
           var lubSheetRowID = Number(req.param(item + 'SheetRowID' + j));

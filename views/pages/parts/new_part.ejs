@@ -8,7 +8,11 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page"><a href="/parts">Respuestos</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Nuevo Repuesto</li>
+            <% if(typeof part != "undefined"){ %>
+              <li class="breadcrumb-item active" aria-current="page">Editar Repuesto <%=part.internalCode%></li>
+            <%} else {%>
+              <li class="breadcrumb-item active" aria-current="page">Nuevo Repuesto</li>
+            <%}%>
           </ol>
         </nav>
       </div>
@@ -18,25 +22,32 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-body">
-      <h3 class="card-title">Nuevo Repuesto</h3>
-      <h5 class="card-subtitle"> Ingrese los datos del repuesto que desea agregar </h5>
-      <form class="form-horizontal m-t-30" method="POST" action="/parts/new">
+        <% if(typeof part != "undefined"){ %>
+          <h3 class="card-title">Editar Repuesto</h3>
+          <h5 class="card-subtitle"> Modifique los datos del repuesto </h5>
+          <form class="form-horizontal m-t-30" method="POST" action="/parts/edit/<%=part.id%>">
+        <%} else {%>
+          <h3 class="card-title">Nuevo Repuesto</h3>
+          <h5 class="card-subtitle"> Ingrese los datos del repuesto que desea agregar </h5>
+          <form class="form-horizontal m-t-30" method="POST" action="/parts/new">
+        <%}%>
         <div class="row">
           <div class="col-8">
             <div class="form-group">
               <label>Tipo</label>
-              <select class="custom-select col-12" name="tipo">
-                <option selected value="oil">Aceite</option>
+              <input list="type" name="tipo" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.type%> <%}%>>
+              <datalist id="type">
+                <option value="oil">Aceite</option>
                 <option value="filter">Filtro</option>
                 <option value="liquid">Liquidos</option>
                 <option value="vent">Respiradero</option>
-              </select>
+              </datalist>
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label>Precio [usd]</label>
-              <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0">
+              <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0" <% if(typeof part != "undefined"){ %> value=<%=part.pricePerUnit%> <%}%>>
             </div>
           </div>
         </div>
@@ -44,8 +55,9 @@
           <div class="col">
             <div class="form-group">
               <label>Marca</label>
-              <select class="custom-select col-12" name="marca">
-                <option selected>KOMATSU</option>
+              <input list="brands" name="marca" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.brand%> <%}%>>
+              <datalist id="brands">
+                <option>KOMATSU</option>
                 <option>YPF</option>
                 <option>CATERPILLAR</option>
                 <option>JOHN DEERE</option>
@@ -58,19 +70,19 @@
                 <option>JCB</option>
                 <option>LIEBHERR</option>
                 <option>VOLVO</option>
-              </select>
+              </datalist>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Modelo</label>
-              <input class="form-control" type="text" placeholder="Modelo" name="modelo">
+              <input class="form-control" type="text" placeholder="Modelo" name="modelo" <% if(typeof part != "undefined"){ %> value=<%=part.model%> <%}%>>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Codigo Interno</label>
-              <input class="form-control" type="text" placeholder="Código Interno" name="codigo interno">
+              <input class="form-control" type="text" placeholder="Código Interno" name="codigo interno" <% if(typeof part != "undefined"){ %> value=<%=part.internalCode%> <%}%>>
             </div>
           </div>
         </div>
@@ -78,20 +90,21 @@
           <div class="col">
             <div class="form-group">
               <label>Link Detalle</label>
-              <input class="form-control" type="text" placeholder="Link para detalles" name="detailLink">
+              <input class="form-control" type="text" placeholder="Link para detalles" name="detailLink" <% if(typeof part != "undefined"){ %> value=<%=part.detailLink%> <%}%>>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Cantidad</label>
-              <input class="form-control" type="number" placeholder="Cantidad"  name="cantidad">
+              <input class="form-control" type="number" placeholder="Cantidad"  name="cantidad"  <% if(typeof part != "undefined"){ %> value=<%=part.stock%> <%}%>>
             </div>
           </div>
             <div class="col">
               <div class="form-group">
                 <label>Aplicación</label>
-                <select class="custom-select col-12" name="aplicacion">
-                  <option selected value="air">Aire</option>
+                <input list="application" name="aplicacion" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.application%> <%}%>>
+                <datalist id="application">
+                  <option value="air">Aire</option>
                   <option value="oil">Aceite</option>
                   <option value="fuel">Combustible</option>
                   <option value="motor">Motor</option>
@@ -100,7 +113,7 @@
                   <option value="coolant">Refrigerante</option>
                   <option value="break">Frenos</option>
                   <option value="other">Otro</option>
-                </select>
+                </datalist>
               </div>
             </div>
           </div>

@@ -8,7 +8,11 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page"><a href="/equipment/list">Equipos</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Nuevo Equipo</li>
+            <% if(typeof editEquipment != "undefined"){ %>
+              <li class="breadcrumb-item active" aria-current="page">Editar Equipo <%=editEquipment.code%></li>
+            <%} else {%>
+              <li class="breadcrumb-item active" aria-current="page">Nuevo Equipo</li>
+            <%}%>
           </ol>
         </nav>
       </div>
@@ -18,16 +22,24 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-body">
-      <h3 class="card-title">Nuevo Equipo</h3>
-      <h5 class="card-subtitle"> Ingrese los datos del equipo que desea agregar </h5>
-      <form class="form-horizontal m-t-30" method="POST" action="/equipment/new">
+      <% if(typeof editEquipment != "undefined"){ %>
+        <h3 class="card-title">Editar Equipo</h3>
+        <h5 class="card-subtitle"> Modifique los datos del equipo </h5>
+        <form class="form-horizontal m-t-30" method="POST" action="/equipment/edit/<%=editEquipment.id%>">
+      <%} else {%>
+        <h3 class="card-title">Nuevo Equipo</h3>
+        <h5 class="card-subtitle"> Ingrese los datos del equipo que desea agregar </h5>
+        <form class="form-horizontal m-t-30" method="POST" action="/equipment/new">
+      <%}%>
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label>Designación</label>
-              <select class="custom-select col-12" name="designacion">
-                <option selected>Excavadora</option>
+              <input list="designation" name="designacion" class="custom-select col-12" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.designation%>" <%}%> >
+              <datalist id="designation">
+                <option >Excavadora</option>
                 <option>Cargadora</option>
+                <option>Camioneta</option>
                 <option>Retroexcavadora</option>
                 <option>Camión</option>
                 <option>Rodillo Compactador</option>
@@ -35,7 +47,7 @@
                 <option>Mini Cargadora</option>
                 <option>Topadora</option>
                 <option>Otros</option>
-              </select>
+              </datalist>
             </div>
           </div>
         </div>
@@ -43,29 +55,37 @@
           <div class="col">
             <div class="form-group">
               <label>Marca</label>
-              <select class="custom-select col-12" name="marca">
-                <option selected>KOMATSU</option>
-                <option>JOHN DEERE</option>
+              <input list="brands" name="marca" class="custom-select col-12" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.brand%>" <%}%> >
+              <datalist id="brands">
+                <option value="KOMATSU">
+                <option value="JOHN DEERE">
+                <option>DOOSAN</option>
                 <option>SAMSUNG</option>
                 <option>CATERPILLAR</option>
                 <option>BOBCAT</option>
                 <option>IVECO</option>
+                <option>FORD</option>
+                <option>MERCEDES BENZ</option>
+                <option>RENAULT</option>
+                <option>VOLKSWAGEN</option>
+                <option>SCANIA</option>
+                <option>TOYOTA</option>
                 <option>JCB</option>
                 <option>LIEBHERR</option>
                 <option>VOLVO</option>
-              </select>
+              </datalist>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Modelo</label>
-              <input class="form-control" type="text" placeholder="Modelo" name="modelo">
+              <input class="form-control" type="text" placeholder="Modelo" name="modelo" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.model%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Origen</label>
-              <input class="form-control" type="text" placeholder="Origen" name="origen">
+              <input class="form-control" type="text" placeholder="Origen" name="origen" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.origin%>" <%}%> >
             </div>
           </div>
         </div>
@@ -73,19 +93,19 @@
           <div class="col">
             <div class="form-group">
               <label>Codigo</label>
-              <input class="form-control" type="text" placeholder="Codigo" name="codigo">
+              <input class="form-control" type="text" placeholder="Codigo" name="codigo" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.code%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Numero de Serie</label>
-              <input class="form-control" type="text" placeholder="Numero de Serie"  name="nroSerie">
+              <input class="form-control" type="text" placeholder="Numero de Serie"  name="nroSerie" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.serialNumber%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Año de Fabricación</label>
-              <input class="form-control" type="number" placeholder="2019" name="fechaFab">
+              <input class="form-control" type="number" placeholder="2019" name="fechaFab" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.manufDate%>" <%}%> >
             </div>
           </div>
         </div>
@@ -93,13 +113,13 @@
           <div class="col">
             <div class="form-group">
               <label>Fecha de Entrada al Servicio</label>
-              <input class="form-control" type="text" placeholder="Fecha"  name="fechaServ">
+              <input class="form-control" type="text" placeholder="Fecha"  name="fechaServ" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.serviceDate%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Potencia [HP]</label>
-              <input class="form-control" type="number" placeholder="Potencia" name="potencia">
+              <input class="form-control" type="number" placeholder="Potencia" name="potencia" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.power%>" <%}%> >
               <!--div class="input-group-prepend">
               <select class="input-group-text" name="potenciaUnidad">
               <option>HP</option>
@@ -112,7 +132,7 @@
           <div class="col">
             <div class="form-group">
               <label>Peso [Kg]</label>
-              <input class="form-control" type="number" placeholder="Peso" name="peso">
+              <input class="form-control" type="number" placeholder="Peso" name="peso" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.weight%>" <%}%> >
             </div>
           </div>
         </div>
@@ -120,19 +140,19 @@
           <div class="col">
             <div class="form-group">
               <label>Horas/Km Totales</label>
-              <input class="form-control" type="number" placeholder="Totales"  name="horasTotales">
+              <input class="form-control" type="number" placeholder="Totales"  name="horasTotales" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.totalHours%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Horas/Km Parciales</label>
-              <input class="form-control" type="number" placeholder="Parciales" name="horasParciales">
+              <input class="form-control" type="number" placeholder="Parciales" name="horasParciales" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.partialHours%>" <%}%> >
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Precio [U$D]</label>
-              <input class="form-control" type="number" placeholder="Precio" name="precio">
+              <input class="form-control" type="number" placeholder="Precio" name="precio" <% if(typeof editEquipment != "undefined"){ %> value="<%=editEquipment.price%>" <%}%> >
             </div>
           </div>
         </div>
@@ -140,7 +160,7 @@
           <div class="col">
             <div class="form-group">
               <label>Observaciones</label>
-              <textarea class="form-control" rows="3" name="observaciones"></textarea>
+              <textarea class="form-control" rows="3" name="observaciones" ><% if(typeof editEquipment != "undefined"){ %> <%=editEquipment.observations%> <%}%> </textarea>
             </div>
           </div>
         </div>
