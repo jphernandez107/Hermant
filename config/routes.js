@@ -11,7 +11,8 @@
 module.exports.routes = {
 
   '/': {
-    view:'pages/index',
+    controller: 'EquipmentUseHour',
+    action: 'show_calendar',
   },
   '/calendar/events': {
     controller: 'EquipmentUseHour',
