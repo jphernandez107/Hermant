@@ -38,7 +38,7 @@
                             <th class="border-top-0" style="width: 10%; text-align: center;">APLICACION</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">MARCA</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">MODELO</th>
-                            <th class="border-top-0" style="width: 7%; text-align: center;">STOCK</th>
+                            <th class="border-top-0" colspan="2" style="width: 7%; text-align: center;">STOCK</th>
                             <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
                                 <th class="border-top-0" style="width: 7%; text-align: center;">ACCIÓN</th>
                             <%}%>
@@ -55,18 +55,55 @@
                             <td class="txt-oflo align-middle"><%= parts.model %></td>
                             <td class="txt-oflo align-middle"><%= parts.stock %></td>
                             <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                <td class="txt-oflo align-middle"><a href="/parts/delete/<%= parts.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a></td>
-                            <%}%>
+                              <td class="txt-oflo align-middle">
+                                <div class="align-middle">
+                                  <form class="form-horizontal m-t-30 align-middle" method="post" action="/parts/stock/<%=parts.id%>">
+                                    <div class="input-group mb-3">
+                                      <input type="number" class="form-control" placeholder="Cantidad" name="cantidad" value="1">
+                                      <div class="input-group-append">
+                                        <button class="btn btn-success" type="submit">+</button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>  
+                              </td>
+                              <td class="txt-oflo align-middle">
+                                <div class="btn-group" role="group">
+                                  <a href="/parts/edit/<%= parts.id %>"class="btn btn-warning btn-rounded"><i class="mdi mdi-pencil-outline"></i></a>
+                                  <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#deleteSparePartModal" data-partid="<%=parts.id%>" data-partcode="<%=parts.internalCode%>" ><i class="mdi mdi-delete"></i></button>
+                                </div>
+                              </td>
+                            <% } %>
                         </tr>
                       <% }); %>
                     </tbody>
                 </table>
             </div>
         </div>
-
       </div>
   </div>
 </div>
 <!-- ============================================================== -->
 <!-- Ravenue - page-view-bounce rate -->
 <!-- ============================================================== -->
+
+
+<div class="modal fade" id="deleteSparePartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Cuidado! Seguro desea eliminar este repuesto?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Esta acción no se puede deshacer.</h5>  
+      </div>
+      <div class="modal-footer">
+        <a id="deletePartLink" href="/parts/delete/<%= parts.id %>" class="btn btn-danger btn-rounded">ELIMINAR</a>
+        <button type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+</div>

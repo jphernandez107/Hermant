@@ -210,19 +210,19 @@ async function update_calendar_events_list(){
 
         partialHours2 += uniqueFreqs[1];
       }
-    }
-  }
-  events = events.substring(0, events.length-1);
-  events += ']';
+      events = events.substring(0, events.length-1);
+      events += ']';
 
-  if(await Events.count() > 0){
-    //console.log("Estoy en events mayor a 0");
-    //console.log(await Events.find({}));
-    await Events.destroy({});
-    //console.log(await Events.find({}));
-    await Events.create({events:JSON.parse(events)});
-  }else{
-    await Events.create({events:JSON.parse(events)});
+      if(await Events.count() > 0){
+        //console.log("Estoy en events mayor a 0");
+        //console.log(await Events.find({}));
+        await Events.destroy({});
+        //console.log(await Events.find({}));
+        await Events.create({events:JSON.parse(events)});
+      }else{
+        await Events.create({events:JSON.parse(events)});
+      }
+    }
   }
 
 

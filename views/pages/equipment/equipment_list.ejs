@@ -47,7 +47,7 @@
                             <th class="border-top-0" style="width: 10%; text-align: center;">MARCA</th>
                             <th class="border-top-0" style="width: 10%; text-align: center;">MODELO</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">I/C [U$D/Hr]</th>
-                            <th class="border-top-0" style="width: 7%; text-align: center;">I/R</th>
+                            <th class="border-top-0" style="width: 7%; text-align: center;">I/D</th>
                             <th class="border-top-0" style="width: 7%; text-align: center;">HORÓMETRO</th>
                             <th class="border-top-0" style="width: 25%; text-align: center;">PRÓXIMO MANTENIMIENTO</th>
                             <th class="border-top-0" style="width: 14%; text-align: center;">DETALLES</th>
@@ -82,7 +82,8 @@
                               <div class="btn-group" role="group">
                                 <a href="/equipment/details/<%= equipment.id %>"class="btn btn-success btn-rounded"><i class="mdi mdi-file-find"></i></a>
                                 <% if(req.session.authenticated && req.session.User.permissions === "admin"){ %>
-                                  <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger btn-rounded"><i class="mdi mdi-delete"></i></a>
+                                  <a href="/equipment/edit/<%= equipment.id %>"class="btn btn-warning btn-rounded"><i class="mdi mdi-pencil-outline"></i></a>
+                                  <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#deleteEquipmentModal" data-equipmentid="<%=equipment.id%>" data-equipmentcode="<%=equipment.code%>" ><i class="mdi mdi-delete"></i></button>
                                 <%}%>
                               </div>
                             </td>
@@ -94,7 +95,7 @@
         </div>
         <div class="card-footer text-muted">
           I/C: Índice de Costos -
-          I/R: Índice de Reparabilidad
+          I/D: Índice de Disponibilidad
         </div>
       </div>
   </div>
@@ -102,3 +103,24 @@
 <!-- ============================================================== -->
 <!-- Ravenue - page-view-bounce rate -->
 <!-- ============================================================== -->
+
+
+<div class="modal fade" id="deleteEquipmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Cuidado! Seguro desea eliminar el equipo?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Esta acción no se puede deshacer.</h5>  
+      </div>
+      <div class="modal-footer">
+        <a href="/equipment/delete/<%= equipment.id %>"class="btn btn-danger btn-rounded">ELIMINAR</a>
+        <button type="button" class="btn btn-secondary btn-rounded" data-dismiss="modal">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@ module.exports = {
     repair_new: async function (req, res){
         var equipmentId = req.param('idEquip');
 
-        var equipment = await Equipment.findOne({id:equipmentId});
+        var equipment = await Equipment.findOne({id:equipmentId}).populate("trustIndexes");
 
         var date = String(req.param('datepicker'));
         var repairTime = Number(req.param('repairTime'));
@@ -52,6 +52,21 @@ module.exports = {
 
         repairCost = Math.round(repairCost * 100)/100;
         await Repair.updateOne({id:repair.id}).set({totalCost:repairCost});//actualiza la reapir que tenia el fetch de antes
+
+        var repairs = await Repair.find({equipment:equipmentId}).sort([{createdAt:"ASC"}]);
+
+        var equipmentTotalHours = equipment.totalHours;
+        var repairsCount = repairs.length;
+        var totalRepairTime = await Repair.sum('repairTime').where({equipment:equipmentId});
+
+        var midTimeBetweenFailures = equipmentTotalHours / repairsCount;
+        var midTimeToRepair = totalRepairTime / repairsCount;
+
+        var index = 100 * (midTimeBetweenFailures / midTimeToRepair / 8760);
+
+        //console.log("MTBF: " + midTimeBetweenFailures + " MTTR: " + midTimeToRepair + " index: " + index);
+        await EquipmentTrustIndex.create({date:date, equipment:equipmentId, index:index});
+
         res.redirect('/equipment/details/' + equipmentId);
 
 
