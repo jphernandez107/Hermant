@@ -8,8 +8,8 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page"><a href="/parts">Respuestos</a></li>
-            <% if(typeof part != "undefined"){ %>
-              <li class="breadcrumb-item active" aria-current="page">Editar Repuesto <%=part.internalCode%></li>
+            <% if(typeof editPart != "undefined"){ %>
+              <li class="breadcrumb-item active" aria-current="page">Editar Repuesto <%=editPart.internalCode%></li>
             <%} else {%>
               <li class="breadcrumb-item active" aria-current="page">Nuevo Repuesto</li>
             <%}%>
@@ -22,10 +22,10 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-body">
-        <% if(typeof part != "undefined"){ %>
+        <% if(typeof editPart != "undefined"){ %>
           <h3 class="card-title">Editar Repuesto</h3>
           <h5 class="card-subtitle"> Modifique los datos del repuesto </h5>
-          <form class="form-horizontal m-t-30" method="POST" action="/parts/edit/<%=part.id%>">
+          <form class="form-horizontal m-t-30" method="POST" action="/parts/edit/<%=editPart.id%>">
         <%} else {%>
           <h3 class="card-title">Nuevo Repuesto</h3>
           <h5 class="card-subtitle"> Ingrese los datos del repuesto que desea agregar </h5>
@@ -35,7 +35,7 @@
           <div class="col-8">
             <div class="form-group">
               <label>Tipo</label>
-              <input list="type" name="tipo" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.type%> <%}%>>
+              <input list="type" name="tipo" class="custom-select col-12" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.type%> <%}%>>
               <datalist id="type">
                 <option value="oil">Aceite</option>
                 <option value="filter">Filtro</option>
@@ -47,7 +47,7 @@
           <div class="col-4">
             <div class="form-group">
               <label>Precio [usd]</label>
-              <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0" <% if(typeof part != "undefined"){ %> value=<%=part.pricePerUnit%> <%}%>>
+              <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.pricePerUnit%> <%}%>>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
           <div class="col">
             <div class="form-group">
               <label>Marca</label>
-              <input list="brands" name="marca" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.brand%> <%}%>>
+              <input list="brands" name="marca" class="custom-select col-12" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.brand%> <%}%>>
               <datalist id="brands">
                 <option>KOMATSU</option>
                 <option>YPF</option>
@@ -76,13 +76,13 @@
           <div class="col">
             <div class="form-group">
               <label>Modelo</label>
-              <input class="form-control" type="text" placeholder="Modelo" name="modelo" <% if(typeof part != "undefined"){ %> value=<%=part.model%> <%}%>>
+              <input class="form-control" type="text" placeholder="Modelo" name="modelo" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.model%> <%}%>>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Codigo Interno</label>
-              <input class="form-control" type="text" placeholder="Código Interno" name="codigo interno" <% if(typeof part != "undefined"){ %> value=<%=part.internalCode%> <%}%>>
+              <input class="form-control" type="text" placeholder="Código Interno" name="codigo interno" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.internalCode%> <%}%>>
             </div>
           </div>
         </div>
@@ -90,19 +90,19 @@
           <div class="col">
             <div class="form-group">
               <label>Link Detalle</label>
-              <input class="form-control" type="text" placeholder="Link para detalles" name="detailLink" <% if(typeof part != "undefined"){ %> value=<%=part.detailLink%> <%}%>>
+              <input class="form-control" type="text" placeholder="Link para detalles" name="detailLink" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.detailLink%> <%}%>>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label>Cantidad</label>
-              <input class="form-control" type="number" placeholder="Cantidad"  name="cantidad"  <% if(typeof part != "undefined"){ %> value=<%=part.stock%> <%}%>>
+              <input class="form-control" type="number" placeholder="Cantidad"  name="cantidad"  <% if(typeof editPart != "undefined"){ %> value=<%=editPart.stock%> <%}%>>
             </div>
           </div>
             <div class="col">
               <div class="form-group">
                 <label>Aplicación</label>
-                <input list="application" name="aplicacion" class="custom-select col-12" <% if(typeof part != "undefined"){ %> value=<%=part.application%> <%}%>>
+                <input list="application" name="aplicacion" class="custom-select col-12" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.application%> <%}%>>
                 <datalist id="application">
                   <option value="air">Aire</option>
                   <option value="oil">Aceite</option>

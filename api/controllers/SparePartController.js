@@ -54,7 +54,7 @@ delete: async function(req,res){
  edit: async function(req,res){
   var idPart = req.param('idPart');
   var part = await SparePart.findOne({id:idPart});
-  return res.view('pages/parts/new_part', {part});
+  return res.view('pages/parts/new_part', {editPart:part});
 },
 
 edited: async function(req,res){
