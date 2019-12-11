@@ -35,6 +35,7 @@
           <div class="col-8">
             <div class="form-group">
               <label>Tipo</label>
+
               <input list="type" name="tipo" class="custom-select col-12" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.type%> <%}%>>
               <datalist id="type">
                 <option value="oil">Aceite</option>
@@ -47,6 +48,7 @@
           <div class="col-4">
             <div class="form-group">
               <label>Precio [usd]</label>
+
               <input class="form-control" type="number" name="unitPrice" placeholder="Precio" min="0" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.pricePerUnit%> <%}%>>
             </div>
           </div>
@@ -76,6 +78,7 @@
           <div class="col">
             <div class="form-group">
               <label>Modelo</label>
+
               <input class="form-control" type="text" placeholder="Modelo" name="modelo" <% if(typeof editPart != "undefined"){ %> value=<%=editPart.model%> <%}%>>
             </div>
           </div>
