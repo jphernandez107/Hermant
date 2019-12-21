@@ -99,7 +99,9 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'filter'){%>
-                                <%if(part.application === application){%>
+                                <%if(part.application === application && application != 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%} else if (application === 'other'){%>
                                   <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                                 <%}%>
                               <%}%>
@@ -301,9 +303,7 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'oil'){%>
-                                <%if(part.application === 'other'){%>
-                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
-                                <%}%>
+                                <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                               <%}%>
                             <%}%>
                           </select>
@@ -386,7 +386,9 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'liquid'){%>
-                                <%if(part.application === application){%>
+                                <%if(part.application === application && application != 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%} else if (application === 'other'){%>
                                   <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                                 <%}%>
                               <%}%>
