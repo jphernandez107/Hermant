@@ -28,7 +28,34 @@
   </div>
 </div>
 
-<form class="form-horizontal m-t-30" method="POST" action="/lubsheet/new/<%= equipment.id %>">
+<%if(typeof equipments != "undefined"){%>
+  <form class="form-horizontal m-t-30" method="POST" action="/lubsheet/link/<%= equipment.id %>">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Seleccionar una planilla de otro equipo</h3>
+            <div class="row text-center align-items-center">
+              <div class="col-6" id="existingLubSheet">
+                <select class="existingLubSheetSelect" name="existingLubSheetSelect" id="existingLubSheetSelect" style="width: 100%; height: 100%;">
+                  <option value="none">Seleccione una opción</option>
+                  <%for (let equip of equipments){%>
+                    <option value="<%=equip.lubricationSheet%>"><%=equip.code%> <%=equip.designation%> <%=equip.brand%> <%=equip.model%></option>
+                  <%}%>
+                </select>
+              </div>
+              <div class="col-2">
+                <input type="submit" value="Utilizar esta planilla" class="btn btn-primary btn-rounded">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+<%}%>
+
+<form class="form-horizontal m-t-30" method="POST" action="/lubsheet/new/<%= equipment.id %>" id="lubSheetFormToHide">
   <%if(typeof sheet != "undefined"){%>
     <input type="hidden" name="" value="sheet" id="sheetID" name="sheetName">
   <%}else{var sheet = ""}%>
@@ -99,7 +126,9 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'filter'){%>
-                                <%if(part.application === application){%>
+                                <%if(part.application === application && application != 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%} else if (application === 'other'){%>
                                   <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                                 <%}%>
                               <%}%>
@@ -301,9 +330,7 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'oil'){%>
-                                <%if(part.application === 'other'){%>
-                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
-                                <%}%>
+                                <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                               <%}%>
                             <%}%>
                           </select>
@@ -386,7 +413,9 @@
                             <option value="">Seleccione una opción</option>
                             <%for (let part of parts){%>
                               <%if(part.type === 'liquid'){%>
-                                <%if(part.application === application){%>
+                                <%if(part.application === application && application != 'other'){%>
+                                  <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
+                                <%} else if (application === 'other'){%>
                                   <option value="<%=part.id%>"><%=part.internalCode%> <%=part.brand%> <%=part.model%></option>
                                 <%}%>
                               <%}%>

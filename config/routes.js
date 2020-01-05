@@ -187,6 +187,10 @@ module.exports.routes = {
     controller: 'lubricationSheet',
     action: 'lubsheet_new',
   },
+  'POST /lubsheet/link/:idEquip':{
+    controller: 'lubricationSheet',
+    action: 'lubsheet_link',
+  },
   'GET /lubsheet/details/:idEquip/:idLubSheet':{
     controller: 'lubricationSheet',
     action: 'lubsheet_details',

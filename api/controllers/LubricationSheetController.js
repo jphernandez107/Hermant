@@ -16,15 +16,18 @@ module.exports = {
     var equipmentId = req.param('idEquip');
 
     var equipment = await Equipment.findOne({id:equipmentId});
+    var equipments = await Equipment.find({
+      lubricationSheet: { '!=': null }
+    });
     var parts = await SparePart.find({});
     var sheet = await LubricationSheet.findOne({id:equipment.lubricationSheet});
 
     if(equipment){
       if(parts){
         if(sheet){
-          return res.view('pages/lubSheet/new_sheet', {equipment, parts, sheet});
+          return res.view('pages/lubSheet/new_sheet', {equipment, equipments, parts, sheet});
         }
-        return res.view('pages/lubSheet/new_sheet', {equipment, parts});
+        return res.view('pages/lubSheet/new_sheet', {equipment, equipments, parts});
       }
     }
     return res.redirect('/equipment/list');
@@ -73,7 +76,7 @@ module.exports = {
         item = "otherLiquid";
       }
       count[i] = req.param(item + 'Count');
-      console.log("Hay " +count[i]+ ' subfilas');
+      //console.log("Hay " +count[i]+ ' subfilas');
 
       for(var j=1; j<=count[i]; j++){
         // Estoy dentro de cada fila y creo el nuevo repuesto correspondiente
@@ -101,7 +104,7 @@ module.exports = {
           }
 
           var maints = req.param(item + 'MaintenanceCheckbox' + j);
-          console.log(maints);
+          //console.log(maints);
           var found = 0;
           var realMaints = [];
           for(var l=0; l<maints.length; l++){
@@ -114,12 +117,12 @@ module.exports = {
             }
           }
 
-          console.log(realMaints);
-          console.log('Hay ' + maintCount + ' frecuencias y '+realMaints.length+' mants');
+          //console.log(realMaints);
+          //console.log('Hay ' + maintCount + ' frecuencias y '+realMaints.length+' mants');
           for(var k=1; k <= maintCount; k++){
             var change = false;
             change = realMaints[k-1];
-            console.log('El check '+k+' de '+item+' es ' + realMaints[k-1]);
+            //console.log('El check '+k+' de '+item+' es ' + realMaints[k-1]);
 
             var maint = await MaintenanceFrequency.create({type: k,frequency:req.param('maintenanceInput' + k),
             change:change, lubricationSheetRow:row.id}).fetch();
@@ -171,6 +174,14 @@ module.exports = {
       }
     }
     return res.redirect('/equipment/list');
+  },
+
+  lubsheet_link: async function(req,res){
+    var equipmentId = req.param('idEquip');
+    var sheetToLinkId = req.param('existingLubSheetSelect');
+
+    await LubricationSheet.addToCollection(sheetToLinkId, 'equipments').members([equipmentId])
+    res.redirect('/equipment/details/' + equipmentId);
   },
 
 };
