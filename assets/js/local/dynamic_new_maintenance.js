@@ -18,13 +18,13 @@ $(document).ready(function(){
   });
 
   $('[name="motorOilSelect1"]').on("change keyup", function(){
-    console.log($(this).val());
+    // console.log($(this).val());
     if($(this).val() != ""){
       $('[name="motorOilSelect2"]').find('option:eq(0)').prop('selected', true);
     }
   });
   $('[name="motorOilSelect2"]').on("change keyup", function(){
-    console.log($(this).val());
+    // console.log($(this).val());
     if($(this).val() != ""){
       $('[name="motorOilSelect1"]').find('option:eq(0)').prop('selected', true);
     }
