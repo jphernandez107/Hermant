@@ -110,9 +110,21 @@
                 <td class="txt-oflo"><%= equipment.totalHours %>Hs</td>
                 <td class="txt-oflo"><a href="/site/details/<%=equipment.constructionSite.id%>"><%= equipment.constructionSite.name %></td>
                 <td class="txt-oflo">
-                  <div class="progress" style="height: 0%;">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                  </div>
+                  <% if (nextMaintenance != 0) {%>
+                    <% var percentage = ((minMaintenance - hoursToNextMaintenance) / minMaintenance * 100).toFixed(2)%>
+                    <div class="row align-middle">
+                      <div class="progress col-9" style="height: 0%;">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: <%= percentage %>%;" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100">
+                          <font color="black"><%= (nextMaintenance - hoursToNextMaintenance) %> / <%= nextMaintenance %> Hs</font>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <%= percentage %> %
+                      </div>
+                    </div>
+                  <%} else {%>
+                    <h5> Planilla de mantenimientos no cargada </h5>
+                  <%}%>
                 </td>
                 <td class="txt-oflo"><%= equipment.observations %></td>
               </tbody>

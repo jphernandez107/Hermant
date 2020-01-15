@@ -43,6 +43,17 @@ module.exports = {
 
     var equipment = await Equipment.findOne({id:equipmentId});
 
+    var sheetRows = await LubricationSheetRow.find({lubricationSheet:equipment.lubricationSheet});
+    var uniqueMaintFreqs = await MaintenanceFrequency.find({lubricationSheetRow:sheetRows[0].id});
+    var uniqueFreqs = [];
+    for(uMF of uniqueMaintFreqs){
+      uniqueFreqs.push(uMF.frequency);
+    }
+
+    if(maintenanceFrequency == uniqueFreqs[uniqueFreqs.length - 1]){
+      equipment = await Equipment.updateOne({id:equipmentId}).set({partialHours:0});
+    }
+
     var maintenance = await Maintenance.create({date, maintenanceType, maintenanceFrequency,
       observations, equipment:equipmentId, totalHoursEquipment:equipment.totalHours,
       partialHoursEquipment:equipment.partialHours, maintenanceTime}).fetch();

@@ -166,18 +166,47 @@ module.exports = {
   details_view: async function(req,res){
 
     var equipmentId = req.param('idEquip');
-
     var equipment = await Equipment.findOne({id:equipmentId}).populate('constructionSite');
-
     var maintenances = await Maintenance.find({equipment:equipmentId}).populate('maintenanceRows');
-
     var repairs = await Repair.find({equipment:equipmentId}).populate('repairRows');
+
+    var hoursToNextMaintenance = 0;
+    var minMaintenance = 0;
+    var nextMaintenance = 0;
+
+    if(equipment.lubricationSheet != null){
+      var sheetRows = await LubricationSheetRow.find({lubricationSheet:equipment.lubricationSheet});
+      var uniqueMaintFreqs = await MaintenanceFrequency.find({lubricationSheetRow:sheetRows[0].id});
+      var uniqueFreqs = [];
+      for(uMF of uniqueMaintFreqs){
+        uniqueFreqs.push(uMF.frequency);
+      }
+      var partialHours2 = equipment.partialHours;
+      var partialHours = 0;
+
+      partialHours = partialHours2;
+      for(var i = uniqueFreqs.length-1; i>=0 ; i--){
+        if(partialHours >= uniqueFreqs[uniqueFreqs.length-1]){
+          partialHours -= uniqueFreqs[uniqueFreqs.length-1];
+        }
+        if(partialHours > uniqueFreqs[i]){
+          partialHours -= uniqueFreqs[i];
+        }else{
+          nextMaintenance = uniqueFreqs[i];
+        }
+      }
+      hoursToNextMaintenance = nextMaintenance - equipment.partialHours;
+      while(hoursToNextMaintenance < 1){
+        hoursToNextMaintenance += 250;
+      }
+      minMaintenance = uniqueFreqs[0];
+    }
 
     if(equipment){
       if(maintenances){
-        return res.view('pages/equipment/equipment_details', {equipment, maintenances, repairs});
+        return res.view('pages/equipment/equipment_details', {equipment, maintenances, repairs, hoursToNextMaintenance, nextMaintenance, minMaintenance});
       }else{
-        return res.view('pages/equipment/equipment_details', {equipment});
+        return res.view('pages/equipment/equipment_details', {equipment, hoursToNextMaintenance, nextMaintenance, minMaintenance});
       }
     }else{
       return res.redirect('/equipment/list');
