@@ -115,7 +115,7 @@ module.exports = {
    //console.log(equipment.length == lastCostIndexes.length);
    var nextMaintenanceMap = new Map();
    var hoursToNextMaintenanceMap = new Map();
-   var minMaintenanceMap = new Map();
+   var prevMaintenanceMap = new Map();
 
    for(equipment of equipments){
      if(equipment.lubricationSheet != null){
@@ -127,6 +127,7 @@ module.exports = {
        }
        var partialHours2 = equipment.partialHours;
        var nextMaintenance = 0;
+       var prevMaintenance = 0;
        var hoursToNextMaintenance = 0;
        var partialHours = 0;
 
@@ -135,23 +136,23 @@ module.exports = {
          if(partialHours >= uniqueFreqs[uniqueFreqs.length-1]){
            partialHours -= uniqueFreqs[uniqueFreqs.length-1];
          }
-         if(partialHours > uniqueFreqs[i]){
-           partialHours -= uniqueFreqs[i];
-         }else{
+         if(partialHours < uniqueFreqs[i]){
            nextMaintenance = uniqueFreqs[i];
+           if (i > 0){
+             prevMaintenance = uniqueFreqs[i - 1]
+           } else {
+             prevMaintenance = 0;
+           }
          }
        }
-       hoursToNextMaintenance = nextMaintenance - equipment.partialHours;
-       while(hoursToNextMaintenance < 1){
-         hoursToNextMaintenance += 250;
-       }
+       hoursToNextMaintenance = nextMaintenance - partialHours2;
        hoursToNextMaintenanceMap.set(equipment.id, hoursToNextMaintenance);
        nextMaintenanceMap.set(equipment.id, nextMaintenance);
-       minMaintenanceMap.set(equipment.id, uniqueFreqs[0]);
+       prevMaintenanceMap.set(equipment.id, prevMaintenance);
      } else {
        hoursToNextMaintenanceMap.set(equipment.id, 0);
        nextMaintenanceMap.set(equipment.id, 0);
-       minMaintenanceMap.set(equipment.id, 0);
+       prevMaintenanceMap.set(equipment.id, 0);
      }
    }
 
@@ -159,7 +160,7 @@ module.exports = {
      // No se encontraron equipos registrados.
      return res.redirect('/');
    }else{
-     return res.view('pages/equipment/equipment_list', {equipments, lastCostIndexes, hoursToNextMaintenanceMap, nextMaintenanceMap, minMaintenanceMap});
+     return res.view('pages/equipment/equipment_list', {equipments, lastCostIndexes, hoursToNextMaintenanceMap, nextMaintenanceMap, prevMaintenanceMap});
    }
  },
 
@@ -171,7 +172,7 @@ module.exports = {
     var repairs = await Repair.find({equipment:equipmentId}).populate('repairRows');
 
     var hoursToNextMaintenance = 0;
-    var minMaintenance = 0;
+    var prevMaintenance = 0;
     var nextMaintenance = 0;
 
     if(equipment.lubricationSheet != null){
@@ -189,24 +190,23 @@ module.exports = {
         if(partialHours >= uniqueFreqs[uniqueFreqs.length-1]){
           partialHours -= uniqueFreqs[uniqueFreqs.length-1];
         }
-        if(partialHours > uniqueFreqs[i]){
-          partialHours -= uniqueFreqs[i];
-        }else{
+        if(partialHours < uniqueFreqs[i]){
           nextMaintenance = uniqueFreqs[i];
+          if (i > 0){
+            prevMaintenance = uniqueFreqs[i - 1]
+          } else {
+            prevMaintenance = 0;
+          }
         }
       }
-      hoursToNextMaintenance = nextMaintenance - equipment.partialHours;
-      while(hoursToNextMaintenance < 1){
-        hoursToNextMaintenance += 250;
-      }
-      minMaintenance = uniqueFreqs[0];
+      hoursToNextMaintenance = nextMaintenance - partialHours2;
     }
 
     if(equipment){
       if(maintenances){
-        return res.view('pages/equipment/equipment_details', {equipment, maintenances, repairs, hoursToNextMaintenance, nextMaintenance, minMaintenance});
+        return res.view('pages/equipment/equipment_details', {equipment, maintenances, repairs, hoursToNextMaintenance, nextMaintenance, prevMaintenance});
       }else{
-        return res.view('pages/equipment/equipment_details', {equipment, hoursToNextMaintenance, nextMaintenance, minMaintenance});
+        return res.view('pages/equipment/equipment_details', {equipment, hoursToNextMaintenance, nextMaintenance, prevMaintenance});
       }
     }else{
       return res.redirect('/equipment/list');

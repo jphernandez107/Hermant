@@ -47,6 +47,7 @@ module.exports = {
 
   show_calendar: async function(req,res){
     //calendar_events_list();
+    update_calendar_events_list();
     return res.view('pages/calendar/calendar');
   },
 
@@ -160,20 +161,34 @@ async function update_calendar_events_list(){
       var nextMaintenance = 0;
       var hoursToNextMaintenance = 0;
       var partialHours = 0;
+      var nextMaintIndex = -1;  // Flag para controlar que el primer nextMaint lo busque y al resto los calcula con el indice
       for(var j=0; j<5; j++){
         partialHours = partialHours2;
-        for(var i = uniqueFreqs.length-1; i>=1 ;i--){
-          if(partialHours >= uniqueFreqs[uniqueFreqs.length-1]){
-            partialHours -= uniqueFreqs[uniqueFreqs.length-1];
+        var pastLastMaintenanceHours = 0; // Cuando pasamos el ultimo mantenimiento (en prediccion de tiempo) sumamos el valor de este para dar las horas reales.
+
+        if (nextMaintIndex == -1){
+          for(var i = uniqueFreqs.length-1; i>=0 ; i--){
+            if(partialHours >= uniqueFreqs[uniqueFreqs.length-1]){
+              partialHours -= uniqueFreqs[uniqueFreqs.length-1];
+            }
+            if(partialHours < uniqueFreqs[i]){
+              nextMaintenance = uniqueFreqs[i];
+              nextMaintIndex = i;
+            }
           }
-          if(partialHours > uniqueFreqs[i]){
-            partialHours -= uniqueFreqs[i];
-          }else{
-            nextMaintenance = uniqueFreqs[i];
+        } else {
+          nextMaintIndex += 1;
+          if (nextMaintIndex > uniqueFreqs.length - 1){
+            nextMaintIndex = 0;
+            pastLastMaintenanceHours = uniqueFreqs[uniqueFreqs.length - 1];
           }
+          nextMaintenance = uniqueFreqs[nextMaintIndex];
         }
 
-        hoursToNextMaintenance = uniqueFreqs[1] + partialHours2 - equipment.partialHours*2;
+        hoursToNextMaintenance = nextMaintenance - equipment.partialHours + pastLastMaintenanceHours;
+        if (hoursToNextMaintenance < 0){
+          hoursToNextMaintenance += uniqueFreqs[uniqueFreqs.length - 1];
+        }
 
         var daysToNextMaintenance = Math.round(hoursToNextMaintenance/avg);
 
@@ -207,32 +222,16 @@ async function update_calendar_events_list(){
         if(equipment.constructionSite != null){
           color = String(colorArray[equipment.constructionSite]);
         }
-
-        partialHours2 += uniqueFreqs[1];
-      }
-      events = events.substring(0, events.length-1);
-      events += ']';
-
-      if(await Events.count() > 0){
-        //console.log("Estoy en events mayor a 0");
-        //console.log(await Events.find({}));
-        await Events.destroy({});
-        //console.log(await Events.find({}));
-        await Events.create({events:JSON.parse(events)});
-      }else{
-        await Events.create({events:JSON.parse(events)});
+        partialHours2 += nextMaintenance;
       }
     }
   }
 
-
-  // if(Events.count() > 0){
-  //   await Events.updateOne({id:1}).set({events:events.JSON.parse(events)});
-  // }else{
-  //   await Events.create({events:JSON.parse(events)});
-  // }
-
-  // 'use strict';
-  //  const Fs = require('fs-extra');
-  //  await Fs.writeFile('./assets/json/calendar_events.json', events);
+  events = events.substring(0, events.length-1);
+  events += ']';
+  if(await Events.count() > 0){
+    await Events.updateOne({id:1}).set({events:JSON.parse(events)})
+  }else{
+    await Events.create({events:JSON.parse(events)});
+  }
 }
