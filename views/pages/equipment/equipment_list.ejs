@@ -79,8 +79,8 @@
                               <% if (nextMaintenanceMap.get(equipment.id) != 0) {%>
                                 <% var nextMaintenance = nextMaintenanceMap.get(equipment.id)%>
                                 <% var hoursToNextMaintenance = hoursToNextMaintenanceMap.get(equipment.id)%>
-                                <% var minMaintenance = minMaintenanceMap.get(equipment.id)%>
-                                <% var percentage = ((minMaintenance - hoursToNextMaintenance) / minMaintenance * 100).toFixed(2)%>
+                                <% var prevMaintenance = prevMaintenanceMap.get(equipment.id)%>
+                                <% var percentage = ((1 - (nextMaintenance - equipment.partialHours) / (nextMaintenance - prevMaintenance)) * 100).toFixed(2) %>
                                 <div class="row align-middle">
                                   <div class="progress col-9" style="height: 0%;">
                                     <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: <%= percentage %>%;" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100">
