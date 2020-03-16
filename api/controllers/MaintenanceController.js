@@ -52,6 +52,8 @@ module.exports = {
 
     if(maintenanceFrequency == uniqueFreqs[uniqueFreqs.length - 1]){
       equipment = await Equipment.updateOne({id:equipmentId}).set({partialHours:0});
+    } else {
+      equipment = await Equipment.updateOne({id:equipmentId}).set({partialHours:maintenanceFrequency});
     }
 
     var maintenance = await Maintenance.create({date, maintenanceType, maintenanceFrequency,
