@@ -83,7 +83,8 @@
                                 <% var percentage = ((1 - (nextMaintenance - equipment.partialHours) / (nextMaintenance - prevMaintenance)) * 100).toFixed(2) %>
                                 <div class="row align-middle">
                                   <div class="progress col-9" style="height: 0%;">
-                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: <%= percentage %>%;" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100">
+                                    <% var barColor = "bg-info"; if (percentage >= 90 || percentage <= 10) {barColor = "bg-danger"}%>
+                                    <div class="progress-bar progress-bar-striped <%=barColor%>" role="progressbar" style="width: <%= percentage %>%;" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100">
                                       <font color="black"><%= (nextMaintenance - hoursToNextMaintenance) %> / <%= nextMaintenance %> Hs</font>
                                     </div>
                                   </div>
